@@ -1,0 +1,910 @@
+.contenedorprincipal{
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.contenedorbusqueda{
+    width: 100%;
+    height: auto;
+    background-color: blue;
+    display: block;
+    padding: 10px;
+    background-color: aliceblue;
+}
+.containerelemento{
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    display: grid;
+    padding: 3px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+.btn {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.contenedorcaracteristicas {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.acciones {
+    margin-bottom: 10px;
+}
+.contenedorcaracteristicas .acciones{
+    width: 100%;
+   
+    background-color: transparent;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.acciones .btnver{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+
+}
+.acciones .btnver:hover{
+    background-color: #0056b3;
+}
+.acciones .btneliminar{
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+.acciones .btneliminar:hover{
+    background-color: #a71d2a;
+}
+.contenedorcaracteristicas .caracteristicas{
+    width: 100%;
+    height: auto;
+ 
+    grid-column: 1/2;
+    grid-row: 2/3;
+    
+}
+.caracteristica {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.subcaracteristica {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+
+.detalle textarea {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 5px;
+}
+.imagencaracteristica img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.contenedorcaracteristicas .caracteristicas .caracteristica{
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: 140px 1fr 200px;
+    grid-template-rows: 100px 1fr;
+    padding: 5px;
+    border-bottom: 1px solid black;
+  
+}
+.contenedorcaracteristicas .caracteristicas .caracteristica .detalle{
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    grid-column: 1/3;
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contenedorcaracteristicas .caracteristicas .caracteristica .acciones{
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    grid-column: 3/4;
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+   
+}
+.contenedorcaracteristicas .caracteristicas .caracteristica .imagencaracteristica{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    
+    grid-column: 1/4;
+    grid-row: 2/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contenedorcaracteristicas .caracteristicas .caracteristica .contenedorsubcaracteristicas{
+    width: 95%;
+    margin: 0 auto;
+    height: auto;
+    background-color: transparent;
+    grid-column: 2/4;
+    grid-row: 2/3;
+  
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 1fr;
+}
+.contenedorcaracteristicas .caracteristicas .caracteristica .contenedorsubcaracteristicas .acciones{
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+.contenedorcaracteristicas .caracteristicas .caracteristica .contenedorsubcaracteristicas .subcaracteristicas{
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    grid-column: 1/3;
+    grid-row: 2/3;  
+
+}
+.contenedorcaracteristicas .caracteristicas .caracteristica .contenedorsubcaracteristicas .subcaracteristicas .subcaracteristica{
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-template-rows: 1fr ;
+    padding: 5px;
+    border-bottom: 1px solid black;
+   
+}
+.contenedorcaracteristicas .caracteristicas .caracteristica .contenedorsubcaracteristicas .subcaracteristicas .subcaracteristica .detalle{
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contenedorcaracteristicas .caracteristicas .caracteristica .contenedorsubcaracteristicas .subcaracteristicas .subcaracteristica .acciones{
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos mejorados para la interfaz */
+
+.contenedorchat {
+    width: 90%;
+    height: 95%;
+    margin: 0 auto;
+    min-height: 400px;
+    max-height: 600px;
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    grid-template-rows: 60px 60px 1fr 60px;
+    background-color: #fff; /* Cambiar el color de fondo */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agregar una suave sombra */
+    border: 1px solid #ddd; /* Cambiar el color del borde */
+}
+
+/* Estilos para el botón "Agregar Chat" */
+.contenedorchat .addchat {
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd; /* Agregar un borde inferior */
+    grid-column: 1/2;
+    grid-row: 1/2;
+
+}
+.contenedorchat .addchat button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contenedorchat .addchat button:hover {
+    background-color: #0056b3; /* Cambiar el color al pasar el mouse */
+}
+
+/* Estilos para la barra de búsqueda */
+
+.contenedorchat .searchchat {
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd; /* Agregar un borde inferior */
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.contenedorchat .searchchat input[type="text"] {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.contenedorchat .searchchat button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contenedorchat .searchchat button:hover {
+    background-color: #0056b3; /* Cambiar el color al pasar el mouse */
+}
+
+/* Estilos para la lista de usuarios */
+.contenedorchat .userschat {
+    border-right: 1px solid #ddd; /* Agregar un borde derecho */
+    overflow-y: auto; /* Agregar desplazamiento vertical si es necesario */
+    grid-column: 1/2;
+    grid-row: 3/4;
+}
+.contenedorchat .userschat::-webkit-scrollbar{
+    width: 5px;
+    background-color: transparent;
+    border-radius: 4px;
+}
+.contenedorchat .userschat::-webkit-scrollbar-thumb{
+    background-color: #232d8d;
+    border-radius: 4px;
+}
+
+.userchat {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.userchat:hover {
+    background-color: #f0f0f0; /* Cambiar el color de fondo al pasar el ratón */
+}
+
+.userchatimg {
+    margin-right: 10px;
+}
+
+.userchatimg img {
+    width: 50px; /* Ajustar el tamaño de la imagen de perfil */
+    height: 50px;
+    border-radius: 50%; /* Hacer la imagen de perfil redonda */
+}
+
+.userchatinfo {
+    flex-grow: 1;
+}
+
+.userchatinfo p {
+    margin: 5px 0;
+}
+
+.username {
+    font-weight: bold; /* Hacer el nombre del usuario en negrita */
+}
+
+.message-preview {
+    color: #666; /* Cambiar el color del mensaje de vista previa */
+}
+
+
+
+/* Estilos para la ventana de chat */
+.contenedorchat .headerchat{
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd; /* Agregar un borde inferior */
+    grid-column: 2/3;
+    grid-row: 1/2;
+
+}
+.contenedorchat .chatbox {
+    padding: 20px;
+    overflow-y: auto; /* Agregar desplazamiento vertical si es necesario */
+    grid-column: 2/3;
+    grid-row: 2/4;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+}
+.contenedorchat .chatbox::-webkit-scrollbar{
+    width: 5px;
+    background-color: transparent;
+    border-radius: 4px;
+}
+.contenedorchat .chatbox::-webkit-scrollbar-thumb{
+    background-color: #232d8d;
+    border-radius: 4px;
+}
+
+
+
+/* Estilos para los mensajes */
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    position: relative;
+}
+
+.sent {
+    background-color: #007bff;
+    color: #fff;
+    align-self: flex-end;
+}
+
+.received {
+    background-color: #f0f0f0;
+    color: #333;
+    align-self: flex-start;
+}
+
+/* Estilos para el visto en los mensajes enviados */
+.sent .status {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 12px;
+    color: #999;
+}
+.sent .timestamp {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    font-size: 12px;
+    color: #999;
+}
+/* Estilos para la fecha y hora en los mensajes recibidos */
+.received .timestamp {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    font-size: 12px;
+    color: #999;
+}
+
+/* Estilos para la barra de escritura */
+.contenedorchat .chatwrite {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    border-top: 1px solid #ddd; /* Agregar un borde superior */
+    grid-column: 2/3;
+    grid-row: 4/5;
+}
+
+.contenedorchat .chatwrite input[type="text"] {
+    width: calc(100% - 80px); /* Calcula el ancho del input */
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.contenedorchat .chatwrite button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contenedorchat .chatwrite button:hover {
+    background-color: #0056b3; /* Cambiar el color al pasar el mouse */
+}
+.elemento1{
+    height: auto;
+    background-color: transparent;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    padding: 10px;
+}
+.elemento2{
+    height: auto;
+    background-color: transparent;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    padding: 10px;
+
+}
+.elemento3{
+    height: auto;
+    background-color: transparent;
+    grid-column: 3/4;
+    grid-row: 1/2;
+    padding: 10px;
+}
+.elemento4{
+    height: auto;
+    background-color: transparent;
+    grid-column: 4/5;
+    grid-row: 1/2;
+    padding: 10px;
+}
+
+
+.contenedorbusqueda input[type="button"]{
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.menulateral{
+    width: 100%;
+    height: 200px;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.contenedorsecundario{
+    width: 100%;
+    height: 100%;
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#reikocontenedor{
+    width: 100%;
+    height: 100%;
+   
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 50px  50px 100%  40px;
+   
+}
+#reikocontenedor #infosystem{
+    grid-column: 1/4;
+    grid-row: 1/2;
+    border-radius: 0;
+    box-shadow: 4px 3px 3px 0px rgba(0,0,0,0.75);
+    background-color: white;
+    display: flex;
+    padding: 5px;
+  
+    
+}
+#reikocontenedor #infosystem p{
+    
+}
+#reikocontenedor #contenedorprincipal{
+    grid-column: 1/4;
+    grid-row: 3/4;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: 4px 3px 3px 0px rgba(0,0,0,0.75);
+    background-color: ghostwhite;
+
+}
+#reikocontenedor #contenedormodulos{
+    grid-column: 1/4;
+    grid-row: 2/3;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: 4px 3px 3px 0px rgba(0,0,0,0.75);
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+#reikocontenedor #contenedormodulos #modulos{
+    width: 90%;
+    background-color: transparent;
+    overflow: hidden;
+    
+    
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+
+}
+#reikocontenedor #contenedormodulos #modulos img{
+    border:2px solid black; 
+    width: 40px;
+    height: 40px;
+
+}
+#reikocontenedor #contenedormodulos #modulos img:hover{
+    border:2px solid white; 
+    width: 40px;
+    height: 40px;
+    box-shadow: 4px 3px 3px 0px rgba(0,0,0,0.75);
+
+}
+#reikocontenedor #piepagina{
+    grid-column: 1/4;
+    grid-row: 4/5;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: 4px 3px 3px 0px rgba(0,0,0,0.75);
+    background-color: gray;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    padding: 5px;
+    
+
+}
+.nextbuttonmenu,
+.prevbuttonmenu {
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-weight: bold;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.nextbuttonmenu:hover,
+.prevbuttonmenu:hover {
+    background-color: #0000ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-weight: bold;
+  
+}
+.containerreiko{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+   
+    align-items: center;
+    justify-content: center;
+   
+}
+.containerreiko2{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    display: block;
+   
+
+}
+
+.contenedormodulos{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+}.contenedormensajeria {
+    width: 90%;
+    max-width: 800px; /* Limita el ancho máximo para que no se vea demasiado amplio en pantallas grandes */
+    margin: 20px auto; /* Centra el contenedor horizontalmente y agrega margen en la parte superior e inferior */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hace que el contenedor tenga una sombra sutil */
+    background-color: #fff;
+}
+
+.contenedormensajeria .contenidomensajeria .mensaje {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 15px; /* Agrega margen inferior entre los mensajes */
+    padding: 10px;
+}
+
+.contenedormensajeria .contenidomensajeria .mensaje .elemento {
+    flex: 1; /* Hace que los elementos ocupen todo el espacio disponible horizontalmente */
+    margin: 0 10px; /* Agrega espaciado entre los elementos */
+}
+
+.contenedormensajeria .contenidomensajeria .mensaje .elemento input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.contenedormensajeria .contenidomensajeria .mensaje .elemento .btnver,.btnver,
+.contenedormensajeria .contenidomensajeria .mensaje .elemento .btneliminar {
+    width: 100px; /* Establece un ancho fijo para los botones */
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Agrega una transición suave */
+}
+
+.contenedormensajeria .contenidomensajeria .mensaje .elemento .btnver, .btnver {
+    background-color: #007bff; /* Azul */
+}
+
+.contenedormensajeria .contenidomensajeria .mensaje .elemento .btneliminar, .btneliminar {
+    background-color: #dc3545; /* Rojo */
+}
+
+.contenedormensajeria .contenidomensajeria .mensaje .elemento .btnver:hover, .btnver:hover,
+.contenedormensajeria .contenidomensajeria .mensaje .elemento .btneliminar:hover, .btneliminar:hover {
+    background-color: #0056b3; /* Cambia el color al tono más oscuro de azul en hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra sutil en hover */
+}
+.target{
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    border: 2px solid blue;
+    margin: 5px;
+    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+    display: block;
+    text-align: center;
+    position: relative;
+}
+.target img{
+    width: 150px;
+    height: 150px;
+    background: transparent;
+    margin: 5px auto;
+   
+}
+.target:hover {
+    border: 2px solid rgb(26, 35, 161);
+    box-shadow: 4px 3px 3px 0px rgba(0,0,0,0.75);
+    background-color: seashell;
+    
+}
+.target .botones{
+    opacity: 0;
+}
+.target:hover .botones{
+    opacity: 1;
+} 
+
+.contenedorformularios{
+    width: auto;
+    height:auto;
+    max-width: 90%;
+    max-height: 90%;
+    border: 1px solid black;
+    box-shadow: 4px 3px 3px 0px rgba(0,0,0,0.75);
+    
+}
+
+.contenedorformularios form{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+   
+}
+.contenedorformularios form img{
+    width: 100px;
+    height: 100px;
+}
+.contenedorformularios form input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="file"]){
+    width: 100%;
+    height: 40px;	
+    max-width: 400px;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin: 5px;
+    padding: 9px;
+}
+.botones{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0; 
+}
+.botones button, .btnreiko{
+   padding: 3px;
+   border-radius: 4px;
+   border: 2px solid black;
+   margin-left: 5px;
+}
+
+.reikomodal {
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    background-color: rgba(128, 128, 128, 0.541);
+  
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.75);
+    overflow: auto;
+    display: none;
+}
+
+
+.reikomodal::-webkit-scrollbar-thumb{
+    background-color: gray;
+    border-radius: 2px;
+}
+.reikomodal::-webkit-scrollbar{
+    width: 5px;
+    background-color: transparent;
+    border-radius: 4px;
+}
+.reikomodal .contenidomodal{
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    
+    max-height: auto;
+    padding: 15px;
+    background-color: white;
+    margin: 10% auto;
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    grid-template-rows: 50px 1fr;
+    
+}
+
+
+.reikomodal .contenidomodal .bannertitulo{
+    grid-column: 1/2;
+    grid-row: 1/2;
+    background-color: #0C134F;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px;
+    text-align: center;
+}
+
+
+.reikomodal .contenidomodal .cuerpomodal{
+    grid-column: 1/3;
+    grid-row: 2/3;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+.reikomodal .contenidomodal .cuerpomodal form{
+    
+}
+.reikomodal .contenidomodal .cuerpomodal::-webkit-scrollbar-thumb{
+    background-color: #0C134F;
+    border-radius: 4px;
+}   
+.reikomodal .contenidomodal .cuerpomodal::-webkit-scrollbar{
+    width: 5px;
+    background-color: transparent;
+    border-radius: 4px;
+}
+.reikomodal .contenidomodal .closemodal{
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    
+}
+
+.closemodal button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+ 
+.reikomodal .contenidomodal .closemodal a{
+    background-color: transparent;
+    border: none;
+    font-size: 2.5vh;
+    font-weight: bold;
+    color: black;
+}
+
+.reikomodal .contenidomodal .closemodal a:hover{
+    cursor: pointer;
+    background-color: turquoise;
+}/* Oculta los números de página y otros elementos */
+
