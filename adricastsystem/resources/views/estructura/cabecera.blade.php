@@ -7,12 +7,12 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> ADRICAST SYSTEM - @yield('titulo')</title>
+   <script src="{{ route('recursos.show', ['fontawesome/js', 'all.js']) }}"></script>
+    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{ route('recursos.show', ['img', 'min.png']) }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="{{ route('recursos.show', ['fontawesome/js', 'all.js']) }}"></script>
-    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
-    <link rel="icon" href="{{ route('recursos.show', ['img', 'min.png']) }}">
    
     <script src="{{ route('recursos.show', ['js', 'funciones.js']) }}"></script>
     <script src="{{ route('recursos.show', ['js/reiko/', 'funcionesreiko.js']) }}"></script>
@@ -20,40 +20,73 @@
     <link href="{{ asset('css/estilo_estructura.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilo_contenedores.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilo_pagina.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/estilo_principal.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilo_reiko.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
 
 </head>
 <body>
-    <header class="cabecera">
-        <div class="jumbotron jumbotron-fluid custom-banner">
-            <div class="container">
-              
-            </div>
-        </div>
-    </header>
-   
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary" id="menu">
-    
-        <a class="navbar-brand" href="#"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<header class="cabecera">
+    <div class="logo">
+        <img  id="imagen-preview" src="{{ route('recursos.show', ['img', 'min.png']) }}" alt="Logo">
+    </div>
+    <nav class="menu">
+    <ul>
+        <li class="{{ request()->is('paginas/inicio') ? 'active' : '' }}">
+            <a href="{{ route('paginas.inicio') }}">INICIO</a>
+        </li>
+        <li class="{{ request()->is('paginas/nosotros') ? 'active' : '' }}">
+            <a href="{{ route('paginas.nosotros') }}">NOSOTROS</a>
+        </li>
+        <li class="{{ isset($contactanos_active) ? 'active' : '' }}">
+            <a href="{{ route('paginas.contactanos') }}">CONTACTANOS</a>
+        </li>
+        <li class="{{ request()->is('paginas/servicios') ? 'active' : '' }}">
+            <a href="{{ route('paginas.servicios') }}">SERVICIOS</a>
+        </li>
+        <li class="{{ request()->is('posts') ? 'active' : '' }}">
+            <a href="{{ route('posts.index') }}">REIKOSOFT</a>
+        </li>
+    </ul>
+</nav>
+<div class="menu-mobile-icon">
+    <i class="fas fa-bars"></i> <!-- Icono de menú móvil -->
+</div>
+<nav class="menu-mobile">
+    <ul>
+        <li>
+            <a href="{{ route('paginas.inicio') }}">INICIO</a>
+        </li>
+        <li>
+            <a href="{{ route('paginas.nosotros') }}">NOSOTROS</a>
+        </li>
+        <li>
+            <a href="{{ route('paginas.contactanos') }}">CONTACTANOS</a>
+        </li>
+        <li>
+            <a href="{{ route('paginas.servicios') }}">SERVICIOS</a>
+        </li>
+        <li>
+            <a href="{{ route('posts.index') }}">REIKOSOFT</a>
+        </li>
+    </ul>
+</nav>
 
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-            <a class="nav-item nav-link item-menu " href="{{route('paginas.inicio')}}" > <span class="fa fa-home span"></span> INICIO <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link item-menu" href="{{route('paginas.nosotros')}}"> <span class="fa fa-users span"></span>NOSOTROS</a>
-            <a class="nav-item nav-link item-menu" href="{{route('paginas.contactanos')}}"><span class="fa fa-envelope span"></span>CONTACTANOS</a>
-            <a class="nav-item nav-link item-menu" href="{{route('paginas.servicios')}}"><span class="fa fa-box span"></span>SERVICIOS</a>
-            <a class="nav-item nav-link item-menu" href="{{ route('posts.index') }}"><span class="fa fa-shopping-bag span"></span>REIKOSOFT</a>
-           
-            </div>
-        </div>
-    </nav>
-    <main id="cuerpo">
+    <script>
+        // obtén el icono de menú móvil
+        var menuMobileIcon = document.querySelector('.menu-mobile-icon');
+
+        // agrega un event listener al icono de menú móvil para alternar la visibilidad del menú móvil
+        menuMobileIcon.addEventListener('click', toggleMenuMobile);
+        window.onload = hideMenuOnLargeScreen;
+
+            // ejecutar hideMenuOnLargeScreen() cuando se cambie el tamaño de la ventana
+            window.addEventListener('resize', hideMenuOnLargeScreen);
+    </script>
+</header>
+<main class="cuerpo">
         @yield('contenido')
-    </main> 
+</main> 
   
 </body>

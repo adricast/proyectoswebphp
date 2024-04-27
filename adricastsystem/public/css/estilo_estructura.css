@@ -76,8 +76,17 @@
 
 /* FOOTER */
 .piepagina{
+  margin: 2px;
+  border-radius: 3px;
   width: 100%;
-  background-color: #0C134F;
+  background: rgb(2,0,36);
+  background: linear-gradient(3deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(93,175,191,1) 100%);  box-shadow: 4px 3px 4px black;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+.borde {
+  border: 1px solid black;
+  margin: 0 -1px;
 }
 .seccionespie{
   display: grid;
@@ -88,13 +97,17 @@
 .seccion1{
   grid-column: 1/5;
   grid-row: 1/2;
-  background-color: transparent;
+  background: rgb(230,229,250);
+background: linear-gradient(3deg, rgba(230,229,250,1) 0%, rgba(138,138,246,1) 35%, rgba(93,175,191,1) 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
- 
+  border-bottom: 2px solid black;
+  padding: 5px;
 }
+
+
 .seccion1 ul{
   display: flex;
   justify-content: center;
@@ -112,14 +125,14 @@
 .seccion2{
   grid-column: 1/2;
   grid-row: 2/3;
-  background-color: transparent;
+  background-color: rgb(129, 146, 163);
   display: flex;
   justify-content: center;
   align-items: center;
  
 }
 .seccion2 a{
-  color: white;
+  color: black;
   text-decoration: none;
   list-style: none;
   font-weight: bold;
@@ -250,6 +263,7 @@
   align-items: center;
   color: white;
   font-size: 2vh;
+  border-top: 1px solid black;
 }
 
 a{
@@ -268,7 +282,7 @@ a:visited {
 .slider-container {
     position: relative;
     width: 100%;
-    height: 250px;
+    height: 300px;
     overflow: hidden;
     background-color: #000;
   }
@@ -359,8 +373,9 @@ main {
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
+  
 	margin: 0px auto;
-    background-color: rgb(179, 225, 252);
+  background-color: ghostwhite;
 }
 .sectionblock-1c{
     width: 100%;
@@ -442,36 +457,44 @@ main {
     margin: 0 auto;
     position: relative;
     margin-top: 10px;
+    padding: 10px;
   }
   
   .cards {
     display: flex;
+    align-items: center ;
+    justify-content: center;
+    padding: 10px;
     overflow: hidden;
   }
   
   .card {
     width: 25%;
-    max-width: 400px;
+    max-width: 350px;
     min-width: 260px;
-    height: 400px;
+    height: 350px;
     margin-right: 20px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    
     background-color: #fff;
     border-radius: 10px;
+   
+    box-shadow: 5px 8px 5px gray;
+
   }
   .card:hover {
-    border: 2px solid #ffbf00; /* Cambia el borde a un borde sólido de color naranja */
-    box-shadow: 0px 0px 10px #ffbf00; /* Añade una sombra naranja */
+    border: 1px solid black;
+   
+    box-shadow: 5px 8px 5px gray;
     transition: all 0.3s ease; /* Transición suave */
   }
   
   .card img {
     width: 100%;
-    height: 60%;
+    height: 55%;
     object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;

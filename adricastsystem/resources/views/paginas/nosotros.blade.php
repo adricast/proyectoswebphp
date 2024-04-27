@@ -5,5 +5,6 @@
 
 @section('contenido')
     @include('contenidos.introempresa')
+    @include('contenidos.informaciondeempresa')
     @include('contenidos.pie')
 @endsection

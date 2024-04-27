@@ -1,75 +1,70 @@
 <div class="contenidogrid">
     <div id="contenido">
         <div id="titulocontenido">
-            <p>Información General</p>
+            <p>Información sobre Adricast System</p>
         </div>
         <div id="listadocontenido">
-            <!-- Pestaña 1: Negocios -->
             <div class="pestañas">
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta1" class="check preguntas">
-                        <label class="lblchbx" for="pregunta1"><b style="color:black;">Negocios</b></label>
+                        <label class="lblchbx" for="pregunta1"><b style="color:black;">Historia y Filosofía</b></label>
                     </div>
                     <div id="respuesta1" class="respuestas">
                         <p class="parrafo1">
-                            En nuestro portal, ofrecemos soluciones tecnológicas innovadoras para empresas y negocios de todos los tamaños. Nos especializamos en el desarrollo de aplicaciones móviles, software a medida, diseño web, análisis de datos y mucho más.
+                            Adricast System fue fundada en el año 20XX con el objetivo de proporcionar soluciones tecnológicas innovadoras a empresas de diversos sectores. Nuestra filosofía se basa en el compromiso con la calidad, la excelencia en el servicio al cliente y la constante búsqueda de la mejora continua.
                         </p>
                     </div>
                 </div>
             </div>
-            <!-- Pestaña 2: Tecnologías Aplicadas -->
             <div class="pestañas">
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta2" class="check preguntas">
-                        <label class="lblchbx" for="pregunta2"><b style="color:black;">Tecnologías Aplicadas</b></label>
+                        <label class="lblchbx" for="pregunta2"><b style="color:black;">Equipo de Trabajo</b></label>
                     </div>
                     <div id="respuesta2" class="respuestas">
                         <p class="parrafo1">
-                            Utilizamos las últimas tecnologías y metodologías de desarrollo para ofrecer soluciones de vanguardia que impulsen el crecimiento y la eficiencia de su negocio. Nuestro equipo de expertos está capacitado en una variedad de tecnologías, incluyendo HTML, CSS, JavaScript, Python, Java, entre otros.
+                            Nuestro equipo está conformado por profesionales altamente capacitados y apasionados por la tecnología. Contamos con desarrolladores, diseñadores, analistas de datos y especialistas en gestión de proyectos, todos comprometidos con la excelencia y la satisfacción del cliente.
                         </p>
                     </div>
                 </div>
             </div>
-            <!-- Pestaña 3: Compromiso con los Clientes -->
             <div class="pestañas">
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta3" class="check preguntas">
-                        <label class="lblchbx" for="pregunta3"><b style="color:black;">Compromiso con los Clientes</b></label>
+                        <label class="lblchbx" for="pregunta3"><b style="color:black;">Valores y Compromisos</b></label>
                     </div>
                     <div id="respuesta3" class="respuestas">
                         <p class="parrafo1">
-                            Estamos comprometidos a proporcionar a nuestros clientes soluciones tecnológicas de alta calidad que se adapten a sus necesidades específicas. Nos esforzamos por establecer relaciones sólidas y duraderas con nuestros clientes, basadas en la confianza, la transparencia y la satisfacción del cliente.
+                            En Adricast System nos regimos por valores como la ética, la transparencia, la innovación y el trabajo en equipo. Estamos comprometidos con la satisfacción del cliente, la mejora continua y el desarrollo sostenible.
                         </p>
                     </div>
                 </div>
             </div>
-            <!-- Pestaña 4: Beneficios de Trabajar con Nosotros -->
             <div class="pestañas">
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta4" class="check preguntas">
-                        <label class="lblchbx" for="pregunta4"><b style="color:black;">Beneficios de Trabajar con Nosotros</b></label>
+                        <label class="lblchbx" for="pregunta4"><b style="color:black;">Nuestros Servicios</b></label>
                     </div>
                     <div id="respuesta4" class="respuestas">
                         <p class="parrafo1">
-                            Al elegir trabajar con nosotros, los clientes pueden beneficiarse de nuestra experiencia y conocimientos en el campo de la tecnología. Ofrecemos soluciones personalizadas, atención al cliente excepcional y resultados sobresalientes que ayudarán a impulsar el éxito de su negocio.
+                            En Adricast System ofrecemos una amplia gama de servicios, incluyendo desarrollo de software a medida, diseño web, análisis de datos, consultoría tecnológica y mucho más. Estamos comprometidos con la excelencia y la innovación en todo lo que hacemos.
                         </p>
                     </div>
                 </div>
             </div>
-            <!-- Pestaña 5: Valores Fundamentales -->
             <div class="pestañas">
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta5" class="check preguntas">
-                        <label class="lblchbx" for="pregunta5"><b style="color:black;">Valores Fundamentales</b></label>
+                        <label class="lblchbx" for="pregunta5"><b style="color:black;">Nuestros Clientes</b></label>
                     </div>
                     <div id="respuesta5" class="respuestas">
                         <p class="parrafo1">
-                            En nuestra empresa, nos guiamos por una serie de valores fundamentales que reflejan nuestra ética empresarial y nuestra cultura organizacional. Estos valores incluyen la integridad, la innovación, la colaboración, la responsabilidad y el compromiso con la excelencia.
+                            En Adricast System tenemos el privilegio de trabajar con una amplia variedad de clientes, desde pequeñas empresas hasta grandes corporaciones. Nuestra prioridad es entender las necesidades de cada cliente y ofrecer soluciones personalizadas que impulsen su éxito en el mundo digital.
                         </p>
                     </div>
                 </div>
@@ -80,6 +75,7 @@
         </div>
     </div>
     <div id="imagencontenido">
-        <img src="{{ route('recursos.show', ['img', 'disenoweb.png']) }}" alt="">
+        <img src="{{ route('recursos.show', ['img', 'desarrollosoftware.png']) }}" alt="">
+        
     </div>
 </div>

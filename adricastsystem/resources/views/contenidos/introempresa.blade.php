@@ -1,46 +1,40 @@
-<main class="main">
+<main class="presentation">
+    <section class="company-info">
+        <div class="info-container-img">
         @include('contenidos.slider')
-        <div class="contenido">
-            <div class="imagen">
-                <img src="{{ route('recursos.show', ['img', 'min.png']) }}" alt="">
-            </div>
-            <div class="titulo">
-                <h1>Acerca de Nosotros</h1>
-            </div>
-            <div class="seccion">
-                <h2>Misión</h2>
-                <p>Nuestra misión es proporcionar soluciones tecnológicas de alta calidad que impulsen la transformación digital de nuestros clientes y mejoren su eficiencia.</p>
-            </div>
-            <div class="seccion">
-                <h2>Visión</h2>
-                <p>Nuestra visión es convertirnos en líderes en el desarrollo de software y servicios tecnológicos, ofreciendo innovación constante y excelencia en todo lo que hacemos.</p>
-            </div>
-            <div class="imagen2">
-                <img src="{{ route('recursos.show', ['img', 'estrategia.png']) }}" alt="">
-            </div>
-            <div class="seccion">
-                <h2>Estrategia</h2>
-                <p>Nuestra estrategia se basa en la creatividad, la colaboración y la ética para proporcionar soluciones tecnológicas excepcionales a nuestros clientes.</p>
-            </div>
-            <div class="seccion">
-                <h2>Constitución</h2>
-                <p>Adricast System fue fundada por un equipo de expertos en tecnología con un compromiso inquebrantable con la integridad y la responsabilidad en el trabajo.</p>
-            </div>
-            <div class="seccion">
-                <h2>Valores</h2>
-                <ul>
-                    <li>Compromiso con la Calidad</li>
-                    <li>Creatividad e Innovación</li>
-                    <li>Colaboración</li>
-                    <li>Ética y Responsabilidad</li>
-                </ul>
-            </div>
         </div>
-        <script> 
-           
-           var slideIndex = 0;
-          
-           funcionslider();
-         
-       </script>
+        <div class="info-container">
+            <h2>Acerca de Nosotros</h2>
+            <p>Nuestra empresa se especializa en proporcionar soluciones tecnológicas innovadoras que satisfacen las necesidades de nuestros clientes.</p>
+        </div>
+       
+        <div class="info-container">
+            <h2>Contacto</h2>
+            <p>Correo: info@miempresa.com<br>Teléfono: 123-456-7890<br>Dirección: Calle Principal, Ciudad</p>
+        </div>
+        
+    </section>
+    <section class="company-values">
+        <div class="value-card">
+            <h3>Compromiso</h3>
+            <p>Nos comprometemos a ofrecer productos y servicios de la más alta calidad a nuestros clientes.</p>
+        </div>
+        <div class="value-card">
+            <h3>Innovación</h3>
+            <p>Buscamos constantemente nuevas formas de mejorar y ofrecer soluciones innovadoras a nuestros clientes.</p>
+        </div>
+        <div class="value-card">
+            <h3>Colaboración</h3>
+            <p>Valoramos la colaboración y trabajamos en equipo para lograr resultados excepcionales.</p>
+        </div>
+        <div class="value-card">
+            <h3>Ética</h3>
+            <p>Nos regimos por los más altos estándares éticos en todas nuestras operaciones y relaciones comerciales.</p>
+        </div>
+    </section>
 </main>
+
+
+
+
+

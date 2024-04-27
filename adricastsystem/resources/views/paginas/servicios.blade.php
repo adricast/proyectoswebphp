@@ -5,7 +5,7 @@
 
 @section('contenido')
     @include('contenidos.introservicio')
-    @include('contenidos.procesosdeservicio')
     @include('contenidos.infoservicio')
+    @include('contenidos.solucionestecnologicas')
     @include('contenidos.pie')
 @endsection

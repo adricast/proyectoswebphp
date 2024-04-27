@@ -1,1 +1,2 @@
-document.addEventListener("scroll", manejarScroll);
+/*document.addEventListener("scroll", manejarScroll);
+*/

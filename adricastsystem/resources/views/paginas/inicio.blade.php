@@ -6,6 +6,6 @@
 @section('contenido')
    
     @include('contenidos.introservicio')
-    @include('contenidos.solucionestecnologicas')
+    @include('contenidos.procesosdeservicio')
     @include('contenidos.pie')
 @endsection

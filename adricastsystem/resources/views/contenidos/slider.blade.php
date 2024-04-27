@@ -6,3 +6,7 @@
     <img class="slider-image" src="{{ route('recursos.show', ['img', 'portadaweb.gif']) }}" alt="Imagen 4">
     <div class="slider-overlay"></div>
 </div>
+<script>
+    var slideIndex = 0;
+     funcionslider();
+</script>

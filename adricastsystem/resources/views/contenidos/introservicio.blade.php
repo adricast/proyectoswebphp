@@ -43,9 +43,12 @@
        
         <script> 
            
-            var slideIndex = 0;
+            
+            let scrollAmount = 0; 
+            let prevButton; // Declarar prevButton en un alcance más amplio
+            let nextButton; // Declarar nextButton en un alcance más amplio
+
            
-            funcionslider();
             funciontarjeta();
         </script>
 </main>

@@ -8,35 +8,33 @@ function quitarImg() {
   quitarImagenBtn.style.display = 'none';
   moduloImagen.value = ''; // Restablecer el input de tipo file
 }
-function funciontarjeta(){
-    const cards = document.querySelector(".cards");
-    const prevButton = document.querySelector(".prev-button");
-    const nextButton = document.querySelector(".next-button");
-    
-    let scrollAmount = 0;
-    const cardWidth = 320; // Ancho de cada tarjeta
-    const cardMargin = 20; // Margen derecho de cada tarjeta
-    
-    prevButton.addEventListener("click", () => {
+function funciontarjeta() {
+  const cards = document.querySelector(".cards");
+  const prevButton = document.querySelector(".prev-button");
+  const nextButton = document.querySelector(".next-button");
+  
+  const cardWidth = 320; // Ancho de cada tarjeta
+  const cardMargin = 20; // Margen derecho de cada tarjeta
+  
+  prevButton.addEventListener("click", () => {
       cards.scrollTo({
-        top: 0,
-        left: (scrollAmount -= cardWidth + cardMargin),
-        behavior: "smooth"
+          top: 0,
+          left: (scrollAmount -= cardWidth + cardMargin),
+          behavior: "smooth"
       });
       console.log("hizo click en el boton prev");
-      checkScrollButtons();
-    });
-    
-    nextButton.addEventListener("click", () => {
+      checkScrollButtons(prevButton, nextButton,cards); // Pasar prevButton y nextButton a checkScrollButtons
+  });
+  
+  nextButton.addEventListener("click", () => {
       cards.scrollTo({
-        top: 0,
-        left: (scrollAmount += cardWidth + cardMargin),
-        behavior: "smooth"
+          top: 0,
+          left: (scrollAmount += cardWidth + cardMargin),
+          behavior: "smooth"
       });
       console.log("hizo click en el boton next");
-      checkScrollButtons();
-    });
- 
+      checkScrollButtons(prevButton, nextButton,cards); // Pasar prevButton y nextButton a checkScrollButtons
+  });
 }
 
 function funciontarjeta2(){
@@ -58,7 +56,22 @@ function funciontarjeta2(){
         });
 
   }
- 
+  function toggleMenuMobile() {
+    var menuMobile = document.querySelector('.menu-mobile');
+    if (menuMobile.style.display === 'none' || menuMobile.style.display === '') {
+        menuMobile.style.display = 'flex';
+    } else {
+        menuMobile.style.display = 'none';
+    }
+}
+function hideMenuOnLargeScreen() {
+    var menuMobile = document.querySelector('.menu-mobile');
+    var screenWidth = window.innerWidth;
+    if (screenWidth > 768) { // Cambia 768 por el ancho deseado para considerar como "pantalla grande"
+        menuMobile.style.display = 'none';
+    }
+}
+
   function cargarImagen() {
     var input = document.getElementById('file-input');
     var preview = document.getElementById('imagen-preview');
@@ -81,10 +94,11 @@ function funciontarjeta2(){
 
 
     
-function checkScrollButtons() {
+function checkScrollButtons(prevButton, nextButton,cards) {
     // Desactiva el botón de "anterior" si llegamos al inicio de las tarjetas
     if (scrollAmount === 0) {
       prevButton.disabled = true;
+      console.log("estamos probando los botones1");
     } else {
       prevButton.disabled = false;
     }
@@ -130,6 +144,137 @@ function funcionslider(){
     if (slideIndex > slides.length) { slideIndex = 1 }
     slides[slideIndex - 1].classList.add("active");
     setTimeout(funcionslider, 3000); // Cambia la imagen cada 3 segundos
+}
+function aparecerpestañas(){
+  var pestañas = document.querySelector(".tab-content-container");
+ 
+  var pregunta1= document.getElementById("pregunta1");
+  var respuesta1= document.getElementById("respuesta1");
+ 
+  var pregunta2= document.getElementById("pregunta2");
+  var respuesta2= document.getElementById("respuesta2");
+ 
+  var pregunta3= document.getElementById("pregunta3");
+  var respuesta3= document.getElementById("respuesta3");
+
+  var pregunta4= document.getElementById("pregunta4");
+  var respuesta4= document.getElementById("respuesta4");
+  
+  var pregunta5= document.getElementById("pregunta5");
+  var respuesta5= document.getElementById("respuesta5");
+ 
+ 
+
+  pregunta1.addEventListener("change",validacheck1,false);
+  pregunta2.addEventListener("change",validacheck2,false);
+  pregunta3.addEventListener("change",validacheck3,false);
+  pregunta4.addEventListener("change",validacheck4,false);
+  pregunta5.addEventListener("change",validacheck5,false);
+
+ 
+
+
+
+
+  function validacheck1(){
+      var checked=pregunta1.checked;
+      if(checked){
+        
+          respuesta1.style.display="block";
+          respuesta1.style.animation="crecer 2s";
+          
+          respuesta2.style.display="none";
+          respuesta3.style.display="none";
+          respuesta4.style.display="none";
+          respuesta5.style.display="none";
+          pregunta2.checked=false;
+          pregunta3.checked=false;
+          pregunta4.checked=false;
+          pregunta5.checked=false;
+      }else{
+          respuesta1.style.display="none";
+
+      }
+  }
+  function validacheck2(){
+    var checked=pregunta2.checked;
+    if(checked){
+      
+        respuesta2.style.display="block";
+        respuesta2.style.animation="crecer 2s";
+        respuesta1.style.display="none";
+        respuesta3.style.display="none";
+        respuesta4.style.display="none";
+        respuesta5.style.display="none";
+        pregunta1.checked=false;
+        pregunta3.checked=false;
+        pregunta4.checked=false;
+        pregunta5.checked=false;
+    }else{
+        respuesta2.style.display="none";
+    }
+}
+
+function validacheck3(){
+    var checked=pregunta3.checked;
+    if(checked){
+      
+        respuesta3.style.display="block";
+        respuesta3.style.animation="crecer 2s";
+        respuesta1.style.display="none";
+        respuesta2.style.display="none";
+       
+        respuesta4.style.display="none";
+        respuesta5.style.display="none";
+        pregunta1.checked=false;
+        pregunta2.checked=false;
+        pregunta4.checked=false;
+        pregunta5.checked=false;
+    }else{
+        respuesta3.style.display="none";
+    }
+}
+function validacheck4(){
+    var checked=pregunta4.checked;
+    if(checked){
+      
+        respuesta4.style.display="block";
+        respuesta4.style.animation="crecer 2s";
+        respuesta1.style.display="none";
+        respuesta2.style.display="none";
+        respuesta3.style.display="none";
+       
+        respuesta5.style.display="none";
+        pregunta1.checked=false;
+        pregunta3.checked=false;
+        pregunta2.checked=false;
+        pregunta5.checked=false;
+    }else{
+        respuesta4.style.display="none";
+    }
+}
+function validacheck5(){
+    var checked=pregunta5.checked;
+    if(checked){
+      
+        respuesta5.style.display="block";
+        respuesta5.style.animation="crecer 2s";
+        respuesta1.style.display="none";
+        respuesta2.style.display="none";
+        respuesta3.style.display="none";
+        respuesta4.style.display="none";
+        pregunta1.checked=false;
+        pregunta3.checked=false;
+        pregunta4.checked=false;
+        pregunta2.checked=false;
+       
+    }else{
+        respuesta5.style.display="none";
+    }
+}
+
+
+
 }
 function aparecerpestañas(){
   var pestañas = document.querySelector(".pestañas");
@@ -200,6 +345,7 @@ function aparecerpestañas(){
         respuesta2.style.display="none";
     }
 }
+
 function validacheck3(){
     var checked=pregunta3.checked;
     if(checked){
@@ -365,7 +511,7 @@ function tecnologiasSC(){
    csharp.style.backgroundColor="rgb(113, 201, 252)";
  }
 
-function manejarScroll() {
+/*function manejarScroll() {
   var menu = document.getElementById("menu");
   var scrollPosition = window.scrollY;
 
@@ -374,7 +520,7 @@ function manejarScroll() {
   } else {
       menu.classList.remove("fixed");
   }
-}
+}*/
 var validacionesFormulario = {
   validaformularioregistro: function() {
     var formulario = document.getElementById('formularioRegistro');
