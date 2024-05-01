@@ -107,45 +107,81 @@ function consultaDatos() {
         });
     });
   }
-  function eliminarDatos(id) {
-    // Mostrar la alerta de confirmación
+
+  function eliminarDato(id) {
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Esta acción no se puede deshacer',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminarlo!'
     }).then((result) => {
-      // Si se hace clic en el botón de confirmación
-      if (result.isConfirmed) {
-        var token = $('meta[name="csrf-token"]').attr('content');
-        // Realizar la solicitud AJAX para eliminar el registro
-        $.ajax({
-          url: '/tipousuariosdelete/' + id,
-          method: 'DELETE',
-          headers: {
-            'X-CSRF-TOKEN': token
-          },
-          data: { id: id
-          },
-          success: function(response) {
-            // Mostrar una alerta de éxito
-            Swal.fire('Eliminado', 'El registro ha sido eliminado', 'success');
-            window.location.href = '/tipousuarios';
-            // Realizar cualquier otra acción después de eliminar el registro (como actualizar la tabla)
-            // ...
-          },
-          error: function(xhr, status, error) {
-            // Mostrar una alerta de error si ocurre algún problema en la solicitud AJAX
-            Swal.fire('Error', 'Se produjo un error al eliminar el registro', 'error');
-          }
-        });
-      }
+        if (result.isConfirmed) {
+            var token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url:  'tipousuariosdelete/' + id,
+                type: "DELETE",
+                data: {
+                    "_token": token,
+                },
+                success: function(response) {
+                    // Manejar la respuesta exitosa aquí
+                    console.log(response);
+                    Swal.fire('Eliminado!', 'El registro ha sido eliminado.', 'success');
+                    // Redireccionamos después de eliminar el contacto
+                    window.location.href = '/tipousuarios';
+                },
+                error: function(xhr, status, error) {
+                    // Manejar errores aquí
+                    console.error('Error en la solicitud AJAX:', xhr, status, error);
+                    Swal.fire('Error', 'Se produjo un error en el servidor.', 'error');
+                }
+            });
+        }
     });
-  }
+}
+
+function eliminarDatos(ids) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminarlos!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var token = $('meta[name="csrf-token"]').attr('content');
+            // Recorremos los IDs y enviamos una solicitud AJAX para eliminar cada uno
+            ids.forEach(id => {
+                $.ajax({
+                    url:  'tipousuariosdelete/' + id,
+                    type: "DELETE",
+                    data: {
+                        "_token": token,
+                    },
+                    success: function(response) {
+                        // Manejar la respuesta exitosa aquí (puedes eliminar el console.log si no lo necesitas)
+                        console.log(response);
+                        // No redireccionamos aquí, ya que estamos eliminando varios contactos y no queremos redireccionar hasta que se completen todas las eliminaciones
+                    },
+                    error: function(xhr, status, error) {
+                        // Manejar errores aquí
+                        console.error('Error en la solicitud AJAX:', xhr, status, error);
+                        Swal.fire('Error', 'Se produjo un error en el servidor.', 'error');
+                    }
+                });
+            });
+            // Una vez que se hayan enviado todas las solicitudes de eliminación, mostramos un mensaje y redireccionamos
+            Swal.fire('Eliminados!', 'Los registros han sido eliminados.', 'success').then(() => {
+                window.location.href = '/tipousuarios';
+            });
+        }
+    });
+}
   function guardarDatos() {
     var token = $('meta[name="csrf-token"]').attr('content');
 
@@ -233,3 +269,31 @@ function obtenerDatos(id) {
       }
   });
 }
+
+function obtenerTipoUsuariosSeleccionados() {
+  var tipousuariosSeleccionados = [];
+  $("input[name='tipousuarios_seleccionados[]']:checked").each(function () {
+      tipousuariosSeleccionados.push($(this).val());
+  });
+  return tipousuariosSeleccionados;
+}
+
+
+function actualizarVisibilidadBotonEliminar() {
+  var tipousuariosSeleccionados = obtenerTipoUsuariosSeleccionados();
+  if (tipousuariosSeleccionados.length > 0) {
+      $('#btnEliminarSeleccionados').show();
+  } else {
+      $('#btnEliminarSeleccionados').hide();
+  }
+}
+
+// Llamar a la función al cargar la página
+$(document).ready(function() {
+  actualizarVisibilidadBotonEliminar();
+  
+  // Llamar a la función cuando se cambia el estado de un checkbox
+  $("input[name='modulos_seleccionados[]']").change(function() {
+      actualizarVisibilidadBotonEliminar();
+  });
+});

@@ -11,9 +11,11 @@ class CategoriasController extends Controller
 {
     //
        //
+       protected $rutaConcat;
        public function __construct()
        {
            $this->middleware('auth');
+           $this->rutaConcat = config('app.ruta_concat');
        }
        public function index()
        {
@@ -73,7 +75,7 @@ class CategoriasController extends Controller
             if ($request->hasFile('imagencategoria')) {
                 $imagen = $request->file('imagencategoria');
                 $nombreImagen = $categoriaId . '.' . $imagen->getClientOriginalExtension();
-                $destino = public_path('img/categorias');
+                $destino = public_path($this->rutaConcat . 'img/categorias');
                 $imagen->move($destino, $nombreImagen);
                 $imagenUrl = $nombreImagen;
     
@@ -113,7 +115,7 @@ class CategoriasController extends Controller
            if ($request->hasFile('imagencategoria')) {
                $imagen = $request->file('imagencategoria');
                $nombreImagen = $request->id . '.' . $imagen->getClientOriginalExtension();
-               $destino = public_path('img/categorias');
+               $destino = public_path($this->rutaConcat . 'img/categorias');
                $imagen->move($destino, $nombreImagen);
                $imagenUrl = $nombreImagen;
        
@@ -142,7 +144,7 @@ class CategoriasController extends Controller
            $registro->delete();
             if ($registro->foto != '')
             {
-                $ruta= 'img/categorias/'.$registro->foto;
+                $ruta= $this->rutaConcat . 'img/categorias/'.$registro->foto;
                 if (file_exists($ruta)) {
                  unlink($ruta);
                  }

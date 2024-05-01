@@ -6,6 +6,8 @@
 @section('contenidoreiko')
 
     <script src="{{ route('recursos.show', ['js/reiko', 'categoriasreiko.js']) }}"></script>
+    <button type="button" id="btnEliminarSeleccionados" style="display: none;" class="btn" onclick="eliminarDatos(obtenerCategoriasSeleccionadas())">Eliminar seleccionados</button>
+ 
     Busqueda
     <input type="text" name="busqueda" id="busqueda" placeholder="Busqueda de Datos" onkeyup="consultaDatos()" style="width: 200px;">
       
@@ -30,6 +32,9 @@
                     @endif
                       <p>{{ $categoria->nombre }}</p>
                         <div class="botones">
+                            {{-- Checkbox --}}
+                            <input type="checkbox" name="categorias_seleccionadas[]" value="{{ $categoria->id }}" onchange="actualizarVisibilidadBotonEliminar()">
+                            
                             {{-- Botón Eliminar --}}
                             <button onclick="eliminarDatos('{{ $categoria->id }}')">
                                 <i class="fas fa-trash"></i> 

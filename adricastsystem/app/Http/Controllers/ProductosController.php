@@ -15,9 +15,11 @@ class ProductosController extends Controller
 {
     //
       //
+      protected $rutaConcat;
       public function __construct()
       {
           $this->middleware('auth');
+          $this->rutaConcat = config('app.ruta_concat');
       }
       public function index()
     {
@@ -66,9 +68,10 @@ class ProductosController extends Controller
             'precio' => 'required|numeric|min:0|max:999999.99',
             'codigo' => 'required',
             'en_stock' => 'nullable|boolean',
-            'stock' => 'sometimes|required_if:en_stock,1|numeric|min:0|max:1000',
+            'stock' => 'nullable|numeric|min:0|max:1000', // Permitir que el campo esté vacío si en_stock no está marcado
             'en_oferta' => 'nullable|boolean',
-            'precio_oferta' => 'sometimes|required_if:en_oferta,true|numeric|min:0|max:999999.99',
+            'precio_oferta' => 'nullable|numeric|min:0|max:999999.99', // Permitir que el campo esté vacío si no está en oferta
+            
             'publicar_web' => 'nullable|boolean',
             'linkcompra' => 'nullable',
         ]);
@@ -90,6 +93,7 @@ class ProductosController extends Controller
                 'categoria_id' => $request->input('categoria_id'),
                 'marca_id' => $request->input('marca_id'),
                 'precio' => $request->input('precio'),
+                'en_stock' => $enStock,
                 'stock' => $stockValue,
                 'codigo' => $request->input('codigo'),
                 'en_oferta' => $enOferta,
@@ -107,7 +111,7 @@ class ProductosController extends Controller
             if ($request->hasFile('imagenproducto')) {
                 $imagen = $request->file('imagenproducto');
                 $nombreImagen = $productoId . '.' . $imagen->getClientOriginalExtension();
-                $destino = public_path('img/productos');
+                $destino = public_path($this->rutaConcat.'img/productos');
                 $imagen->move($destino, $nombreImagen);
                 $imagenUrl = $nombreImagen;
     
@@ -132,7 +136,7 @@ class ProductosController extends Controller
             // Retornar una respuesta exitosa en formato JSON
             return response()->json(['success' => true, 'message' => 'El registro ha sido eliminado']);
         }
-        $ruta= 'img/productos/'.$registro->foto;
+        $ruta= $this->rutaConcat. 'img/productos/'.$registro->foto;
         
         if (file_exists($ruta)) {
             unlink($ruta);
@@ -160,9 +164,10 @@ class ProductosController extends Controller
             'precio' => 'required|numeric|min:0|max:999999.99',
             'codigo' => 'required',
             'en_stock' => 'nullable|boolean',
-            'stock' => 'sometimes|required_if:en_stock,1|numeric|min:0|max:1000',
+            'stock' => 'nullable|numeric|min:0|max:1000', // Permitir que el campo esté vacío si en_stock no está marcado
             'en_oferta' => 'nullable|boolean',
-            'precio_oferta' => 'sometimes|required_if:en_oferta,true|numeric|min:0|max:999999.99',
+            'precio_oferta' => 'nullable|numeric|min:0|max:999999.99', // Permitir que el campo esté vacío si no está en oferta
+            
             'publicar_web' => 'nullable|boolean',
             'linkcompra' => 'nullable',
         ]);
@@ -181,7 +186,7 @@ class ProductosController extends Controller
             if ($request->hasFile('imagenmodulo')) {
                 $imagen = $request->file('imagenmodulo');
                 $nombreImagen = $request->id . '.' . $imagen->getClientOriginalExtension();
-                $destino = public_path('img/productos');
+                $destino = public_path($this->rutaConcat.'img/productos');
                 $imagen->move($destino, $nombreImagen);
                 $imagenUrl = $nombreImagen;
         
@@ -195,6 +200,7 @@ class ProductosController extends Controller
                     'categoria_id' => $request->categoria_id,
                     'marca_id' => $request->marca_id,
                     'precio' => $request->precio,
+                    'en_stock' => $enStock,
                     'stock' => $stockValue,
                     'codigo' => $request->codigo,
                     'en_oferta' => $enOferta,
@@ -214,6 +220,7 @@ class ProductosController extends Controller
                     'categoria_id' => $request->categoria_id,
                     'marca_id' => $request->marca_id,
                     'precio' => $request->precio,
+                    'en_stock' => $enStock,
                     'stock' => $stockValue,
                     'codigo' => $request->codigo,
                     'en_oferta' => $enOferta,

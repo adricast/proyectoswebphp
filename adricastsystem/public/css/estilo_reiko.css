@@ -726,37 +726,77 @@
     background-color: #0056b3; /* Cambia el color al tono más oscuro de azul en hover */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra sutil en hover */
 }
-.target{
+/* Estilo de los elementos .target */
+/* Estilo para contenedor de cada elemento .target */
+/* Estilo para contenedor de cada elemento .target */
+.target {
     width: 200px;
-    height: 200px;
+    height: 250px; /* Altura fija para todos los elementos */
     border-radius: 4px;
     border: 2px solid blue;
     margin: 5px;
-    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
-    display: block;
+    padding: 10px;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     position: relative;
+    overflow: hidden; /* Recorta el contenido si es necesario */
 }
-.target img{
+
+/* Estilo para la imagen dentro de .target */
+.target img {
     width: 150px;
     height: 150px;
     background: transparent;
     margin: 5px auto;
-   
 }
-.target:hover {
-    border: 2px solid rgb(26, 35, 161);
-    box-shadow: 4px 3px 3px 0px rgba(0,0,0,0.75);
-    background-color: seashell;
-    
-}
-.target .botones{
-    opacity: 0;
-}
-.target:hover .botones{
-    opacity: 1;
-} 
 
+/* Estilo para botones */
+.botones {
+    opacity: 0;
+    margin-top: auto;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Alinea los botones verticalmente */
+    align-items: center; /* Centra los botones horizontalmente */
+}
+
+.target:hover .botones {
+    opacity: 1;
+}
+
+/* Estilo para los botones */
+.botones button {
+    margin-top: 5px; /* Añade un espacio entre los botones */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Estilo para los botones al pasar el ratón */
+.botones button:hover {
+    background-color: #0056b3;
+}
+
+#btnEliminarSeleccionados {
+    display: none; /* Para ocultar el botón por defecto */
+    margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+    background-color: #d9534f; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    padding: 10px 20px; /* Ajusta el padding según sea necesario */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Borde redondeado */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+#btnEliminarSeleccionados:hover {
+    background-color: #c9302c; /* Cambia el color de fondo al pasar sobre el botón */
+}
 .contenedorformularios{
     width: auto;
     height:auto;
@@ -766,6 +806,7 @@
     box-shadow: 4px 3px 3px 0px rgba(0,0,0,0.75);
     
 }
+
 
 .contenedorformularios form{
     width: 100%;
@@ -908,3 +949,8 @@
     background-color: turquoise;
 }/* Oculta los números de página y otros elementos */
 
+@media screen and (max-width: 767px) {
+   .botones{
+    opacity: 1;
+   } 
+}

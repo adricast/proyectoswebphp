@@ -6,8 +6,7 @@ function cerrarModal(){
 function principal(){
     window.location.href = '/contactos';
 }
-
-function eliminarDatos(id) {    
+function eliminarDato(id) {
     Swal.fire({
         title: '¿Estás seguro?',
         text: "No podrás revertir esto!",
@@ -29,6 +28,7 @@ function eliminarDatos(id) {
                     // Manejar la respuesta exitosa aquí
                     console.log(response);
                     Swal.fire('Eliminado!', 'El registro ha sido eliminado.', 'success');
+                    // Redireccionamos después de eliminar el contacto
                     window.location.href = '/contactos';
                 },
                 error: function(xhr, status, error) {
@@ -40,6 +40,47 @@ function eliminarDatos(id) {
         }
     });
 }
+
+function eliminarDatos(ids) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminarlos!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var token = $('meta[name="csrf-token"]').attr('content');
+            // Recorremos los IDs y enviamos una solicitud AJAX para eliminar cada uno
+            ids.forEach(id => {
+                $.ajax({
+                    url:  'contactosdelete/' + id,
+                    type: "DELETE",
+                    data: {
+                        "_token": token,
+                    },
+                    success: function(response) {
+                        // Manejar la respuesta exitosa aquí (puedes eliminar el console.log si no lo necesitas)
+                        console.log(response);
+                        // No redireccionamos aquí, ya que estamos eliminando varios contactos y no queremos redireccionar hasta que se completen todas las eliminaciones
+                    },
+                    error: function(xhr, status, error) {
+                        // Manejar errores aquí
+                        console.error('Error en la solicitud AJAX:', xhr, status, error);
+                        Swal.fire('Error', 'Se produjo un error en el servidor.', 'error');
+                    }
+                });
+            });
+            // Una vez que se hayan enviado todas las solicitudes de eliminación, mostramos un mensaje y redireccionamos
+            Swal.fire('Eliminados!', 'Los registros han sido eliminados.', 'success').then(() => {
+                window.location.href = '/contactos';
+            });
+        }
+    });
+}
+
 function obtenerDatos(id) {
     editmodal= document.getElementById('editmodal');
     editmodal.style.display = 'block';
@@ -135,3 +176,29 @@ function consultaDatos() {
         }
     });
 }
+function obtenerMensajesSeleccionados() {
+    var mensajesSeleccionados = [];
+    $("input[name='mensajes_seleccionados[]']:checked").each(function () {
+        mensajesSeleccionados.push($(this).val());
+    });
+    return mensajesSeleccionados;
+}
+
+function actualizarVisibilidadBotonEliminar() {
+    var mensajesSeleccionados = obtenerMensajesSeleccionados();
+    if (mensajesSeleccionados.length > 0) {
+        $('#btnEliminarSeleccionados').show();
+    } else {
+        $('#btnEliminarSeleccionados').hide();
+    }
+}
+
+// Llamar a la función al cargar la página
+$(document).ready(function() {
+    actualizarVisibilidadBotonEliminar();
+    
+    // Llamar a la función cuando se cambia el estado de un checkbox
+    $("input[name='mensajes_seleccionados[]']").change(function() {
+        actualizarVisibilidadBotonEliminar();
+    });
+});

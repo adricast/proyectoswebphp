@@ -402,7 +402,7 @@
     display: flex;
     align-items: center;
     justify-items: center;
-    
+    padding: 20px;
 }
 .pestañas{
     width: 90%;

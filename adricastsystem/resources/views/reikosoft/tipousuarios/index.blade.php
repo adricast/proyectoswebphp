@@ -6,6 +6,8 @@
 @section('contenidoreiko')
 
     <script src="{{ route('recursos.show', ['js/reiko', 'tipousuariosreiko.js']) }}"></script>
+    <button type="button" id="btnEliminarSeleccionados" style="display: none;" class="btn" onclick="eliminarDatos(obtenerTipoUsuariosSeleccionados())">Eliminar seleccionados</button>
+ 
     Busqueda
     <input type="text" name="busqueda" id="busqueda" placeholder="Busqueda de Datos" onkeyup="consultaDatos()" style="width: 200px;">
    
@@ -28,6 +30,9 @@
                  
                       <p>{{ $tipousuario->descripcion }}</p>
                         <div class="botones">
+                            {{-- Checkbox --}}
+                            <input type="checkbox" name="tipousuarios_seleccionados[]" value="{{ $tipousuario->id }}" onchange="actualizarVisibilidadBotonEliminar()">
+                            
                             {{-- Botón Eliminar --}}
                             <button onclick="eliminarDatos('{{ $tipousuario->id }}')">
                                 <i class="fas fa-trash"></i> 

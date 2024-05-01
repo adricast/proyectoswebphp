@@ -8,9 +8,11 @@ use App\Models\Subcaracteristica;
 class SubcaracteristicasController extends Controller
 {
     //
+    protected $rutaConcat;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->rutaConcat = config('app.ruta_concat');
     }
     public function agregarsubcaracteristica($id_caracteristica){
         $subcaracteristica = new Subcaracteristica();

@@ -11,9 +11,12 @@ class CaracteristicasController extends Controller
 {
     //
       //
+  
+      protected $rutaConcat;
       public function __construct()
       {
           $this->middleware('auth');
+          $this->rutaConcat = config('app.ruta_concat');
       }
       public function index()
       {

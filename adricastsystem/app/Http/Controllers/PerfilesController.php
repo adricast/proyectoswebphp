@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\Hash;
 class PerfilesController extends Controller
 {
     //
+    protected $rutaConcat;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->rutaConcat = config('app.ruta_concat');
     }
     public function index()
     {
@@ -67,7 +69,7 @@ class PerfilesController extends Controller
         if ($request->hasFile('imagenmodulo')) {
             $imagen = $request->file('imagenmodulo');
             $nombreImagen = 'perfil_' . $user->id . '.' . $imagen->getClientOriginalExtension();
-            $destino = public_path('img/perfiles');
+            $destino = public_path($this->rutaConcat.'img/perfiles');
             $imagen->move($destino, $nombreImagen);
             $registro->foto = $nombreImagen;
         }

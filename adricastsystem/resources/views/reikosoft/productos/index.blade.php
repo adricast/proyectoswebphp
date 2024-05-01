@@ -6,11 +6,13 @@
 @section('contenidoreiko')
 
     <script src="{{ route('recursos.show', ['js/reiko', 'productosreiko.js']) }}"></script>
+    <button type="button" id="btnEliminarSeleccionados" style="display: none;" class="btn" onclick="eliminarDatos(obtenerProductosSeleccionados())">Eliminar seleccionados</button>
+ 
     Busqueda
     <input type="text" name="busqueda" id="busqueda" placeholder="Busqueda de Datos" onkeyup="consultaDatos()" style="width: 200px;">
-      
+   
     <section class="containerreiko">
-       
+  
         <div class="contenedormodulos" id="contenedorelemento">
             <a href="{{ route('productos.create') }}">
                 <div class="target">
@@ -31,8 +33,11 @@
                      @endif
                     <p>{{ $producto->nombre}}</p>
                         <div class="botones">
+                             {{-- Checkbox --}}
+                            <input type="checkbox" name="productos_seleccionados[]" value="{{ $producto->id }}" onchange="actualizarVisibilidadBotonEliminar()">
+                              
                             {{-- Botón Eliminar --}}
-                            <button onclick="eliminarDatos('{{ $producto->id }}')">
+                            <button onclick="eliminarDato('{{ $producto->id }}')">
                                 <i class="fas fa-trash"></i> 
                             </button>
 

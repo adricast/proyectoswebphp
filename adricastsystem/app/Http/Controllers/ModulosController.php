@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\Auth;
 class ModulosController extends Controller
 {
     //
+    protected $rutaConcat;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->rutaConcat = config('app.ruta_concat');
     }
     public function index()
     {
@@ -57,7 +59,7 @@ class ModulosController extends Controller
            // Procesamiento y almacenamiento de la imagen
             $imagen = $request->file('imagenmodulo');
             $nombreImagen = $request->ruta.'.'.$imagen->getClientOriginalExtension();
-            $destino = public_path('img/modulos');
+            $destino = public_path($this->rutaConcat.'img/modulos');
             $request->imagenmodulo->move($destino, $nombreImagen);
             $imagenUrl = $nombreImagen;
         try {
@@ -98,7 +100,7 @@ class ModulosController extends Controller
         if ($request->hasFile('imagenmodulo')) {
             $imagen = $request->file('imagenmodulo');
             $nombreImagen = $request->ruta . '.' . $imagen->getClientOriginalExtension();
-            $destino = public_path('img/modulos');
+            $destino = public_path($this->rutaConcat.'img/modulos');
             $imagen->move($destino, $nombreImagen);
             $imagenUrl = $nombreImagen;
     
@@ -126,7 +128,7 @@ class ModulosController extends Controller
         $modulo = Modulo::find($id);
         $modulo->delete();
 
-        $ruta= 'img/modulos/'.$modulo->icono;
+        $ruta= $this->rutaConcat.'img/modulos/'.$modulo->icono;
         unlink($ruta);
 
           // Retornar una respuesta exitosa en formato JSON

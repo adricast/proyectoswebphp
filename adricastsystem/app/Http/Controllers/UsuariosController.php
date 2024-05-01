@@ -7,13 +7,16 @@ use App\Models\Modulo;
 use App\Models\TipoUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UsuariosController extends Controller
 {
     //
+    protected $rutaConcat;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->rutaConcat = config('app.ruta_concat');
     }
 
     public function index()
@@ -61,7 +64,7 @@ class UsuariosController extends Controller
         }
 
         if($registro->foto){
-            $ruta= 'img/perfiles/'.$registro->foto;
+            $ruta= $this->rutaConcat.'img/perfiles/'.$registro->foto;
             
             if (file_exists($ruta)) {
                 unlink($ruta);
@@ -132,13 +135,16 @@ class UsuariosController extends Controller
       
     
         // Verificar si se proporcionó una nueva imagen
+       
         if ($request->hasFile('imagenmodulo')) {
             $imagen = $request->file('imagenmodulo');
-            $nombreImagen = 'perfil_'.$request->id . '.' . $imagen->getClientOriginalExtension();
-            $destino = public_path('img/perfiles');
+          
+            $nombreImagen = 'perfil_'. $id . '.' . $imagen->getClientOriginalExtension();
+            $destino = public_path($this->rutaConcat.'img/perfiles');
+            //$destino = public_path('../../public_html/img/perfiles'); para produccion hostinger cambiar a esta ruta
             $imagen->move($destino, $nombreImagen);
             $imagenUrl = $nombreImagen;
-    
+        
             // Actualizar solo si se proporciona una nueva imagen
             $registro->update([
                 'nombres' => $request->nombres,
@@ -146,9 +152,10 @@ class UsuariosController extends Controller
                 'direccion' => $request->direccion,
                 'telefono' => $request->telefono,
                 'email' => $request->email,
-                'foto' => $imagenUrl,
+                'foto' => $imagenUrl
 
             ]);
+           
         } else {
             // Actualizar sin cambiar la imagen
             $registro->update([
@@ -156,7 +163,7 @@ class UsuariosController extends Controller
                 'apellidos' => $request->apellidos,
                 'direccion' => $request->direccion,
                 'telefono' => $request->telefono,
-                'email' => $request->email,
+                'email' => $request->email
 
             ]);
         }

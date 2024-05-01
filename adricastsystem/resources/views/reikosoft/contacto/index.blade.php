@@ -15,48 +15,48 @@
         <option value="todos">Todos</option>
     </select>
     <section class="containerreiko2">
-    
-      
+        <!-- Modificado el onclick para llamar a la función eliminarDatos -->
+        <button type="button" id="btnEliminarSeleccionados" class="btn" style="display: none;" onclick="eliminarDatos(obtenerMensajesSeleccionados())">Eliminar seleccionados</button>
 
-       <div class="contenedormensajeria">
+        <div class="contenedormensajeria">
             <div class="contenidomensajeria" id="contenidomensajeria">
-            @foreach ($mensajes as $mensaje)
-               @if ($mensaje->status =='leido')
-                    <p style="color: green;">Mensaje Leido</p>
-                    <div class="mensaje" style="border: 1px solid green;">
-                    
-                @elseif ($mensaje->status =='no_leido')
-                    <p style="color: blue;">Mensaje no Leido</p>
-                    <div class="mensaje" style="border: 1px solid blue;">
-                @endif
-                    <div class="elemento">
-                        <span class="etiqueta">Nombre:</span>
-                        <span class="dato">{{ $mensaje->nombre }}</span>
+                @foreach ($mensajes as $mensaje)
+                    @if ($mensaje->status =='leido')
+                        <p style="color: green;">Mensaje Leido</p>
+                        <div class="mensaje" style="border: 1px solid green;">
+                    @elseif ($mensaje->status =='no_leido')
+                        <p style="color: blue;">Mensaje no Leido</p>
+                        <div class="mensaje" style="border: 1px solid blue;">
+                    @endif
+                        <div class="elemento">
+                            <input type="checkbox" name="mensajes_seleccionados[]" value="{{ $mensaje->id }}">
+                            <span class="etiqueta">Nombre:</span>
+                            <span class="dato">{{ $mensaje->nombre }}</span>
+                        </div>
+                        <div class="elemento">
+                            <span class="etiqueta">Correo:</span>
+                            <span class="dato">{{ $mensaje->correo }}</span>
+                        </div>
+                        <div class="elemento">
+                            <span class="etiqueta">Asunto:</span>
+                            <span class="dato">{{ $mensaje->asunto }}</span>
+                        </div>
+                        <div class="elemento" style="display: flex;">
+                            <button type="button" onclick="obtenerDatos('{{ $mensaje->id }}')" class="btnver">Ver</button>
+                            <!-- Modificado el onclick para llamar a la función eliminarDato -->
+                            <button type="button" onclick="eliminarDato('{{ $mensaje->id }}')" class="btneliminar">Eliminar</button>
+                        </div>
                     </div>
-                    <div class="elemento">
-                        <span class="etiqueta">Correo:</span>
-                        <span class="dato">{{ $mensaje->correo }}</span>
-                    </div>
-                    <div class="elemento">
-                        <span class="etiqueta">Asunto:</span>
-                        <span class="dato">{{ $mensaje->asunto }}</span>
-                    </div>
-                    <div class="elemento" style="display: flex;">
-                        <button type="submit" onclick="obtenerDatos('{{ $mensaje->id }}')" class="btnver">Ver</button>
-                        <button type="submit" onclick="eliminarDatos('{{ $mensaje->id }}')" class="btneliminar">Eliminar</button>
-                    </div>
-                </div>
-              
-            @endforeach
-               
-
+                @endforeach
             </div>
-       
-       </div>
-        
-       
+        </div>
     </section>
     
-   
     @include('reikosoft.contacto.show') 
 @endsection
+
+@section('scripts')
+    <!-- Incluye el archivo JavaScript -->
+    <script src="{{ route('recursos.show', ['js/reiko', 'contactoreiko.js']) }}"></script>
+@endsection
+

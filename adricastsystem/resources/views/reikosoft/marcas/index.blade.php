@@ -6,6 +6,8 @@
 @section('contenidoreiko')
 
     <script src="{{ route('recursos.show', ['js/reiko', 'marcasreiko.js']) }}"></script>
+    <button type="button" id="btnEliminarSeleccionados" style="display: none;" class="btn" onclick="eliminarDatos(obtenerMarcasSeleccionadas())">Eliminar seleccionados</button>
+ 
     Busqueda
     <input type="text" name="busqueda" id="busqueda" placeholder="Busqueda de Datos" onkeyup="consultaDatos()" style="width: 200px;">
    
@@ -30,8 +32,11 @@
                     @endif
                       <p>{{ $marca->nombre }}</p>
                         <div class="botones">
+                            {{-- Checkbox --}}
+                            <input type="checkbox" name="marcas_seleccionadas[]" value="{{ $marca->id }}" onchange="actualizarVisibilidadBotonEliminar()">
+                           
                             {{-- Botón Eliminar --}}
-                            <button onclick="eliminarDatos('{{ $marca->id }}')">
+                            <button onclick="eliminarDato('{{ $marca->id }}')">
                                 <i class="fas fa-trash"></i> 
                             </button>
 

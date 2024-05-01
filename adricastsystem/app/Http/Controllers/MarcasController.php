@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Auth;
 class MarcasController extends Controller
 {
        //
+       protected $rutaConcat;
        public function __construct()
        {
            $this->middleware('auth');
+           $this->rutaConcat = config('app.ruta_concat');
        }
        public function index()
        {
@@ -76,7 +78,7 @@ class MarcasController extends Controller
             if ($request->hasFile('imagenmarca')) {
                 $imagen = $request->file('imagenmarca');
                 $nombreImagen = $marcaId . '.' . $imagen->getClientOriginalExtension();
-                $destino = public_path('img/marcas');
+                $destino = public_path($this->rutaConcat.'img/marcas');
                 $imagen->move($destino, $nombreImagen);
                 $imagenUrl = $nombreImagen;
     
@@ -116,7 +118,7 @@ class MarcasController extends Controller
            if ($request->hasFile('imagenmarca')) {
                $imagen = $request->file('imagenmarca');
                $nombreImagen = $request->id . '.' . $imagen->getClientOriginalExtension();
-               $destino = public_path('img/marcas');
+               $destino = public_path($this->rutaConcat.'img/marcas');
                $imagen->move($destino, $nombreImagen);
                $imagenUrl = $nombreImagen;
        
@@ -145,7 +147,7 @@ class MarcasController extends Controller
            $registro->delete();
             if ($registro->foto)
             {
-                $ruta= 'img/marcas/'.$registro->foto;
+                $ruta= $this->rutaConcat.'img/marcas/'.$registro->foto;
                 if (file_exists($ruta)) {
                  unlink($ruta);
                  }

@@ -1,42 +1,78 @@
-function eliminarDatos(id) {
-    // Mostrar la alerta de confirmación
+
+  function eliminarDato(id) {
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Esta acción no se puede deshacer',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminarlo!'
     }).then((result) => {
-      // Si se hace clic en el botón de confirmación
-      if (result.isConfirmed) {
-        var token = $('meta[name="csrf-token"]').attr('content');
-        // Realizar la solicitud AJAX para eliminar el registro
-        $.ajax({
-          url: '/categoriasdelete/' + id,
-          method: 'DELETE',
-          headers: {
-            'X-CSRF-TOKEN': token
-          },
-          data: { id: id
-          },
-          success: function(response) {
-            // Mostrar una alerta de éxito
-            Swal.fire('Eliminado', 'El registro ha sido eliminado', 'success');
-            window.location.href = '/categorias';
-            // Realizar cualquier otra acción después de eliminar el registro (como actualizar la tabla)
-            // ...
-          },
-          error: function(xhr, status, error) {
-            // Mostrar una alerta de error si ocurre algún problema en la solicitud AJAX
-            Swal.fire('Error', 'Se produjo un error al eliminar el registro', 'error');
-          }
-        });
-      }
+        if (result.isConfirmed) {
+            var token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url:  'categoriasdelete/' + id,
+                type: "DELETE",
+                data: {
+                    "_token": token,
+                },
+                success: function(response) {
+                    // Manejar la respuesta exitosa aquí
+                    console.log(response);
+                    Swal.fire('Eliminado!', 'El registro ha sido eliminado.', 'success');
+                    // Redireccionamos después de eliminar el contacto
+                    window.location.href = '/categorias';
+                },
+                error: function(xhr, status, error) {
+                    // Manejar errores aquí
+                    console.error('Error en la solicitud AJAX:', xhr, status, error);
+                    Swal.fire('Error', 'Se produjo un error en el servidor.', 'error');
+                }
+            });
+        }
     });
-  }
+}
+
+function eliminarDatos(ids) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminarlos!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var token = $('meta[name="csrf-token"]').attr('content');
+            // Recorremos los IDs y enviamos una solicitud AJAX para eliminar cada uno
+            ids.forEach(id => {
+                $.ajax({
+                    url:  'categoriasdelete/' + id,
+                    type: "DELETE",
+                    data: {
+                        "_token": token,
+                    },
+                    success: function(response) {
+                        // Manejar la respuesta exitosa aquí (puedes eliminar el console.log si no lo necesitas)
+                        console.log(response);
+                        // No redireccionamos aquí, ya que estamos eliminando varios contactos y no queremos redireccionar hasta que se completen todas las eliminaciones
+                    },
+                    error: function(xhr, status, error) {
+                        // Manejar errores aquí
+                        console.error('Error en la solicitud AJAX:', xhr, status, error);
+                        Swal.fire('Error', 'Se produjo un error en el servidor.', 'error');
+                    }
+                });
+            });
+            // Una vez que se hayan enviado todas las solicitudes de eliminación, mostramos un mensaje y redireccionamos
+            Swal.fire('Eliminados!', 'Los registros han sido eliminados.', 'success').then(() => {
+                window.location.href = '/categorias';
+            });
+        }
+    });
+}
   function guardarDatos() {
     var token = $('meta[name="csrf-token"]').attr('content');
 
@@ -259,3 +295,31 @@ function consultaDatos() {
       });
   });
 }
+
+function obtenerCategoriasSeleccionadas() {
+  var categoriasSeleccionadas = [];
+  $("input[name='categorias_seleccionadas[]']:checked").each(function () {
+    categoriasSeleccionadas.push($(this).val());
+  });
+  return categoriasSeleccionadas;
+}
+
+
+function actualizarVisibilidadBotonEliminar() {
+  var categoriasSeleccionadas = obtenerCategoriasSeleccionadas();
+  if (categoriasSeleccionadas.length > 0) {
+      $('#btnEliminarSeleccionados').show();
+  } else {
+      $('#btnEliminarSeleccionados').hide();
+  }
+}
+
+// Llamar a la función al cargar la página
+$(document).ready(function() {
+  actualizarVisibilidadBotonEliminar();
+  
+  // Llamar a la función cuando se cambia el estado de un checkbox
+  $("input[name='categorias_seleccionadas[]']").change(function() {
+      actualizarVisibilidadBotonEliminar();
+  });
+});

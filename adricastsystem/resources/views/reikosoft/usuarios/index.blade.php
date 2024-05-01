@@ -6,6 +6,8 @@
 @section('contenidoreiko')
 
     <script src="{{ route('recursos.show', ['js/reiko', 'usuariosreiko.js']) }}"></script>
+    <button type="button" id="btnEliminarSeleccionados" style="display: none;" class="btn" onclick="eliminarDatos(obtenerUsuariosSeleccionados())">Eliminar seleccionados</button>
+ 
     Busqueda
     <input type="text" name="busqueda" id="busqueda" placeholder="Busqueda de Datos" onkeyup="consultaDatos()" style="width: 200px;">
              
@@ -25,14 +27,19 @@
                     <div class="target">
                     @if ($usuario->foto )
                         <img src="{{ asset('img/perfiles/' . $usuario->foto) }}" alt="{{ $usuario->username }}">
-                    @else
+                        <!--<img src="{{ asset('../../img/perfiles/' . $usuario->foto) }}" alt="{{ $usuario->username }}">
+                        --><!-- APLICAR CUANDO CAMBIE A PRODUCCION-->
+                    @else   
                         <img src="{{ route('recursos.show', ['img', 'logotype.png']) }}" alt=""  height="150px" width="150px">
                   
                     @endif
                      <p>{{ $usuario->username}}</p>
                         <div class="botones">
+                            {{-- Checkbox --}}
+                            <input type="checkbox" name="usuarios_seleccionados[]" value="{{ $usuario->id }}" onchange="actualizarVisibilidadBotonEliminar()">
+                          
                             {{-- Botón Eliminar --}}
-                            <button onclick="eliminarDatos('{{ $usuario->id }}')">
+                            <button onclick="eliminarDato('{{ $usuario->id }}')">
                                 <i class="fas fa-trash"></i> 
                             </button>
 

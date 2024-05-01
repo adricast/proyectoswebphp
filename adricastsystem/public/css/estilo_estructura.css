@@ -282,7 +282,7 @@ a:visited {
 .slider-container {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 220px;
     overflow: hidden;
     background-color: #000;
   }
@@ -454,10 +454,10 @@ main {
 }
 .card-container {
     width: 100%;
-    margin: 0 auto;
     position: relative;
     margin-top: 10px;
     padding: 10px;
+  
   }
   
   .cards {
@@ -470,9 +470,9 @@ main {
   
   .card {
     width: 25%;
-    max-width: 350px;
-    min-width: 260px;
-    height: 350px;
+    max-width: 280px;
+    min-width: 200px;
+    height: 320px;
     margin-right: 20px;
     flex-shrink: 0;
     display: flex;
@@ -494,7 +494,7 @@ main {
   
   .card img {
     width: 100%;
-    height: 55%;
+    height: 50%;
     object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -507,13 +507,13 @@ main {
   
   .card-text h2 {
     margin: 0;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: bold;
   }
   
   .card-text p {
     margin: 0;
-    font-size: 14px;
+    font-size: 12px;
   }
   
   .prev-button,
@@ -521,7 +521,7 @@ main {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgb(8, 31, 107);
+    background-color: rgba(8, 31, 107, 0.418);
     border: none;
     font-size: 24px;
     color: #444;
@@ -529,8 +529,15 @@ main {
     z-index: 1;
     padding: 10px;
     color: white;
-  }
   
+  }
+  .prev-button:hover,
+  .next-button:hover {
+   
+    background-color: rgb(8, 31, 107);
+   
+  
+  }
   .prev-button {
     left: 10px;
   }

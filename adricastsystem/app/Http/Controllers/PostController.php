@@ -9,8 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function __construct(){
+    protected $rutaConcat;
+    public function __construct()
+    {
         $this->middleware('auth');
+        $this->rutaConcat = config('app.ruta_concat');
     }
     public function index(User $user){
         $typeUser = auth()->user()->typeUser;

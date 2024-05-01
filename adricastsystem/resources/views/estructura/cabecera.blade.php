@@ -29,7 +29,7 @@
 <body>
 <header class="cabecera">
     <div class="logo">
-        <img  id="imagen-preview" src="{{ route('recursos.show', ['img', 'min.png']) }}" alt="Logo">
+        <img  id="imagen-previewlogo" src="{{ route('recursos.show', ['img', 'min.png']) }}" alt="Logo">
     </div>
     <nav class="menu">
     <ul>
