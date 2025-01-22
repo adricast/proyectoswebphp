@@ -12,7 +12,7 @@
                     </div>
                     <div id="respuesta1" class="respuestas">
                         <p class="parrafo1">
-                            Adricast System fue fundada en el año 20XX con el objetivo de proporcionar soluciones tecnológicas innovadoras a empresas de diversos sectores. Nuestra filosofía se basa en el compromiso con la calidad, la excelencia en el servicio al cliente y la constante búsqueda de la mejora continua.
+                            Adricast System fue fundada en el año 2021 con el objetivo de proporcionar soluciones tecnológicas innovadoras a empresas de diversos sectores. Nuestra filosofía se basa en el compromiso con la calidad, la excelencia en el servicio al cliente y la constante búsqueda de la mejora continua.
                         </p>
                     </div>
                 </div>

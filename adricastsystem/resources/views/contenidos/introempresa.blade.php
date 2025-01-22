@@ -10,7 +10,7 @@
        
         <div class="info-container">
             <h2>Contacto</h2>
-            <p>Correo: info@miempresa.com<br>Teléfono: 123-456-7890<br>Dirección: Calle Principal, Ciudad</p>
+            <p>Correo: adm_adricastsystem@outlook.com<br>Teléfono: 0979450223<br>Dirección: Guayas, Ecuador</p>
         </div>
         
     </section>

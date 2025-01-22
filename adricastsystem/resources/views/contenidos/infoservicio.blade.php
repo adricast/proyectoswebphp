@@ -1,38 +1,41 @@
 <main class="services">
     <section class="service">
         <div class="service-img">
-            <img src="{{ route('recursos.show', ['img', 'desarrollomovil.png']) }}" alt="Desarrollo Móvil">
+            <img src="{{ route('recursos.show', ['img', 'proyectos.png']) }}" alt="Desarrollo Móvil">
         </div>
         <div class="service-info">
-            <h2>DESARROLLO MÓVIL</h2>
-            <p>Nuestros servicios de desarrollo móvil se especializan en la creación de aplicaciones a medida para dispositivos móviles. Ofrecemos un enfoque integral, asegurando que las soluciones que entregamos se adapten de manera precisa a las necesidades específicas de nuestros clientes.</p>
+            <h2>Proyectos Universitarios</h2>
+            <p>   
+            Ofrecemos soporte para proyectos universitarios en desarrollo web, móvil y de escritorio. 
+            Creamos sitios web responsivos, aplicaciones móviles nativas o multiplataforma, y software de escritorio eficiente. 
+            <a href="https://wa.me/593979450223?text=Hola%2C%20me%20gustaría%20obtener%20más%20información%20sobre%20sus%20servicios%20acerca%20de%20proyectos%20universitarios." target="_blank" style="color:darkblue; font-style:normal; text-decoration:none; background-color:white; padding:3px; border-radius:5px; ">Consultar</a>
+
+            </p>
         </div>
     </section>
     <section class="service">
         <div class="service-img">
-            <img src="{{ route('recursos.show', ['img', 'desarrolloweb.png']) }}" alt="Desarrollo Web">
+            <img src="{{ route('recursos.show', ['img', 'api.png']) }}" alt="Desarrollo Web">
         </div>
         <div class="service-info">
-            <h2>DESARROLLO WEB</h2>
-            <p>En el desarrollo web, nuestros servicios se centran en la creación y optimización de sitios web personalizados. Ofrecemos diseño, programación y desarrollo de aplicaciones web, garantizando que las soluciones se ajusten a las necesidades únicas de nuestros clientes.</p>
+            <h2>Desarrollo de API's</h2>
+            <p>Ofrecemos servicios especializados en el desarrollo de APIs robustas y escalables. Diseñamos interfaces que facilitan la integración entre sistemas, garantizando seguridad, rendimiento y una entrega eficiente de datos para proyectos web, móviles o de escritorio.
+            <a href="https://wa.me/593979450223?text=Hola%2C%20me%20gustaría%20obtener%20más%20información%20sobre%20sus%20servicios%20acerca%20de%20desarrollo%20de%20Apis." target="_blank" style="color:darkblue; font-style:normal; text-decoration:none; background-color:white; padding:3px; border-radius:5px; ">Consultar</a>
+
+            </p>
         </div>
     </section>
     <section class="service">
         <div class="service-img">
-            <img src="{{ route('recursos.show', ['img', 'proyectoarduino.png']) }}" alt="Proyectos Arduino">
+            <img src="{{ route('recursos.show', ['img', 'analisisdatos.png']) }}" alt="Proyectos Arduino">
         </div>
         <div class="service-info">
-            <h2>PROYECTOS ARDUINO</h2>
-            <p>En el ámbito de proyectos con Arduino, ofrecemos servicios de diseño y desarrollo personalizado de soluciones electrónicas basadas en la plataforma Arduino. Trabajamos en la concepción, prototipado, programación y optimización de proyectos electrónicos que utilizan Arduino como base.</p>
+            <h2>Analisis de Datos</h2>
+            <p>Ofrecemos servicios de análisis de datos para convertir información en conocimiento útil. Realizamos limpieza, visualización y generación de reportes que ayudan en la toma de decisiones y en la identificación de patrones clave.
+            <a href="https://wa.me/593979450223?text=Hola%2C%20me%20gustaría%20obtener%20más%20información%20sobre%20sus%20servicios%20acerca%20de%20Analisis%20de%20Datos." target="_blank" style="color:darkblue; font-style:normal; text-decoration:none; background-color:white; padding:3px; border-radius:5px; ">Consultar</a>
+
+            </p>
         </div>
     </section>
-    <section class="service">
-        <div class="service-img">
-            <img src="{{ route('recursos.show', ['img', 'proyectodomotica.png']) }}" alt="Servicios de Domótica">
-        </div>
-        <div class="service-info">
-            <h2>SERVICIOS DE DOMÓTICA</h2>
-            <p>En domótica, nos encontramos desarrollando nuevos servicios para la automatización del hogar usando nuevas tecnologías al alcance de todos. Los servicios de domótica ofrecen soluciones para automatizar y controlar dispositivos y sistemas en el hogar o en entornos comerciales.</p>
-        </div>
-    </section>
+   
 </main>

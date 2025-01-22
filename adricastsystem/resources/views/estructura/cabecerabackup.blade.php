@@ -48,8 +48,8 @@
             <a class="nav-item nav-link item-menu" href="{{route('paginas.nosotros')}}"> <span class="fa fa-users span"></span>NOSOTROS</a>
             <a class="nav-item nav-link item-menu" href="{{route('paginas.contactanos')}}"><span class="fa fa-envelope span"></span>CONTACTANOS</a>
             <a class="nav-item nav-link item-menu" href="{{route('paginas.servicios')}}"><span class="fa fa-box span"></span>SERVICIOS</a>
-            <a class="nav-item nav-link item-menu" href="{{ route('posts.index') }}"><span class="fa fa-shopping-bag span"></span>REIKOSOFT</a>
-           
+           <!-- <a class="nav-item nav-link item-menu" href="{{ route('posts.index') }}"><span class="fa fa-shopping-bag span"></span>REIKOSOFT</a>
+            -->
             </div>
         </div>
     </nav>
