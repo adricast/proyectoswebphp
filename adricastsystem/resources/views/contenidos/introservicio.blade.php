@@ -68,6 +68,19 @@
                     </p>
                     </div> 
                 </div>  
+                <div class="card2">
+                    <img src="{{ route('recursos.show', ['img', 'RPA.png']) }}" alt="Imagen de ejemplo">
+                    <div class="card-text2">
+                    <h2>Automatización con RPA</h2>
+                    <p style="text-align: justify;">
+                        
+                        Creamos bots personalizados para automatizar tareas repetitivas y optimizar procesos empresariales. Ahorra tiempo, reduce errores, mejora la eficiencia y libera a tu equipo para tareas más estratégicas y de mayor valor operativo.
+    
+                    <a class="enlace"  href="https://wa.me/593994643169?text=Hola%2C%20me%20gustaría%20obtener%20más%20información%20sobre%20sus%20servicios%20de%20RPA." target="_blank" >Consultar</a>
+ 
+                    </p>
+                    </div> 
+                </div>  
               <!-- Repite el código HTML de la tarjeta para crear las otras 9 tarjetas -->
             </div>
             <button class="next-button">&#8250;</button>

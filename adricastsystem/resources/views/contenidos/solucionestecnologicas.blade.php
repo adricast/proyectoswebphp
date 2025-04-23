@@ -9,7 +9,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1">
                         <input type="checkbox" id="pregunta1" class="check">
-                        <label class="lblchbx" for="pregunta1"><b>Apps móviles</b></label>
+                        <label class="lblchbx" for="pregunta1">Apps móviles</label>
                     </div>
                     <div id="respuesta1" class="respuestas">
                         <p>
@@ -26,7 +26,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1">
                         <input type="checkbox" id="pregunta2" class="check">
-                        <label class="lblchbx" for="pregunta2"><b>Gestión de Bases de Datos</b></label>
+                        <label class="lblchbx" for="pregunta2">Gestión de Bases de Datos</label>
                     </div>
                     <div id="respuesta2" class="respuestas">
                         <p>
@@ -43,7 +43,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1">
                         <input type="checkbox" id="pregunta3" class="check">
-                        <label class="lblchbx" for="pregunta3"><b>Análisis de Datos</b></label>
+                        <label class="lblchbx" for="pregunta3">Análisis de Datos</label>
                     </div>
                     <div id="respuesta3" class="respuestas">
                         <p>
@@ -60,7 +60,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1">
                         <input type="checkbox" id="pregunta4" class="check">
-                        <label class="lblchbx" for="pregunta4"><b>Software a Medida</b></label>
+                        <label class="lblchbx" for="pregunta4">Software a Medida</label>
                     </div>
                     <div id="respuesta4" class="respuestas">
                         <p>
@@ -77,7 +77,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1">
                         <input type="checkbox" id="pregunta5" class="check">
-                        <label class="lblchbx" for="pregunta5"><b>Diseño y Desarrollo Web</b></label>
+                        <label class="lblchbx" for="pregunta5">Diseño y Desarrollo Web</label>
                     </div>
                     <div id="respuesta5" class="respuestas">
                         <p>
