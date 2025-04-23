@@ -9,7 +9,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta1" class="check preguntas">
-                        <label class="lblchbx" for="pregunta1"><b style="color:black;">Negocios</b></label>
+                        <label class="lblchbx" for="pregunta1">Negocios</label>
                     </div>
                     <div id="respuesta1" class="respuestas">
                         <p class="parrafo1">
@@ -23,7 +23,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta2" class="check preguntas">
-                        <label class="lblchbx" for="pregunta2"><b style="color:black;">Tecnologías Aplicadas</b></label>
+                        <label class="lblchbx" for="pregunta2">Tecnologías Aplicadas</label>
                     </div>
                     <div id="respuesta2" class="respuestas">
                         <p class="parrafo1">
@@ -37,7 +37,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta3" class="check preguntas">
-                        <label class="lblchbx" for="pregunta3"><b style="color:black;">Compromiso con los Clientes</b></label>
+                        <label class="lblchbx" for="pregunta3">Compromiso con los Clientes</label>
                     </div>
                     <div id="respuesta3" class="respuestas">
                         <p class="parrafo1">
@@ -51,7 +51,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta4" class="check preguntas">
-                        <label class="lblchbx" for="pregunta4"><b style="color:black;">Beneficios de Trabajar con Nosotros</b></label>
+                        <label class="lblchbx" for="pregunta4">Beneficios de Trabajar con Nosotros</label>
                     </div>
                     <div id="respuesta4" class="respuestas">
                         <p class="parrafo1">
@@ -65,7 +65,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta5" class="check preguntas">
-                        <label class="lblchbx" for="pregunta5"><b style="color:black;">Valores Fundamentales</b></label>
+                        <label class="lblchbx" for="pregunta5">Valores Fundamentales</label>
                     </div>
                     <div id="respuesta5" class="respuestas">
                         <p class="parrafo1">
@@ -80,6 +80,6 @@
         </div>
     </div>
     <div id="imagencontenido">
-        <img src="{{ route('recursos.show', ['img', 'disenoweb.png']) }}" alt="">
+        <img src="{{ route('recursos.show', ['img', 'portadaweb.png']) }}" alt="">
     </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="contenidogrid main">
     <div id="contenido">
         <div id="titulocontenido">
-            <p>SOLUCIONES TECNOLÓGICAS</p>
+            <p>Soluciones Tecnologicas</p>
         </div>
         <div id="listadocontenido">
             <!-- Pestaña 1: Apps móviles -->

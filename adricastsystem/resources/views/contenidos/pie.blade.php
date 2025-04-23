@@ -17,9 +17,9 @@
       </div>
       <div class="footer-social">
         <ul>
-          <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-          <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-          <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="https://www.facebook.com/ASGERENTE" target="blank"><i class="fab fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fab fa-tiktok"></i></a></li>
+          <li><a href="https://www.instagram.com/adricastsystem01" target="blank"><i class="fab fa-instagram"></i></a></li>
           <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
         </ul>
       </div>

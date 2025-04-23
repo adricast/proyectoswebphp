@@ -38,6 +38,7 @@
     max-height: 300px;
     box-shadow: 3px 4px 4px #21053b;
     border: 1px solid white; /* Sombra para los títulos */
+    padding: 2x;
 }
 
 /* Estilos para la sección "titulo" */

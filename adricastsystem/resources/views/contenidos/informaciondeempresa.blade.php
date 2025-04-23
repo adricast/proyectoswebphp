@@ -8,7 +8,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta1" class="check preguntas">
-                        <label class="lblchbx" for="pregunta1"><b style="color:black;">Historia y Filosofía</b></label>
+                        <label class="lblchbx" for="pregunta1">Historia y Filosofía</label>
                     </div>
                     <div id="respuesta1" class="respuestas">
                         <p class="parrafo1">
@@ -21,7 +21,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta2" class="check preguntas">
-                        <label class="lblchbx" for="pregunta2"><b style="color:black;">Equipo de Trabajo</b></label>
+                        <label class="lblchbx" for="pregunta2">Equipo de Trabajo</label>
                     </div>
                     <div id="respuesta2" class="respuestas">
                         <p class="parrafo1">
@@ -34,7 +34,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta3" class="check preguntas">
-                        <label class="lblchbx" for="pregunta3"><b style="color:black;">Valores y Compromisos</b></label>
+                        <label class="lblchbx" for="pregunta3">Valores y Compromisos</label>
                     </div>
                     <div id="respuesta3" class="respuestas">
                         <p class="parrafo1">
@@ -47,7 +47,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta4" class="check preguntas">
-                        <label class="lblchbx" for="pregunta4"><b style="color:black;">Nuestros Servicios</b></label>
+                        <label class="lblchbx" for="pregunta4">Nuestros Servicios</label>
                     </div>
                     <div id="respuesta4" class="respuestas">
                         <p class="parrafo1">
@@ -60,7 +60,7 @@
                 <div class="contenedortxtpestaña">
                     <div class="p1" style="text-align:justify; color:black;">
                         <input type="checkbox" id="pregunta5" class="check preguntas">
-                        <label class="lblchbx" for="pregunta5"><b style="color:black;">Nuestros Clientes</b></label>
+                        <label class="lblchbx" for="pregunta5">Nuestros Clientes</label>
                     </div>
                     <div id="respuesta5" class="respuestas">
                         <p class="parrafo1">

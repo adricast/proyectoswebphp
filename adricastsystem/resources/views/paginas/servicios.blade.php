@@ -3,9 +3,10 @@
 @section('titulo', 'Nosotros')
 @section('nosotros-active', 'active')
 
-@section('contenido')
+@section('contenido') 
     @include('contenidos.introservicio')
-    @include('contenidos.infoservicio')
+    
     @include('contenidos.solucionestecnologicas')
+   
     @include('contenidos.pie')
 @endsection

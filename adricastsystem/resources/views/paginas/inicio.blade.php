@@ -4,8 +4,8 @@
 @section('inicio-active', 'active')
 
 @section('contenido')
-   
-    @include('contenidos.introservicio')
+    @include('contenidos.infoservicio')
+  
     @include('contenidos.procesosdeservicio')
     @include('contenidos.pie')
 @endsection
