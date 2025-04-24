@@ -1,7 +1,7 @@
 @extends('estructura.cabecera')
 
 @section('titulo', 'Nosotros')
-@section('nosotros-active', 'active')
+@section('servicios-active', 'active')
 
 @section('contenido') 
     @include('contenidos.introservicio')
