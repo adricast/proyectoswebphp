@@ -2,26 +2,27 @@
     <div class="titulo">
         <h2>Lenguajes de programación que usamos</h2>
     </div>
-    <div class="contenidogrid2">
-    <div id="contenido2">
-        <div id="php" class="botton">
-            <img src="{{ route('recursos.show', ['img', 'php.png']) }}" alt="" width="90%" height="90%">
-        </div>
-        <div id="cplus" class="botton">
-            <img src="{{ route('recursos.show', ['img', 'cplus.png']) }}" alt="" width="90%" height="90%">
-        </div>
-        <div id="csharp" class="botton">
-        <img src="{{ route('recursos.show', ['img', 'csharp.png']) }}" alt="" width="90%" height="90%">
-        </div>
-        <div id="javascript" class="botton">
-        <img src="{{ route('recursos.show', ['img', 'javascript.png']) }}" alt="" width="90%" height="90%">    
-        </div>
-        <div id="phyton" class="botton">
-        <img src="{{ route('recursos.show', ['img', 'phyton.png']) }}" alt="" width="90%" height="90%">
-        </div>
-        <div id="java" class="botton">
-        <img src="{{ route('recursos.show', ['img', 'java.png']) }}" alt="" width="90%" height="90%">
-        </div>
+    <div class="contenidogrid4">
+        <div id="contenido2">
+            <div id="php" class="botton">
+                <img src="{{ route('recursos.show', ['img', 'php.png']) }}" alt="" width="90%" height="90%">
+            </div>
+            
+            <div id="cplus" class="botton">
+                <img src="{{ route('recursos.show', ['img', 'cplus.png']) }}" alt="" width="90%" height="90%">
+            </div>
+            <div id="csharp" class="botton">
+            <img src="{{ route('recursos.show', ['img', 'csharp.png']) }}" alt="" width="90%" height="90%">
+            </div>
+            <div id="javascript" class="botton">
+            <img src="{{ route('recursos.show', ['img', 'javascript.png']) }}" alt="" width="90%" height="90%">    
+            </div>
+            <div id="phyton" class="botton">
+            <img src="{{ route('recursos.show', ['img', 'phyton.png']) }}" alt="" width="90%" height="90%">
+            </div>
+            <div id="java" class="botton">
+            <img src="{{ route('recursos.show', ['img', 'java.png']) }}" alt="" width="90%" height="90%">
+            </div>
     </div>
 
         <div id="contenido3">

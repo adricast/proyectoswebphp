@@ -12,7 +12,7 @@
                         <label class="lblchbx" for="pregunta1">Modalidades de Trabajo</label>
                     </div>
                     <div id="respuesta1" class="respuestas">
-                        <p class="parrafo1">
+                        <p class="parrafo1" style="text-align: justify";>
                             Ofrecemos oportunidades freelance por proyecto. Tú eliges los proyectos en los que deseas participar, con horarios flexibles y pagos por entregable.
                         </p>
                     </div>
