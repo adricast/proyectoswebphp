@@ -5,8 +5,7 @@
 
 @section('contenido')
     
-    @include('contenidos.ofertaempleo')
+    @include('contenidos.introempleo')
     @include('contenidos.formaempleo')
-    @include('contenidos.introtecnologias')
     @include('contenidos.pie')
 @endsection

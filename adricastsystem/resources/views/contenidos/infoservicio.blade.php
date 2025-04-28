@@ -35,17 +35,7 @@
             </p>
         </div>
     </section>
-    <section class="service2">
-        <div class="service-img2">
-            <img src="{{ route('recursos.show', ['img', 'analisisdatos.png']) }}" alt="Proyectos Arduino">
-        </div>
-        <div class="service-info2">
-            <h2>Analisis de Datos</h2>
-            <p>Ofrecemos servicios de análisis de datos para convertir información en conocimiento útil. Realizamos limpieza, visualización y generación de reportes que ayudan en la toma de decisiones y en la identificación de patrones clave.
-         
-            </p>
-        </div>
-    </section>
+   
     <section class="service2">
         <div class="service-img3">
             <img src="{{ route('recursos.show', ['img', 'servicios.png']) }}" alt="Proyectos Arduino">

@@ -1,82 +1,86 @@
-<section class="contenedor">
-    <div class="titulo">
-        <h2>Lenguajes de programación que usamos</h2>
+<main class="main contenedor">
+    <div id="titulos" class="titulo">
+        <H2>TECNOLOGIAS</H2>
     </div>
-    <div class="contenidogrid2">
-    <div id="contenido2">
-        <div id="php" class="botton">
-            <img src="{{ route('recursos.show', ['img', 'php.png']) }}" alt="" width="90%" height="90%">
-        </div>
-        <div id="cplus" class="botton">
-            <img src="{{ route('recursos.show', ['img', 'cplus.png']) }}" alt="" width="90%" height="90%">
-        </div>
-        <div id="csharp" class="botton">
-        <img src="{{ route('recursos.show', ['img', 'csharp.png']) }}" alt="" width="90%" height="90%">
-        </div>
-        <div id="javascript" class="botton">
-        <img src="{{ route('recursos.show', ['img', 'javascript.png']) }}" alt="" width="90%" height="90%">    
-        </div>
-        <div id="phyton" class="botton">
-        <img src="{{ route('recursos.show', ['img', 'phyton.png']) }}" alt="" width="90%" height="90%">
-        </div>
-        <div id="java" class="botton">
-        <img src="{{ route('recursos.show', ['img', 'java.png']) }}" alt="" width="90%" height="90%">
-        </div>
-    </div>
+    <section class="sectionblock-1c">
+       
+        <div class="card-container">
+            <button class="prev-button">&#8249;</button>
+            <div class="cards">
+                <!-- Frontend -->
+                <div class="card2" onclick="mostrarInformacion('Frontend', 'Usamos tecnologías como HTML, CSS y JavaScript para crear interfaces interactivas que mejoran la experiencia del usuario. Frameworks como Angular, React y Vue.js nos permiten desarrollar aplicaciones web escalables, dinámicas y de alto rendimiento.')">
+                    <img src="{{ route('recursos.show', ['img', 'front.png']) }}" alt="Imagen de ejemplo">
+                    <div class="card-text2">
+                        <h2>Frontend</h2>
+                        <p>
+                            HTML, CSS y JavaScript son esenciales para la construcción de la interfaz de usuario. Frameworks como Angular, React y Vue.js ofrecen poderosas herramientas para desarrollar aplicaciones web dinámicas y reactivas.
+                        </p>
+                    </div>
+                </div>
 
-        <div id="contenido3">
-                <div class="cuadrado-1" id="textophp" style="min-height: 100px; max-height: 90%;">
-                    <p> PHP es un lenguaje de programación muy popular para el desarrollo de aplicaciones web y servicios en línea. Es especialmente útil para crear API (Interfaces de Programación de Aplicaciones), que permiten a diferentes aplicaciones y servicios comunicarse entre sí. PHP es compatible con una amplia variedad de servidores web y bases de datos, lo que lo convierte en una opción ideal para desarrollar soluciones web escalables y robustas.
-                    </p>
-                    <p> Además, PHP es una opción común para desarrollar sitios web y aplicaciones web de todo tipo, desde sitios web de pequeñas empresas hasta aplicaciones web empresariales complejas. Es compatible con una amplia gama de tecnologías web, como HTML, CSS, JavaScript y otras, lo que permite a los desarrolladores crear experiencias web ricas y personalizadas. En resumen, PHP es una herramienta poderosa y versátil que sigue siendo una opción popular para el desarrollo web en la actualidad.                
-                    </p>
+                <!-- Backend -->
+                <div class="card2" onclick="mostrarInformacion('Backend', 'El backend es crucial para gestionar la lógica del servidor, las bases de datos y la seguridad. Usamos tecnologías como Node.js, Python con Django o Flask, Ruby on Rails y Java con Spring para crear aplicaciones robustas y escalables.')">
+                    <img src="{{ route('recursos.show', ['img', 'back.png']) }}" alt="Imagen de ejemplo">
+                    <div class="card-text2">
+                        <h2>Backend</h2>
+                        <p>
+                            Tecnologías como .net, Node.js, Python (Django, Flask), Ruby on Rails y Java (Spring) nos permiten gestionar la lógica del servidor, manejar la autenticación y la seguridad, y conectar con bases de datos para almacenar la información de la aplicación.
+                            
+                        </p>
+                    </div>
                 </div>
-            
-                <div class="cuadrado-1" id="textojava" style="min-height: 100px; max-height: 90%;">
-                    <p> Java es un lenguaje de programación de alto nivel que se utiliza ampliamente en el desarrollo de aplicaciones móviles, distribuidas y web. En el caso de las aplicaciones móviles, Java se utiliza en el desarrollo de aplicaciones Android, el sistema operativo móvil más popular en la actualidad. Android Studio, el entorno de desarrollo integrado oficial de Android, utiliza Java como lenguaje de programación principal, lo que lo convierte en una herramienta esencial para desarrolladores de aplicaciones móviles.
-                    </p>
-                    <p>
-                    En el caso de las aplicaciones distribuidas, Java es muy popular en el desarrollo de aplicaciones empresariales. Java cuenta con un conjunto de tecnologías, como Java EE y Spring, que facilitan el desarrollo de aplicaciones distribuidas. También se utiliza en el desarrollo de aplicaciones web, con tecnologías como Servlets y JSP. Además, Java también se utiliza en la inteligencia artificial, con bibliotecas como Weka y JavaML, que ofrecen herramientas para el aprendizaje automático y la minería de datos. En resumen, Java es un lenguaje de programación muy versátil que se utiliza en una variedad de campos, desde el desarrollo de aplicaciones móviles hasta el desarrollo de aplicaciones empresariales y de inteligencia artificial.
-                    </p>
-                </div>
-            
-                <div class="cuadrado-1" id="textojavascript" style="min-height: 100px; max-height: 90%;">
-                    <p>JavaScript es un lenguaje de programación utilizado principalmente para crear interacciones dinámicas en sitios web y aplicaciones web. Se utiliza para crear elementos interactivos como formularios, botones y animaciones, así como para realizar validaciones y manejar eventos del usuario. Además, JavaScript es compatible con muchos frameworks y bibliotecas, lo que permite a los desarrolladores crear aplicaciones web complejas con facilidad.
-                    </p>
-                    <p>
-                    En cuanto al desarrollo de aplicaciones web, JavaScript también se utiliza en el backend gracias a tecnologías como Node.js. Esto permite a los desarrolladores crear aplicaciones web que sean altamente escalables y eficientes en términos de rendimiento. La robustez de JavaScript como tecnología radica en su capacidad para crear aplicaciones web interactivas, escalables y de alta calidad. Además, debido a su popularidad y accesibilidad, es fácil encontrar recursos y herramientas de desarrollo que pueden ayudar a economizar costos de mantenimiento de proyectos. En resumen, JavaScript es una herramienta esencial en el desarrollo web, desde el front-end hasta el backend, que ofrece flexibilidad, escalabilidad y facilidad de uso.
-                    </p>
-                </div>
-            
-                <div class="cuadrado-1" id="textophyton" style="min-height: 100px; max-height: 90%;">
-                    <p> Python es un lenguaje de programación de alto nivel que se ha vuelto muy popular en los últimos años debido a su facilidad de uso y su amplia gama de aplicaciones. Uno de los campos más destacados en los que se utiliza Python es la inteligencia artificial y el aprendizaje automático. Python cuenta con una gran cantidad de bibliotecas y herramientas dedicadas al procesamiento de datos y al aprendizaje automático, como TensorFlow, Keras y PyTorch, lo que lo convierte en una herramienta esencial para desarrollar soluciones de inteligencia artificial.
-                    </p>
-                    <p>
-                    Además de su uso en la inteligencia artificial, Python también se utiliza en el desarrollo de aplicaciones web y aplicaciones de escritorio. Python cuenta con varios frameworks web como Django, Flask y Pyramid, que facilitan el desarrollo de aplicaciones web. También se utiliza para crear aplicaciones de escritorio con herramientas como PyQt y PyGTK. Además, Python tiene una gran cantidad de bibliotecas y herramientas útiles para procesamiento de datos, análisis de datos, visualización de datos y automatización de tareas, lo que lo hace muy útil en una variedad de aplicaciones, como la ciencia de datos, la automatización de procesos y el desarrollo de juegos. En resumen, Python es un lenguaje de programación versátil y poderoso que se utiliza en una variedad de campos, incluyendo la inteligencia artificial, el desarrollo de aplicaciones web y aplicaciones de escritorio, y la automatización de tareas.
-                    </p>
-                </div>
-                                
-                <div class="cuadrado-1" id="textocsharp" style="min-height: 100px; max-height: 90%;">
-                    <p> C# es un lenguaje de programación de alto nivel que ha ganado popularidad en los últimos años debido a su uso en el desarrollo de aplicaciones web y API (Interfaces de Programación de Aplicaciones). C# se utiliza para crear aplicaciones web dinámicas, sistemas de gestión de contenido, sistemas de comercio electrónico y otras soluciones web complejas. Además, C# es compatible con la plataforma .NET, lo que significa que se puede utilizar para crear aplicaciones tanto en Windows como en otros sistemas operativos.
-                    </p>
-                    <p> C# también se utiliza en una variedad de otros usos, como el desarrollo de aplicaciones de escritorio, juegos y aplicaciones móviles. Es un lenguaje orientado a objetos, lo que significa que se enfoca en la creación de objetos y clases que pueden ser utilizados en una variedad de aplicaciones. Además, es fácil de aprender y tiene una comunidad de desarrolladores activa que proporciona herramientas y recursos útiles para su uso. En resumen, C# es un lenguaje de programación versátil y popular que se utiliza en una variedad de aplicaciones web, de escritorio, móviles y juegos, y es una excelente opción para quienes desean aprender programación orientada a objetos.
-                    </p>
-                </div>
-                                
-                <div class="cuadrado-1" id="textocplus" style="min-height: 100px; max-height: 90%;">
-                    <p> C++ es un lenguaje de programación de alto nivel que se ha utilizado durante décadas en una variedad de aplicaciones de software y hardware. En el campo de la electrónica, se utiliza para desarrollar controladores de dispositivos y sistemas embebidos. Esto se debe a que C++ es un lenguaje de programación de bajo nivel, lo que significa que puede interactuar directamente con el hardware de una computadora y realizar operaciones complejas con eficiencia. Además, C++ es utilizado en aplicaciones de consola y otros programas de software, como videojuegos, programas de gráficos y herramientas de análisis de datos.
-                    </p>
-                    <p>En cuanto al aprendizaje, C++ es uno de los lenguajes de programación más populares y es una excelente opción para quienes desean aprender programación orientada a objetos y estructuras de datos complejas. También es útil para quienes desean entender cómo funciona la memoria y la administración de recursos de un programa. En resumen, C++ es un lenguaje de programación versátil y poderoso que se utiliza en una variedad de campos, incluyendo la electrónica, el desarrollo de software, los videojuegos y el aprendizaje de programación.
-                    </p>
-                </div>
-                    
-                <script>
-                    tecnologia();
-                </script>
 
+                <!-- Bases de Datos -->
+                <div class="card2" onclick="mostrarInformacion('Bases de Datos', 'Las bases de datos relacionales (SQL) y no relacionales (NoSQL) son fundamentales para almacenar y organizar la información. SQL es ideal para datos estructurados y con relaciones, mientras que NoSQL es mejor para grandes volúmenes de datos no estructurados.')">
+                    <img src="{{ route('recursos.show', ['img', 'basedatos.png']) }}" alt="Imagen de ejemplo">
+                    <div class="card-text2">
+                        <h2>Bases de Datos</h2>
+                        <p>
+                            Usamos bases de datos SQL (MySQL, PostgreSQL) cuando se requiere consistencia y relaciones entre datos. Las bases de datos NoSQL (como MongoDB) se utilizan cuando la flexibilidad y la escalabilidad son más importantes.
+                          
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Desarrollo de APIs -->
+                <div class="card2" onclick="mostrarInformacion('Desarrollo de APIs', 'Las APIs son esenciales para la comunicación entre el frontend y backend. Usamos RESTful APIs, GraphQL y WebSockets para ofrecer diferentes opciones de transferencia de datos, optimizando la eficiencia y la velocidad de las aplicaciones.')">
+                    <img src="{{ route('recursos.show', ['img', 'apis.png']) }}" alt="Imagen de ejemplo">
+                    <div class="card-text2">
+                        <h2>Desarrollo de APIs</h2>
+                        <p>
+                            Las APIs permiten que el frontend y el backend interactúen de manera eficiente. Usamos RESTful APIs para simplicidad, GraphQL para flexibilidad en las consultas y WebSockets para comunicación en tiempo real.
+                          
+                        </p>
+                    </div>
+                </div>
+
+                <!-- RPA -->
+                <div class="card2" onclick="mostrarInformacion('RPA', 'La Automatización Robótica de Procesos (RPA) permite automatizar tareas repetitivas y basadas en reglas en aplicaciones empresariales. Herramientas como UiPath y Automation Anywhere pueden integrarse con el software para optimizar procesos y reducir costos.')">
+                    <img src="{{ route('recursos.show', ['img', 'rpatec.png']) }}" alt="Imagen de ejemplo">
+                    <div class="card-text2">
+                        <h2>RPA</h2>
+                        <p>
+                            RPA es clave para mejorar la eficiencia al automatizar tareas repetitivas y manuales en el entorno empresarial. Con herramientas como UiPath y Automation Anywhere, podemos reducir el error humano y acelerar los procesos de negocio.
+                           
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <button class="next-button">&#8250;</button>
         </div>
+    </section>
 
-    </div>
-    
-    
-</section>
+    <script>
+        function mostrarInformacion(titulo, descripcion) {
+            alert('¡Has hecho clic en la tarjeta de: ' + titulo + '!\n' + descripcion);
+            // Aquí puedes cambiar el contenido de un modal o realizar cualquier otra acción.
+        }
+        let scrollAmount = 0; 
+            let prevButton; // Declarar prevButton en un alcance más amplio
+            let nextButton; // Declarar nextButton en un alcance más amplio
+
+           
+            funciontarjeta();
+    </script>
+</main>

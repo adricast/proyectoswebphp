@@ -1,5 +1,5 @@
 <main class="main">
-        @include('contenidos.slider')
+     
         <section class="sectionblock-1c">
 
         

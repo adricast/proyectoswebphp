@@ -10,7 +10,7 @@
        
         <div class="info-container">
             <h2>Contacto</h2>
-            <p>Correo: adm_adricastsystem@outlook.com<br>Teléfono: 0979450223<br>Dirección: Guayas, Ecuador</p>
+            <p>Correo: adm_adricastsystem@outlook.com<br>Teléfono: 0994643169 <br>Dirección: Guayas, Ecuador</p>
         </div>
         
     </section>

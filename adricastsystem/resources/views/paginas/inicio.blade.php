@@ -4,8 +4,15 @@
 @section('inicio-active', 'active')
 
 @section('contenido')
-    @include('contenidos.infoservicio')
+      @include('contenidos.slider')
+      @include('contenidos.infoservicio')
+      
+        
+      @include('contenidos.procesosdeservicio')  
+      @include('contenidos.introtecnologias') 
+       
+   
   
-    @include('contenidos.procesosdeservicio')
+
     @include('contenidos.pie')
 @endsection

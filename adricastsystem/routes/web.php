@@ -44,7 +44,7 @@ Route::get('/noticias', [NoticiasController::class, 'noticias'])->name('paginas.
 Route::get('/tecnologias', [TecnologiasController::class, 'tecnologias'])->name('paginas.tecnologias');
 Route::get('/nosotros', [NosotrosController::class, 'nosotros'])->name('paginas.nosotros');
 Route::get('/servicios', [ServiciosController::class, 'servicios'])->name('paginas.servicios');
-Route::get('/trabajaconnosotros', [EmpleoController::class, 'empleo'])->name('paginas.empleo');
+Route::get('/empleos', [EmpleoController::class, 'empleo'])->name('paginas.empleo');
 
 Route::get('{directory}/{filename}', [RecursosController::class, 'show'])->name('recursos.show');
 Route::post('/enviar-formulario', [ContactanosController::class, 'submit'])->name('enviarFormulario');

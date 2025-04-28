@@ -45,9 +45,10 @@
         <li class="{{ request()->is('paginas/servicios') ? 'active' : '' }}">
             <a href="{{ route('paginas.servicios') }}">SERVICIOS</a>
         </li>
-        <li class="{{ request()->is('posts') ? 'active' : '' }}">
-            <a href="{{ route('posts.index') }}">REIKOSOFT</a>
+        <li class="{{ request()->is('paginas/tecnologia') ? 'active' : '' }}">
+            <a href="{{ route('paginas.tecnologias') }}">TECNOLOGIAS</a>
         </li>
+
     </ul>
 </nav>
 <div class="menu-mobile-icon">

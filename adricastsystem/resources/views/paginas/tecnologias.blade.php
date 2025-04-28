@@ -5,5 +5,6 @@
 
 @section('contenido')
     @include('contenidos.introtecnologias')
+    @include('contenidos.teclenguajes')
     @include('contenidos.pie')
 @endsection

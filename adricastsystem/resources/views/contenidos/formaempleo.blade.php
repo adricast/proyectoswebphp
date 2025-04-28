@@ -79,12 +79,13 @@
             </script>
         </div>
     </div>
-    
-
-
     <div id="imagencontenido">
-        <img src="{{ route('recursos.show', ['img','freelancer.png']) }}" alt="">
+
+       <img src="{{ route('recursos.show', ['img', 'freelancer.png']) }}" alt="">
+
+
     </div>
+
 </div>
 
 
