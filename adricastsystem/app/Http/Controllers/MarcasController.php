@@ -20,21 +20,21 @@ class MarcasController extends Controller
            $this->middleware('auth');
            $this->rutaConcat = config('app.ruta_concat');
        }
-       public function index()
-       {
-           $typeUser = auth()->user()->typeUser;
-         
-           $user = Auth::user();
-           if ($typeUser) {
-               $descripcion = $typeUser->descripcion;
-           } else {
-               $descripcion = 'No asignado';
-           }
-           $modulos = Modulo::all();
-           $marcas = Marca::all();
-           return view('reikosoft.marcas.index', compact('descripcion','user','modulos','marcas'));
-   
-       }
+public function index()
+{
+    $typeUser = auth()->user()->typeUser;
+    $user = Auth::user();
+    $descripcion = $typeUser ? $typeUser->descripcion : 'No asignado';
+
+    // Obtener los módulos y marcas paginadas
+    $modulos = Modulo::all();
+    $perPage = request()->perPage ?: 5; // Valor predeterminado 5 si no se pasa 'perPage' en la solicitud
+    $marcas = Marca::paginate($perPage);
+
+    // Retornar la vista con los datos
+    return view('reikosoft.marcas.index', compact('descripcion', 'user', 'modulos', 'marcas'));
+}
+
        public function create()
        {
            $typeUser = auth()->user()->typeUser;

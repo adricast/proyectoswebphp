@@ -231,70 +231,85 @@ function principal(){
   window.location.href = '/marcas';
 }
 function consultaDatos() {
-  // Obtener el campo de entrada y el tbody de la tabla
-  var inputBusqueda = document.getElementById('busqueda');
-  var contenedorModulos = document.getElementById('contenedorelemento');
+    const inputBusqueda = document.getElementById('busqueda');
+    const contenedorModulos = document.getElementById('contenedorelemento');
+    const btnEliminarSeleccionados = document.getElementById('btnEliminarSeleccionados');
 
-  // Agregar el evento keyup al campo de entrada
-  inputBusqueda.addEventListener('keyup', function() {
-      var termino = inputBusqueda.value.trim();
+    inputBusqueda.addEventListener('keyup', function () {
+        const termino = inputBusqueda.value.trim();
 
-      $.ajax({
-          url: '/marcasbuscar',
-          method: 'GET',
-          data: { termino: termino },
-          success: function(response) {
-              contenedorModulos.innerHTML = ''; // Limpiar el contenido existente en el contenedor antes de actualizar con los nuevos resultados
+        $.ajax({
+            url: '/marcasbuscar',
+            method: 'GET',
+            data: { termino: termino },
+            success: function (response) {
+                contenedorModulos.innerHTML = '';
 
-              response.forEach(function(marca) {
-                  var aElement = document.createElement('a');
-                  aElement.href = '#';
+                response.forEach(function (marca) {
+                    const trElement = document.createElement('tr');
 
-                  var divTarget = document.createElement('div');
-                  divTarget.className = 'target';
+                    const tdLogo = document.createElement('td');
+                    const imgElement = document.createElement('img');
+                  
+                    imgElement.src = marca.foto ? '/img/marcas/' + marca.foto : '/img/logotype.png';  // Foto del usuario o imagen predeterminada
+                       
+                    imgElement.alt = marca.nombre;
+                    imgElement.style.width = '80px';
+                    imgElement.style.height = '80px';
+                    imgElement.style.objectFit = 'cover';
+                    tdLogo.appendChild(imgElement);
 
-                  var imgElement = document.createElement('img');
-                  imgElement.src = '/img/marcas/' + marca.foto;
-                  imgElement.alt = marca.nombre;
+                    const tdNombre = document.createElement('td');
+                    tdNombre.textContent = marca.nombre;
 
-                  var pElement = document.createElement('p');
-                  pElement.textContent = marca.nombre;
+                    const tdSeleccionar = document.createElement('td');
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.name = 'marcas_seleccionadas[]';
+                    checkbox.value = marca.id;
+                    checkbox.addEventListener('change', function() {
+                        actualizarVisibilidadBotonEliminar();
+                    });
+                    tdSeleccionar.appendChild(checkbox);
 
-                  var divBotones = document.createElement('div');
-                  divBotones.className = 'botones';
+                    const tdAcciones = document.createElement('td');
+                    const buttonEliminar = document.createElement('button');
+                    buttonEliminar.className = 'btn-accion eliminar';
+                    buttonEliminar.addEventListener('click', function () {
+                        eliminarDatos(marca.id);
+                    });
+                    const iEliminar = document.createElement('i');
+                    iEliminar.className = 'fas fa-trash';
+                    buttonEliminar.appendChild(iEliminar);
 
-                  var buttonEliminar = document.createElement('button');
-                  buttonEliminar.addEventListener('click', function() {
-                      eliminarDatos(marca.id);
-                  });
-                  var iEliminar = document.createElement('i');
-                  iEliminar.className = 'fas fa-trash';
-                  buttonEliminar.appendChild(iEliminar);
+                    const buttonModificar = document.createElement('button');
+                    buttonModificar.className = 'btn-accion editar';
+                    buttonModificar.addEventListener('click', function () {
+                        modificarDatos(marca.id);
+                    });
+                    const iModificar = document.createElement('i');
+                    iModificar.className = 'fa fa-edit';
+                    buttonModificar.appendChild(iModificar);
 
-                  var buttonModificar = document.createElement('button');
-                  buttonModificar.className = 'btneditar';
-                  buttonModificar.addEventListener('click', function() {
-                      modificarDatos(marca.id);
-                  });
-                  var spanModificar = document.createElement('span');
-                  spanModificar.className = 'fa fa-edit';
-                  buttonModificar.appendChild(spanModificar);
+                    tdAcciones.appendChild(buttonEliminar);
+                    tdAcciones.appendChild(buttonModificar);
 
-                  divBotones.appendChild(buttonEliminar);
-                  divBotones.appendChild(buttonModificar);
+                    trElement.appendChild(tdLogo);
+                    trElement.appendChild(tdNombre);
+                    trElement.appendChild(tdSeleccionar);
+                    trElement.appendChild(tdAcciones);
 
-                  divTarget.appendChild(imgElement);
-                  divTarget.appendChild(pElement);
-                  divTarget.appendChild(divBotones);
-
-                  aElement.appendChild(divTarget);
-
-                  contenedorModulos.appendChild(aElement);
-              });
-          }
-      });
-  });
+                    contenedorModulos.appendChild(trElement);
+                });
+            },
+            error: function () {
+                console.error('Error al buscar marcas.');
+            }
+        });
+    });
 }
+
+
 function obtenerMarcasSeleccionadas() {
   var marcasSeleccionadas = [];
   $("input[name='marcas_seleccionadas[]']:checked").each(function () {

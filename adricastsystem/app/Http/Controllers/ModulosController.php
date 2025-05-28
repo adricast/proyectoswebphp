@@ -48,37 +48,42 @@ class ModulosController extends Controller
         return view('reikosoft.modulos.create', compact('descripcion','user','modulos'));
     }	
     public function store(Request $request)
-    {
+{
+    try {
         $request->validate([
             'imagenmodulo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'nombre' => 'required|string',
             'descripcion' => 'required|string',
             'ruta' => 'required|string',
-            // Asegúrate de ajustar esta validación según tus necesidades
         ]);
-           // Procesamiento y almacenamiento de la imagen
-            $imagen = $request->file('imagenmodulo');
-            $nombreImagen = $request->ruta.'.'.$imagen->getClientOriginalExtension();
-            $destino = public_path($this->rutaConcat.'img/modulos');
-            $request->imagenmodulo->move($destino, $nombreImagen);
-            $imagenUrl = $nombreImagen;
-        try {
-            Modulo::create(
-                [
-                    'icono' => $imagenUrl,
-                    'nombre' => $request->nombre,
-                    'descripcion' => $request->descripcion,
-                    'ruta' => $request->ruta,
-                  
-                ]
-            );
-        } catch (\Exception $e) {
-            dd($e->getMessage());
-        }
-            
-        
 
+        $imagen = $request->file('imagenmodulo');
+        $nombreImagen = $request->ruta.'.'.$imagen->getClientOriginalExtension();
+        $destino = public_path($this->rutaConcat.'img/modulos');
+        
+        // Verifica si la carpeta destino existe
+        if (!file_exists($destino)) {
+            mkdir($destino, 0775, true);
+        }
+
+        $imagen->move($destino, $nombreImagen);
+        $imagenUrl = $nombreImagen;
+
+        Modulo::create([
+            'icono' => $imagenUrl,
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'ruta' => $request->ruta,
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Módulo creado correctamente']);
+    } catch (\Throwable $e) {
+        // Registrar el error y retornar 500 controlado
+        \Log::error('Error en store(): ' . $e->getMessage());
+        return response()->json(['error' => 'Error interno: '.$e->getMessage()], 500);
     }
+}
+
     public function show($id)
     {
         $registro = Modulo::find($id);

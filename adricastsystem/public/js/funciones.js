@@ -1,3 +1,16 @@
+function togglePassword() {
+  const input = document.getElementById("contrasena");
+  const icon = document.querySelector(".toggle-password");
+  
+  if (input.type === "password") {
+    input.type = "text";
+    icon.textContent = "🙈"; // Cambia el ícono cuando está visible
+  } else {
+    input.type = "password";
+    icon.textContent = "👁️"; // Cambia el ícono cuando está oculto
+  }
+}
+
 function quitarImg() {
   var preview = document.getElementById('imagen-preview');
   var quitarImagenBtn = document.getElementById('quitarImagen');
@@ -8,6 +21,7 @@ function quitarImg() {
   quitarImagenBtn.style.display = 'none';
   moduloImagen.value = ''; // Restablecer el input de tipo file
 }
+
 function funciontarjeta() {
   const cards = document.querySelector(".cards");
   const prevButton = document.querySelector(".prev-button");

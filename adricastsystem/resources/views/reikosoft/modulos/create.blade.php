@@ -21,8 +21,8 @@
                 <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion del Modulo">
                 <input type="text" name="ruta" id="ruta" placeholder="Ruta del Modulo">
                 <div style="display:flex;">
-                <button style="margin-right: 10px;" type="submit" onclick="event.preventDefault(); guardarDatos();">Guardar</button>
-                <button style="margin-right: 10px;" onclick="event.preventDefault(); principal();">Cancelar</button>
+                <button style="margin-right: 10px;" class="btn" type="submit" onclick="event.preventDefault(); guardarDatos();">Guardar</button>
+                <button style="margin-right: 10px;" class="btn" onclick="event.preventDefault(); principal();">Cancelar</button>
                 </div>
             </form>
       

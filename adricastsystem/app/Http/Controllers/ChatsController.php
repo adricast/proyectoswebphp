@@ -8,57 +8,77 @@ use App\Models\User;
 use App\Models\Modulo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ChatsController extends Controller
 {
     //
-    protected $rutaConcat;
+protected $rutaConcat;
     public function __construct()
     {
         $this->middleware('auth');
         $this->rutaConcat = config('app.ruta_concat');
     }
-    public function index()
-    {
-        $typeUser = auth()->user()->typeUser;
-        $user = Auth::user();
-        if ($typeUser) {
-            $descripcion = $typeUser->descripcion;
-        } else {
-            $descripcion = 'No asignado';
+public function index()
+{ 
+    $authUserId = Auth::id();
+    $typeUser = auth()->user()->typeUser;
+    $user = Auth::user();
+    $descripcion = $typeUser ? $typeUser->descripcion : 'No asignado';
+    $modulos = Modulo::all();
+
+    // Obtener los usuarios con los que se ha tenido conversación (mensajes visibles para authId)
+    $chatUsers = Chat::selectRaw("CASE WHEN sender_id = ? THEN receiver_id ELSE sender_id END as other_user_id", [$authUserId])
+        ->where(function ($query) use ($authUserId) {
+            $query->where(function ($q) use ($authUserId) {
+                $q->where('sender_id', $authUserId)->where('visible_sender', 1);
+            })->orWhere(function ($q) use ($authUserId) {
+                $q->where('receiver_id', $authUserId)->where('visible_receiver', 1);
+            });
+        })
+        ->distinct()
+        ->pluck('other_user_id');
+
+    // Calcular mensajes no leídos por usuario (donde el usuario autenticado es receptor y status = 'no_leido')
+    $unreadCounts = Chat::select('sender_id', \DB::raw('COUNT(*) as unread_count'))
+        ->where('receiver_id', $authUserId)
+        ->where('status', 'no_leido')
+        ->where('visible_receiver', 1)
+        ->groupBy('sender_id')
+        ->pluck('unread_count', 'sender_id')
+        ->toArray();
+
+    $userMessages = collect();
+
+    foreach ($chatUsers as $otherUserId) {
+        $lastMessage = Chat::where(function ($query) use ($authUserId, $otherUserId) {
+            $query->where('sender_id', $authUserId)
+                  ->where('receiver_id', $otherUserId)
+                  ->where('visible_sender', 1);
+        })->orWhere(function ($query) use ($authUserId, $otherUserId) {
+            $query->where('sender_id', $otherUserId)
+                  ->where('receiver_id', $authUserId)
+                  ->where('visible_receiver', 1);
+        })
+        ->orderBy('created_at', 'desc')
+        ->first();
+
+        if ($lastMessage) {
+            $userMessages[$otherUserId] = [
+                'user' => User::find($otherUserId),
+                'last_message' => $lastMessage->message,
+                'timestamp' => $lastMessage->created_at->format('Y-m-d H:i:s'),
+                'unread_count' => $unreadCounts[$otherUserId] ?? 0,  // Aquí se añade el contador de mensajes no leídos
+            ];
         }
-        $modulos = Modulo::all();
-        // Obtener todos los usuarios únicos que han enviado o recibido mensajes contigo
-           // Obtener todos los usuarios únicos que han enviado o recibido mensajes contigo
-       
-       
-           // Obtener todos los mensajes donde el usuario autenticado es el remitente o el destinatario
-        $messages = Chat::where('sender_id', auth()->id())
-        ->orWhere('receiver_id', auth()->id())
-        ->latest()
-        ->get();
+    }
 
-        // Crear una colección para almacenar los mensajes agrupados por el ID del otro usuario
-        $userMessages = collect([]);
-
-        // Iterar sobre los mensajes y agruparlos por el ID del otro usuario
-        foreach ($messages as $message) {
-        // Determinar el ID del otro usuario en la conversación
-        $otherUserId = ($message->sender_id === auth()->id()) ? $message->receiver_id : $message->sender_id;
-
-        // Verificar si ya existe una entrada para este usuario en la colección
-        if (!$userMessages->has($otherUserId)) {
-        // Si no existe, crear una nueva entrada en la colección
-        $userMessages[$otherUserId] = [
-        'user' => User::find($otherUserId),
-        'last_message' => $message->message,
-        'timestamp' => $message->created_at->format('Y-m-d H:i:s')
-        ];
-        }
-        }
-
-return view('reikosoft.chats.index', compact('descripcion', 'user', 'modulos', 'userMessages'));
+    return view('reikosoft.chats.index', compact('descripcion', 'modulos', 'userMessages', 'user', 'unreadCounts'));
 }
+
+
+// ChatController.php
+
     public function store(Request $request)
     {
         // Validar los datos del formulario
@@ -91,29 +111,222 @@ return view('reikosoft.chats.index', compact('descripcion', 'user', 'modulos', '
             return response()->json(['error' => 'El usuario receptor no existe.']);
         }
     }
-    public function show($userId)
-    {
-          // Obtener el ID del usuario autenticado
+  public function show($userId)
+{
     $authUserId = Auth::id();
 
-    // Obtener los mensajes relacionados con el usuario autenticado y el usuario con el que se está chateando
     $mensajes = Chat::where(function ($query) use ($authUserId, $userId) {
-            $query->where('sender_id', $authUserId)->where('receiver_id', $userId);
+            $query->where('sender_id', $authUserId)
+                  ->where('receiver_id', $userId)
+                  ->where('visible_sender', 1);   // solo si visible para el sender
         })
         ->orWhere(function ($query) use ($authUserId, $userId) {
-            $query->where('sender_id', $userId)->where('receiver_id', $authUserId);
+            $query->where('sender_id', $userId)
+                  ->where('receiver_id', $authUserId)
+                  ->where('visible_receiver', 1); // solo si visible para el receiver
         })
-        ->orderBy('created_at', 'asc') // Ordenar por fecha y hora de creación en orden ascendente
+        ->orderBy('created_at', 'asc')
         ->get();
 
-    // Marcar los mensajes como enviados o recibidos
     foreach ($mensajes as $mensaje) {
         $mensaje->tipo = ($mensaje->sender_id == $authUserId) ? 'enviado' : 'recibido';
     }
 
-    // Retornar los mensajes como respuesta en formato JSON
     return response()->json($mensajes);
+}
+public function ocultarConversacion($userId)
+{
+    try {
+        $authUserId = Auth::id();
 
+        // Ocultar todos los mensajes enviados por mí a ese usuario (visible_sender = false)
+        Chat::where('sender_id', $authUserId)
+            ->where('receiver_id', $userId)
+            ->update(['visible_sender' => false]);
+
+        // Ocultar todos los mensajes recibidos de ese usuario (visible_receiver = false)
+        Chat::where('sender_id', $userId)
+            ->where('receiver_id', $authUserId)
+            ->update(['visible_receiver' => false]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Conversación oculta correctamente para el usuario autenticado.'
+        ]);
+    } catch (\Exception $e) {
+        // Captura cualquier error inesperado
+        return response()->json([
+            'success' => false,
+            'message' => 'No se pudo ocultar la conversación.',
+            'error' => $e->getMessage()
+        ], 500);
     }
+}
+public function contadorNoLeidos($id)
+{
+    try {
+        $receiverId = Auth::id(); // Usuario autenticado (receptor)
+        $senderId = $id; // Este es el id que se pasa en la URL
+
+        $contador = Chat::where('receiver_id', $receiverId)
+                           ->where('sender_id', $senderId)
+                           ->where('leido', false)
+                           ->count();
+
+        return response()->json([
+            'contador' => $contador
+        ]);
+    } catch (\Exception $e) {
+        \Log::error('Error en contadorNoLeidos: ' . $e->getMessage());
+
+        return response()->json([
+            'error' => 'Ocurrió un error al obtener el contador.'
+        ], 500);
+    }
+}
+
+
+
+    public function deleteConversation($userId)
+{
+    $authUserId = Auth::id();
+
+    // Validar que el usuario existe para evitar problemas
+    $user = User::find($userId);
+    if (!$user) {
+        return response()->json(['error' => 'Usuario no encontrado.'], 404);
+    }
+
+    // Eliminar todos los mensajes entre el usuario autenticado y el usuario $userId
+    Chat::where(function ($query) use ($authUserId, $userId) {
+        $query->where('sender_id', $authUserId)->where('receiver_id', $userId);
+    })->orWhere(function ($query) use ($authUserId, $userId) {
+        $query->where('sender_id', $userId)->where('receiver_id', $authUserId);
+    })->delete();
+
+    return response()->json(['success' => 'Conversación eliminada correctamente.']);
+}
+public function destroyMessage($id)
+{
+    try {
+        $authUserId = Auth::id();
+        // Buscar el mensaje que tenga el id y que haya sido enviado por el usuario autenticado
+        $mensaje = Chat::where('id', $id)
+                       ->where('sender_id', $authUserId)
+                       ->firstOrFail();
+
+        $mensaje->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Mensaje eliminado correctamente.'
+        ]);
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        // El mensaje no existe o no pertenece al usuario autenticado
+        return response()->json([
+            'success' => false,
+            'message' => 'No tienes permiso para eliminar este mensaje o no existe.'
+        ], 403);
+    } catch (\Exception $e) {
+        // Otro error
+        return response()->json([
+            'success' => false,
+            'message' => 'No se pudo eliminar el mensaje.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+public function ocultarMensajeEnviado($id)
+{
+    try {
+        $authUserId = Auth::id();
+
+        // Buscar el mensaje enviado por el usuario autenticado
+        $mensaje = Chat::where('id', $id)
+                       ->where('sender_id', $authUserId)
+                       ->firstOrFail();
+
+        // Marcar como oculto para el emisor
+        $mensaje->visible_sender = false;
+        $mensaje->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Mensaje ocultado para ti (emisor).'
+        ]);
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'No tienes permiso o el mensaje no existe.'
+        ], 403);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'No se pudo ocultar el mensaje.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
+public function ocultarMensajeRecibido($id)
+{
+    try {
+        $authUserId = Auth::id();
+
+        $mensaje = Chat::where('id', $id)
+                       ->where('receiver_id', $authUserId)  // quien recibe
+                       ->firstOrFail();
+
+        $mensaje->visible_receiver = false;
+        $mensaje->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Mensaje ocultado para receptor correctamente.'
+        ]);
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'No tienes permiso para ocultar este mensaje o no existe.'
+        ], 403);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'No se pudo ocultar el mensaje.',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+public function marcarLeidos($userId)
+{
+    $authUserId= Auth::id();
+
+    // Solo mensajes recibidos por el usuario actual y enviados por userId
+    $actualizados = Chat::where('sender_id', $userId)
+        ->where('receiver_id', $authUserId)
+        ->where('status', 'no_leido')
+        ->update(['status' => 'leido']);
+
+    return response()->json([
+        'success' => true,
+        'message' => "$actualizados mensajes marcados como leídos"
+    ]);
+}
+public function contadorConversaciones()
+{
+    $authUserId = Auth::id();
+
+    $unreadCounts = Chat::select('sender_id', \DB::raw('COUNT(*) as unread_count'))
+        ->where('receiver_id', $authUserId)
+        ->where('status', 'no_leido')
+        ->where('visible_receiver', 1)
+        ->groupBy('sender_id')
+        ->pluck('unread_count', 'sender_id')
+        ->toArray();
+
+    return response()->json($unreadCounts);
+}
+
+
 
 }

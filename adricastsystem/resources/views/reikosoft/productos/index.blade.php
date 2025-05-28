@@ -6,59 +6,61 @@
 @section('contenidoreiko')
 
     <script src="{{ route('recursos.show', ['js/reiko', 'productosreiko.js']) }}"></script>
-    <button type="button" id="btnEliminarSeleccionados" style="display: none;" class="btn" onclick="eliminarDatos(obtenerProductosSeleccionados())">Eliminar seleccionados</button>
- 
-    Busqueda
-    <input type="text" name="busqueda" id="busqueda" placeholder="Busqueda de Datos" onkeyup="consultaDatos()" style="width: 200px;">
-   
-    <section class="containerreiko">
+
+    <button type="button" id="btnEliminarSeleccionados" style="display: none;" class="btn-eliminar-seleccionados" onclick="eliminarDatos(obtenerProductosSeleccionados())">
+        Eliminar seleccionados
+    </button>
+
+    <div class="busqueda-box">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar productos..." onkeyup="consultaDatos()" class="busqueda-input">
+    </div>
+
   
-        <div class="contenedormodulos" id="contenedorelemento">
-            <a href="{{ route('productos.create') }}">
-                <div class="target">
-                        
-                        <img src="{{ route('recursos.show',['img/productos', 'mas.png']) }}" alt="Ventas">
-                        <p>Nuevo Producto </p>
-                </div>
-            </a>
-          
-          
-            @foreach ($productos as $producto)
-                <a>
-                    <div class="target">
-                    @if ($producto->foto)
-                            <img src="{{ route('recursos.show', ['img/productos', $producto->foto]) }}"  alt=""  height="150px" width="150px">
-                    @else
-                    <img src="{{ route('recursos.show', ['img', 'logotype.png']) }}" alt=""  height="150px" width="150px">
-                     @endif
-                    <p>{{ $producto->nombre}}</p>
-                        <div class="botones">
-                             {{-- Checkbox --}}
+    <div class="nuevo">
+        <a href="{{ route('productos.create') }}" class="btn-nuevo">
+            <img src="{{ route('recursos.show',['img/productos', 'mas.png']) }}" alt="Nuevo" width="25">
+            Nuevo Producto
+        </a>
+    </div>
+
+    <div class="tabla-container">
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Seleccionar</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($productos as $producto)
+                    <tr>
+                        <td>
+                            <img src="{{ $producto->foto 
+                                ? route('recursos.show', ['img/productos', $producto->foto]) 
+                                : route('recursos.show', ['img', 'logotype.png']) }}" 
+                                alt="Producto" width="80" height="80" style="object-fit: cover;">
+                        </td>
+                        <td>{{ $producto->nombre }}</td>
+                        <td>
                             <input type="checkbox" name="productos_seleccionados[]" value="{{ $producto->id }}" onchange="actualizarVisibilidadBotonEliminar()">
-                              
-                            {{-- Botón Eliminar --}}
-                            <button onclick="eliminarDato('{{ $producto->id }}')">
-                                <i class="fas fa-trash"></i> 
+                        </td>
+                        <td>
+                            <button onclick="eliminarDato('{{ $producto->id }}')" class="btn-accion eliminar">
+                                <i class="fas fa-trash"></i>
                             </button>
-
-                            {{-- Botón Modificar --}}
-                            <button class="btneditar" onclick="modificarDatos('{{ $producto->id }}')">
-                                <span class="fa fa-edit"></span>
+                            <button onclick="modificarDatos('{{ $producto->id }}')" class="btn-accion editar">
+                                <i class="fa fa-edit"></i>
                             </button>
-                            
-                        </div>
-                    </div>
-                </a>
-              
-               
-             @endforeach
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
-           
-        </div>
-     
-    </section>
-    
-    @include('reikosoft.productos.edit') 
+    @include('reikosoft.productos.edit')
 
 @endsection
-   

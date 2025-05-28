@@ -2,6 +2,12 @@
   margin: 0;
   padding: 0;
 }
+.logotype{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px yellowgreen;
+}
 .cabecera{
     background-color: rgb(152, 152, 155);
     color: #fff;
@@ -9,9 +15,9 @@
     font-size: 20px;
     font-weight: bold;
     width: 100%;
-
-    text-align: center;
    
+    text-align: center;
+  
 }
 .cabecera .logo{
     float: left;
@@ -453,57 +459,43 @@ main {
     border-radius: 0 0 10px 10px;
 }
 .card-container {
-    width: 100%;
-    position: relative;
-    margin-top: 10px;
-    padding: 10px;
+  width: 100%;
+  position: relative;
+  margin-top: 10px;
+  padding: 10px;
+  overflow: hidden; /* Oculta el contenido fuera del contenedor */
   
-  }
-  
-  .cards {
-    display: flex;
-    align-items: center ;
-    justify-content: center;
-    padding: 10px;
-    overflow: hidden;
-  }
-  
-  .card {
-    width: 25%;
-    max-width: 320px;
-    min-width: 200px;
-    height: 350px;
-    margin-left: 5px;
-    margin: 10px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #fff;
-    border-radius: 0px;
-    border: 2px solid white;
-   
-    box-shadow: 5px 8px 5px gray;
+}
 
-  }
+.cards {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding: 10px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE y Edge */
+}
+.cards::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+.card2 {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 280px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2px;
+  background-color: #fff;
+  border: #0C134F 3px solid;
+  border-radius: 0px;
+}
 
-  .card2 {
-    width: 25%;
-    max-width: 280px;
-    min-width: 200px;
-    height: 340px;
-    margin-right: 20px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 2px;
-    background-color: #fff;
-    border-radius: 0px;
-    border:#0C134F 3px solid;
-   
-
-  }
   .card2:hover {
     box-shadow: 5px 5px 2px gray;
   }

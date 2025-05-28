@@ -323,3 +323,19 @@ $(document).ready(function() {
       actualizarVisibilidadBotonEliminar();
   });
 });
+
+function toggleDropdown(event) {
+    event.stopPropagation();
+    const dropdownContent = event.currentTarget.nextElementSibling;
+    document.querySelectorAll('.dropdown-content').forEach(dc => {
+        if (dc !== dropdownContent) dc.style.display = 'none';
+    });
+    dropdownContent.style.display = (dropdownContent.style.display === 'flex') ? 'none' : 'flex';
+}
+
+document.addEventListener('click', function() {
+    document.querySelectorAll('.dropdown-content').forEach(dc => {
+        dc.style.display = 'none';
+    });
+});
+

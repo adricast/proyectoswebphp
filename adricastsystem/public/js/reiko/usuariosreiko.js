@@ -247,71 +247,102 @@ function modificarDatos(id){
   
   
   }
-  function consultaDatos() {
+function consultaDatos() {
     // Obtener el campo de entrada y el tbody de la tabla
     var inputBusqueda = document.getElementById('busqueda');
     var contenedorModulos = document.getElementById('contenedorelemento');
 
-    // Agregar el evento keyup al campo de entrada
+    // Agregar el evento keyup al campo de entrada para realizar la búsqueda mientras se escribe
     inputBusqueda.addEventListener('keyup', function() {
-        var termino = inputBusqueda.value.trim();
+        var termino = inputBusqueda.value.trim();  // Obtener el valor del campo de búsqueda
 
+        // Realizar la petición AJAX para obtener los usuarios que coinciden con el término de búsqueda
         $.ajax({
-            url: '/usuariosbuscar',
+            url: '/usuariosbuscar',  // Ruta para obtener los usuarios según el término de búsqueda
             method: 'GET',
             data: { termino: termino },
             success: function(response) {
-                contenedorModulos.innerHTML = ''; // Limpiar el contenido existente en el contenedor antes de actualizar con los nuevos resultados
+                contenedorModulos.innerHTML = ''; // Limpiar el contenido existente en el contenedor
 
-                response.forEach(function(usuario) {
-                    var aElement = document.createElement('a');
-                    aElement.href = '#';
+                // Verifica si hay usuarios en la respuesta
+                if (response.length === 0) {
+                    contenedorModulos.innerHTML = '<tr><td colspan="4">No se encontraron usuarios.</td></tr>';
+                } else {
+                    // Iterar sobre cada usuario que fue encontrado
+                    response.forEach(function(usuario) {
+                        // Crear una fila de la tabla
+                        var trElement = document.createElement('tr');
 
-                    var divTarget = document.createElement('div');
-                    divTarget.className = 'target';
+                        // Crear la celda para la imagen del usuario
+                        var tdImagen = document.createElement('td');
+                        var imgElement = document.createElement('img');
+                        imgElement.src = usuario.foto ? '/img/perfiles/' + usuario.foto : '/img/logotype.png';  // Foto del usuario o imagen predeterminada
+                        imgElement.alt = usuario.username;
+                        imgElement.width = 80;
+                        imgElement.height = 80;
+                        imgElement.style.objectFit = 'cover';
+                        tdImagen.appendChild(imgElement);
 
-                    var imgElement = document.createElement('img');
-                    imgElement.src = '/img/perfiles/' + usuario.foto;
-                    imgElement.alt = usuario.username;
+                        // Crear la celda para el nombre del usuario
+                        var tdUsername = document.createElement('td');
+                        tdUsername.textContent = usuario.username;
 
-                    var pElement = document.createElement('p');
-                    pElement.textContent = usuario.username;
+                        // Crear la celda para el checkbox de selección
+                        var tdSeleccionar = document.createElement('td');
+                        var checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.name = 'usuarios_seleccionados[]';
+                        checkbox.value = usuario.id;
+                        checkbox.onchange = function() {
+                            actualizarVisibilidadBotonEliminar();
+                        };
+                        tdSeleccionar.appendChild(checkbox);
 
-                    var divBotones = document.createElement('div');
-                    divBotones.className = 'botones';
+                        // Crear la celda para las acciones (Eliminar y Modificar)
+                        var tdAcciones = document.createElement('td');
+                        var buttonEliminar = document.createElement('button');
+                        buttonEliminar.className = 'btn-accion eliminar';
+                        buttonEliminar.addEventListener('click', function() {
+                            eliminarDatos(usuario.id);  // Llamar a la función eliminarDatos con el ID del usuario
+                        });
+                        var iEliminar = document.createElement('i');
+                        iEliminar.className = 'fas fa-trash';  // Icono de basura para eliminar
+                        buttonEliminar.appendChild(iEliminar);
 
-                    var buttonEliminar = document.createElement('button');
-                    buttonEliminar.addEventListener('click', function() {
-                        eliminarDatos(usuario.id);
+                        var buttonModificar = document.createElement('button');
+                        buttonModificar.className = 'btn-accion editar';
+                        buttonModificar.addEventListener('click', function() {
+                            modificarDatos(usuario.id);  // Llamar a la función modificarDatos con el ID del usuario
+                        });
+                        var iModificar = document.createElement('i');
+                        iModificar.className = 'fa fa-edit';  // Icono de lápiz para editar
+                        buttonModificar.appendChild(iModificar);
+
+                        // Añadir los botones de acción a la celda de acciones
+                        tdAcciones.appendChild(buttonEliminar);
+                        tdAcciones.appendChild(buttonModificar);
+
+                        // Añadir las celdas a la fila
+                        trElement.appendChild(tdImagen);
+                        trElement.appendChild(tdUsername);
+                        trElement.appendChild(tdSeleccionar);
+                        trElement.appendChild(tdAcciones);
+
+                        // Añadir la fila al cuerpo de la tabla
+                        contenedorModulos.appendChild(trElement);
                     });
-                    var iEliminar = document.createElement('i');
-                    iEliminar.className = 'fas fa-trash';
-                    buttonEliminar.appendChild(iEliminar);
-
-                    var buttonModificar = document.createElement('button');
-                    buttonModificar.className = 'btneditar';
-                    buttonModificar.addEventListener('click', function() {
-                        modificarDatos(usuario.id);
-                    });
-                    var spanModificar = document.createElement('span');
-                    spanModificar.className = 'fa fa-edit';
-                    buttonModificar.appendChild(spanModificar);
-
-                    divBotones.appendChild(buttonEliminar);
-                    divBotones.appendChild(buttonModificar);
-
-                    divTarget.appendChild(imgElement);
-                    divTarget.appendChild(pElement);
-                    divTarget.appendChild(divBotones);
-
-                    aElement.appendChild(divTarget);
-
-                    contenedorModulos.appendChild(aElement);
-                });
+                }
+            },
+            error: function() {
+                console.error('Error al realizar la búsqueda de usuarios.');
+                contenedorModulos.innerHTML = '<tr><td colspan="4">Error al obtener los usuarios. Intenta nuevamente.</td></tr>';
             }
         });
     });
 }
+
+
+
 function obtenerUsuariosSeleccionados() {
     var usuariosSeleccionados = [];
     $("input[name='usuarios_seleccionados[]']:checked").each(function () {

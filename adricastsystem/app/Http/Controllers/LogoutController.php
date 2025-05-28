@@ -9,7 +9,12 @@ class LogoutController extends Controller
     //
     public function store(Request $request){
         auth()->logout();
-        return redirect()->route('posts.index');
-       
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Aquí pones la ruta o URL válida, por ejemplo:
+        return redirect('/home');
     }
+
 }

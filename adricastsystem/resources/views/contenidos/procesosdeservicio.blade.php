@@ -1,4 +1,4 @@
-<div class="contenidogrid">
+<div class="contenidogrid main">
     <div id="contenido">
         <div id="titulocontenido">
             <p>Información General</p>

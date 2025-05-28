@@ -6,7 +6,7 @@
 @section('contenidoreiko')
     <section class="containerreiko">
         
-        <img src="{{ route('recursos.show', ['img', 'fondoreiko.png']) }}" alt="">
+        <img class ="imgpresentacion" src="{{ route('recursos.show', ['img', 'logoreikosoft.png']) }}" alt="">
     </section>
    
 @endsection

@@ -19,21 +19,34 @@ class UsuariosController extends Controller
         $this->rutaConcat = config('app.ruta_concat');
     }
 
-    public function index()
-    {
-        $typeUser = auth()->user()->typeUser;
-      
-        $user = Auth::user();
-        if ($typeUser) {
-            $descripcion = $typeUser->descripcion;
-        } else {
-            $descripcion = 'No asignado';
-        }
+public function index(Request $request)
+{
+    // Obtener el tipo de usuario y el usuario actual
+    $typeUser = auth()->user()->typeUser;
+    $user = Auth::user();
+    $descripcion = $typeUser ? $typeUser->descripcion : 'No asignado';
 
-        $modulos = Modulo::all();
-        $usuarios = User::all();
-        return view('reikosoft.usuarios.index' , compact('descripcion','user','modulos','usuarios'));
+    // Obtener los módulos
+    $modulos = Modulo::all();
+
+    // Obtener el término de búsqueda si existe
+    $termino = $request->get('termino');
+    $perPage = $request->perPage ?: 5; // Si no se selecciona un valor, usará 5 como predeterminado
+
+    // Filtrar usuarios si hay un término de búsqueda
+    if ($termino) {
+        $usuarios = User::where('username', 'like', '%' . $termino . '%')
+                        ->paginate($perPage);
+    } else {
+        // Si no hay término de búsqueda, mostrar todos los usuarios
+        $usuarios = User::paginate($perPage);
     }
+
+    // Pasar todas las variables a la vista
+    return view('reikosoft.usuarios.index', compact('descripcion', 'user', 'modulos', 'usuarios', 'termino'));
+}
+
+
     public function create()
     {
         $typeUser = auth()->user()->typeUser;
@@ -170,19 +183,21 @@ class UsuariosController extends Controller
     
         
     }    
-    public function buscarRegistros(Request $request)
-    {
-         // Obtener el valor de búsqueda del campo "busqueda"
-         $valorBusqueda = $request->input('termino');
- 
-         // Realizar la búsqueda de registros según el valor proporcionado
-         $registros = User::where('username', 'LIKE', "%$valorBusqueda%")
-             ->orWhere('nombres', 'LIKE', "%$valorBusqueda%")
-             ->orWhere('apellidos', 'LIKE', "%$valorBusqueda%")
-             ->get();
- 
-         // Retornar los registros en formato JSON
-         return response()->json($registros->toArray());
-     }
+ public function buscarRegistros(Request $request)
+{
+    $valorBusqueda = $request->input('termino');
+    $registros = User::where('username', 'LIKE', "%$valorBusqueda%")
+                     ->orWhere('nombres', 'LIKE', "%$valorBusqueda%")
+                     ->orWhere('apellidos', 'LIKE', "%$valorBusqueda%")
+                     ->get();
+
+    // Verifica si los registros fueron encontrados
+    if ($registros->isEmpty()) {
+        return response()->json(['message' => 'No se encontraron resultados'], 404);
+    }
+
+    return response()->json($registros);
+}
+
 }
 

@@ -7,11 +7,18 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    //
-    public function index(){
+    public function index()
+    {
+        // Si ya está autenticado, redirige a /reikosoft
+        if (Auth::check()) {
+            return redirect('/home');
+        }
+
         return view('paginas.reikosoft');
     }
-    public function store(Request $request){
+
+    public function store(Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'password' => 'required',
@@ -21,15 +28,10 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Autenticación exitosa
-            $user = Auth::user();
-            return redirect()->route('posts.index',compact('user')); // Cambia 'dashboard' por la ruta a la que deseas redirigir después del inicio de sesión.
+            return redirect('/home');
         } else {
             // Autenticación fallida
             return back()->with('error', 'Usuario o contraseña incorrecta');
         }
-            
-        
-        
-    }   
-
+    }
 }

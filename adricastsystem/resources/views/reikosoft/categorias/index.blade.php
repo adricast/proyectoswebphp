@@ -7,55 +7,58 @@
 
     <script src="{{ route('recursos.show', ['js/reiko', 'categoriasreiko.js']) }}"></script>
     <button type="button" id="btnEliminarSeleccionados" style="display: none;" class="btn" onclick="eliminarDatos(obtenerCategoriasSeleccionadas())">Eliminar seleccionados</button>
- 
-    Busqueda
-    <input type="text" name="busqueda" id="busqueda" placeholder="Busqueda de Datos" onkeyup="consultaDatos()" style="width: 200px;">
-      
-    <section class="containerreiko">
-       
-        <div class="contenedormodulos" id="contenedorelemento">
-            <a href="{{ route('categorias.create') }}">
-                <div class="target">
-                        
-                        <img src="{{ route('recursos.show',['img/categorias', 'mas.png']) }}" alt="Ventas">
-                        <p>Nueva Categoria </p>
-                </div>
-            </a>
-            
-            @foreach ($categorias as $categoria)
-                <a>
-                    <div class="target">
-                    @if ($categoria->foto)
-                        <img src="{{ asset('img/categorias/' . $categoria->foto) }}" alt="{{ $categoria->foto }}">
-                    @else
-                            <img src="{{ route('recursos.show', ['img', 'logotype.png']) }}" alt=""  height="150px" width="150px">
-                    @endif
-                      <p>{{ $categoria->nombre }}</p>
-                        <div class="botones">
-                            {{-- Checkbox --}}
-                            <input type="checkbox" name="categorias_seleccionadas[]" value="{{ $categoria->id }}" onchange="actualizarVisibilidadBotonEliminar()">
-                            
-                            {{-- Botón Eliminar --}}
-                            <button onclick="eliminarDatos('{{ $categoria->id }}')">
-                                <i class="fas fa-trash"></i> 
-                            </button>
 
-                            {{-- Botón Modificar --}}
-                            <button class="btneditar" onclick="modificarDatos('{{ $categoria->id }}')">
-                                <span class="fa fa-edit"></span>
-                            </button>
-                            
-                        </div>
-                    </div>
+  <section class="containerreiko">
+    <div class="contenedormodulos">
+
+        {{-- Nueva Categoria --}}
+        <div class="modulo-contenedor">
+            <div class="dropdown" style="visibility: hidden;">
+                {{-- Espacio para diseño consistente pero sin dropdown visible --}}
+                <button class="menu-button" disabled>⋮</button>
+            </div>
+            <div class="target">
+                <a href="{{ route('categorias.create') }}">
+                    <img src="{{ route('recursos.show',['img/categorias', 'mas.png']) }}" alt="Nueva Categoria">
+                    <p>Nueva Categoria</p>
                 </a>
-                @endforeach
-
-           
+            </div>
+            <div class="checkbox-container">
+                {{-- Sin checkbox aquí --}}
+            </div>
         </div>
-     
-    </section>
-    
-    @include('reikosoft.categorias.edit') 
+
+        {{-- Categorias dinámicas --}}
+        @foreach ($categorias as $categoria)
+        <div class="modulo-contenedor">
+            <div class="dropdown">
+                <button class="menu-button" onclick="toggleDropdown(event)">⋮</button>
+                <div class="dropdown-content">
+                    <button onclick="modificarDatos('{{ $categoria->id }}')">Editar</button>
+                    <button onclick="eliminarDatos('{{ $categoria->id }}')">Eliminar</button>
+                </div>
+            </div>
+
+            <div class="target">
+                <a href="#">
+                    @if ($categoria->foto)
+                    <img src="{{ asset('img/categorias/' . $categoria->foto) }}" alt="{{ $categoria->nombre }}">
+                    @else
+                    <img src="{{ route('recursos.show', ['img', 'logotype.png']) }}" alt="Sin imagen" height="150px" width="150px">
+                    @endif
+                    <p>{{ $categoria->nombre }}</p>
+                </a>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" name="categorias_seleccionadas[]" value="{{ $categoria->id }}" onchange="actualizarVisibilidadBotonEliminar()">
+            </div>
+        </div>
+        @endforeach
+
+    </div>
+  </section>
+
+  @include('reikosoft.categorias.edit') 
 
 @endsection
-   

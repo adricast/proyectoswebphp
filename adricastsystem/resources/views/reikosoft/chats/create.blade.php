@@ -2,7 +2,7 @@
    
     <div class="contenidomodal">
         <div class="bannertitulo">
-            Chats
+            CHATS  <i class="fas fa-comments"></i> 
         </div>
         <div class="closemodal">
            <button onclick="cerrarModal()">
@@ -16,7 +16,7 @@
   
                 <input type="text" name="username" id="username" placeholder="Escribir el Nombre del Usuario">
                 <textarea name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Escribir el Mensaje"></textarea>
-                <button type="submit" id="guardarbtn" onclick="event.preventDefault(); guardarDatos();">Enviar</button>
+                <button type="submit" class="btn" id="guardarbtn" onclick="event.preventDefault(); guardarDatos();">Enviar</button>
               
             </form>
           

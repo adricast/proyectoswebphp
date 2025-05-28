@@ -42,7 +42,6 @@ Route::get('/', [HomeController::class, 'inicio'])->name('paginas.inicio');
 Route::get('/nosotros', [NosotrosController::class, 'nosotros'])->name('paginas.nosotros');
 Route::get('/noticias', [NoticiasController::class, 'noticias'])->name('paginas.noticias');
 Route::get('/tecnologias', [TecnologiasController::class, 'tecnologias'])->name('paginas.tecnologias');
-Route::get('/nosotros', [NosotrosController::class, 'nosotros'])->name('paginas.nosotros');
 Route::get('/servicios', [ServiciosController::class, 'servicios'])->name('paginas.servicios');
 Route::get('/empleos', [EmpleoController::class, 'empleo'])->name('paginas.empleo');
 
@@ -51,13 +50,21 @@ Route::post('/enviar-formulario', [ContactanosController::class, 'submit'])->nam
 
 Route::get('/crearcuenta', [RegistroController::class, 'index'])->name('register');
 Route::post('/crearcuenta', [RegistroController::class, 'store']);
-Route::get('/reikosoft', [PostController::class, 'index'])->name('posts.index');
+Route::get('/home', [PostController::class, 'index'])->name('posts.index');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+
+
+// Solo mostrar el formulario si el usuario NO está autenticado
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+
+// Procesar el login
 Route::post('/login', [LoginController::class, 'store']);
 
-Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+Route::get('/logout', function () {
+    return redirect('/login'); // o a la página que quieras
+});
 Route::get('/reikomodulos', [ModulosController::class, 'index'])->name('cmodulos.index');
 Route::get('/moduloscreate', [ModulosController::class, 'create'])->name('cmodulos.create');
 Route::post('/moduloscreate', [ModulosController::class, 'store'])->name('cmodulos.store');
@@ -120,9 +127,25 @@ Route::delete('/contactosdelete/{id}', [ContactoController::class, 'destroy'])->
 Route::get('/contactos/show/{id}', [ContactoController::class, 'show'])->name('contactos.show');
 Route::get('/contactosbuscar', [ContactoController::class, 'buscarRegistros'])->name('contactos.buscar');
 
-Route::get('/chats', [ChatsController::class, 'index'])->name('chats.index');
-Route::post('/chats/store', [ChatsController::class, 'store'])->name('chats.store');
-Route::get('/chats/show/{id}', [ChatsController::class, 'show'])->name('chats.show');
+Route::middleware(['auth'])->group(function () {
+     Route::get('/chats/contadorconversation/aqui', [ChatsController::class, 'contadorConversaciones']);
+
+    Route::get('/chats', [ChatsController::class, 'index'])->name('chats.index');
+    Route::post('/chats/store', [ChatsController::class, 'store'])->name('chats.store');
+    Route::get('/chats/show/{id}', [ChatsController::class, 'show'])->name('chats.show');
+    Route::delete('/chats/delete-conversation/{userId}', [ChatsController::class, 'deleteConversation']);
+    Route::delete('/chats/ocultar-conversation/{userId}', [ChatsController::class, 'ocultarConversacion']);
+   
+
+});
+
+
+Route::delete('/chats/delete-message/{id}', [ChatsController::class, 'destroyMessage']);
+// Ocultar mensaje enviado (solo para el usuario que envió)
+Route::patch('/chats/ocultar-enviado/{id}', [ChatsController::class, 'ocultarMensajeEnviado']);
+// Ocultar mensaje recibido (solo para el receptor)
+Route::patch('/chats/ocultar-recibido/{id}', [ChatsController::class, 'ocultarMensajeRecibido']);
+Route::patch('/chats/marcar-leidos/{userId}', [ChatsController::class, 'marcarLeidos']);
 
 Route::get('/tipousuarios', [TipousuariosController::class, 'index'])->name('tipousuarios.index');
 Route::get('/tipousuarioscreate', [TipousuariosController::class, 'create'])->name('tipousuarios.create');

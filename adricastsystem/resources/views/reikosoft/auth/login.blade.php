@@ -11,7 +11,7 @@
             <h1>Ingreso al Sistema</h1>
         </div>
         <div class="form-section">
-            <h2><img src="{{ route('recursos.show', ['img', 'logotype.png']) }}" alt="Logo" width="40px" height="40px"></h2>
+            <h2><img src="{{ route('recursos.show', ['img', 'logoreikosoft.png']) }}" alt="Logo" class="logotype"></h2>
             <form action="{{route('login')}}" method="post" novalidate>
                 @csrf
                 <input type="text" placeholder="Usuario" id="usuario" name="name" class="@error('name') border-red-500 @enderror" value="" required>

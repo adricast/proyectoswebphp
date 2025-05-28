@@ -7,7 +7,9 @@
     <script src="{{ route('recursos.show', ['js/reiko', 'productosReiko.js']) }}"></script>
     <script>
         var StoreUrl = "{{ route('productos.store') }}";   
+         const rutaSonido = "{{ route('recursos.show', ['sound', 'sound1.mp3']) }}";
     </script>
+  
     <section class="containerreiko">
         
         <div class="contenedorformularios">

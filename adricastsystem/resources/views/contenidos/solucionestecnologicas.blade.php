@@ -12,10 +12,10 @@
                         <label class="lblchbx" for="pregunta1">Apps móviles</label>
                     </div>
                     <div id="respuesta1" class="respuestas">
-                        <p style="text-align: justify;">
+                        <p>
                             Las aplicaciones móviles se han convertido en una herramienta fundamental para empresas y negocios en la era digital. En ADRICAST SYSTEM desarrollamos aplicaciones nativas, web e híbridas que ofrecen una experiencia fluida y adaptada a las necesidades específicas de nuestros clientes.
                         </p>
-                        <p style="text-align: justify;">
+                        <p>
                             Nuestro equipo de desarrolladores trabaja en estrecha colaboración con los clientes para comprender sus objetivos y crear soluciones móviles innovadoras que mejoren la eficiencia y la productividad.
                         </p>
                     </div>
