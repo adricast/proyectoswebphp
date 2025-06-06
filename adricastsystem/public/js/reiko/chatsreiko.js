@@ -512,68 +512,64 @@ $(document).ready(function() {
 
 function enviarMensaje() {
     var token = $('meta[name="csrf-token"]').attr('content');
-    var mensaje = $('#mensaje').val(); // Obtener el mensaje del campo de texto
+    var mensaje = $('#mensaje').val();
     var nombreUsuario = $('#headerchat').text();
+
     if (!mensaje.trim()) {
         Swal.fire('Error', 'No puedes enviar un mensaje vacío.', 'error');
         return;
     }
-    // Comprobar si se ha seleccionado un usuario de destino
+
     if (nombreUsuario) {
-        // Crear un objeto con los datos del mensaje
         var data = {
-            username: nombreUsuario, // Enviar el ID del usuario de destino
-            mensaje: mensaje // Enviar el mensaje
+            username: nombreUsuario,
+            mensaje: mensaje
         };
 
-        // Enviar la solicitud AJAX para guardar el mensaje
         $.ajax({
-            url: StoreUrl, // URL para enviar el mensaje
+            url: StoreUrl,
             type: "POST",
-            data: data, // Datos del mensaje
+            data: data,
             headers: {
                 'X-CSRF-TOKEN': token
             },
             success: function(response) {
-                // Manejar la respuesta exitosa aquí
-               
-                if (response.success) {
-                    // Si la respuesta indica éxito, mostrar un mensaje exitoso
+                console.log("Respuesta del servidor:", response);
+
+                // Asegurarse de que response.success sea booleano
+                if (response.success === true) {
                     var userId = $('#headerchat').data('userid');
                     cargarMensajes(userId);
                     $('#mensaje').val('');
                 } else {
-                    // Si la respuesta indica un error, mostrar un mensaje de error
-                    Swal.fire('Error', response.message, 'error');
+                    const msg = response.message || 'Ocurrió un error al enviar el mensaje.';
+                    Swal.fire('Error', msg, 'error');
                 }
-                // Redireccionar a la página de chats
-                
             },
             error: function(xhr, status, error) {
-                // Manejar errores aquí
                 if (xhr.status === 422) {
-                    // El servidor respondió con un error de validación (422 Unprocessable Entity)
                     var responseErrors = xhr.responseJSON.errors;
                     var errorMessage = 'Los datos proporcionados no son válidos.';
 
-                    // Recorre los errores y construye el mensaje de error
                     for (var key in responseErrors) {
                         if (responseErrors.hasOwnProperty(key)) {
                             errorMessage += '<br>' + responseErrors[key][0];
                         }
                     }
 
-                    Swal.fire('Error', errorMessage, 'error');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        html: errorMessage
+                    });
                 } else {
-                    // Otros errores de la solicitud AJAX
-                    console.error(error);
-                    Swal.fire('Error', 'Se produjo un error en el servidor.', 'error');
                     console.error('Error en la solicitud AJAX:', xhr, status, error);
+                    Swal.fire('Error', 'Se produjo un error en el servidor.', 'error');
                 }
             }
         });
     } else {
-        // Si no se ha seleccionado un usuario de destino, mostrar un mensaje de error
         Swal.fire('Error', 'Por favor, selecciona un usuario de destino.', 'error');
     }
 }
+

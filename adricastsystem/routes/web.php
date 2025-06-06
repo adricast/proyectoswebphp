@@ -24,6 +24,7 @@ use App\Http\Controllers\TecnologiasController;
 use App\Http\Controllers\CaracteristicasController;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\RolesUsuarioController;
 use App\Http\Controllers\SubcaracteristicasController;
 use App\Http\Controllers\TipousuariosController;
 
@@ -52,106 +53,105 @@ Route::get('/crearcuenta', [RegistroController::class, 'index'])->name('register
 Route::post('/crearcuenta', [RegistroController::class, 'store']);
 Route::get('/home', [PostController::class, 'index'])->name('posts.index');
 
-
-
-// Solo mostrar el formulario si el usuario NO está autenticado
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-
-// Procesar el login
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 
-
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
-Route::get('/logout', function () {
-    return redirect('/login'); // o a la página que quieras
-});
-Route::get('/reikomodulos', [ModulosController::class, 'index'])->name('cmodulos.index');
-Route::get('/moduloscreate', [ModulosController::class, 'create'])->name('cmodulos.create');
-Route::post('/moduloscreate', [ModulosController::class, 'store'])->name('cmodulos.store');
-Route::delete('/modulosdelete/{id}', [ModulosController::class, 'destroy'])->name('cmodulos.destroy');
-Route::get('/reikomodulos/modulosshow/{id}', [ModulosController::class, 'show'])->name('cmodulos.show');
-Route::put('/reikomodulos/modulosupdate/{id}', [ModulosController::class, 'update'])->name('cmodulos.update');
-
-Route::get('/marcas', [MarcasController::class, 'index'])->name('marcas.index');
-Route::get('/marcascreate', [MarcasController::class, 'create'])->name('marcas.create');
-Route::post('/marcascreate', [MarcasController::class, 'store'])->name('marcas.store');
-Route::delete('/marcasdelete/{id}', [MarcasController::class, 'destroy'])->name('marcas.destroy');
-Route::get('/marcas/show/{id}', [MarcasController::class, 'show'])->name('marcas.show');
-Route::put('/marcas/update/{id}', [MarcasController::class, 'update'])->name('marcas.update');
-Route::get('/marcasbuscar', [MarcasController::class, 'buscarRegistros'])->name('marcas.buscar');
-
-Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias.index');
-Route::get('/categoriascreate', [CategoriasController::class, 'create'])->name('categorias.create');
-Route::post('/categoriascreate', [CategoriasController::class, 'store'])->name('categorias.store');
-Route::delete('/categoriasdelete/{id}', [CategoriasController::class, 'destroy'])->name('categorias.destroy');
-Route::get('/categorias/show/{id}', [CategoriasController::class, 'show'])->name('categorias.show');
-Route::put('/categorias/update/{id}', [CategoriasController::class, 'update'])->name('categorias.update');
-Route::get('/categoriasbuscar', [CategoriasController::class, 'buscarRegistros'])->name('categorias.buscar');
-
-Route::get('/perfiles', [PerfilesController::class, 'index'])->name('perfiles.index');
-Route::put('/perfilesupdate/', [PerfilesController::class, 'update'])->name('perfiles.update');
-
-Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
-Route::get('/usuarioscreate', [UsuariosController::class, 'create'])->name('usuarios.create');
-Route::post('/usuarioscreate', [UsuariosController::class, 'store'])->name('usuarios.store');
-Route::delete('/usuariosdelete/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
-Route::get('/usuarios/show/{id}', [UsuariosController::class, 'show'])->name('usuarios.show');
-Route::put('/usuarios/update/{id}', [UsuariosController::class, 'update'])->name('usuarios.update');
-Route::get('/usuariosbuscar', [UsuariosController::class, 'buscarRegistros'])->name('usuarios.buscar');
-
-Route::get('/productos', [ProductosController::class, 'index'])->name('productos.index');
-Route::get('/productoscreate', [ProductosController::class, 'create'])->name('productos.create');
-Route::post('/productoscreate', [ProductosController::class, 'store'])->name('productos.store');
-Route::delete('/productosdelete/{id}', [ProductosController::class, 'destroy'])->name('productos.destroy');
-Route::get('/productos/show/{id}', [ProductosController::class, 'show'])->name('productos.show');
-Route::put('/productos/update/{id}', [ProductosController::class, 'update'])->name('productos.update');
-Route::get('/productosbuscar', [ProductosController::class, 'buscarRegistros'])->name('productos.buscar');
-Route::get('/productosbuscarcodigo', [ProductosController::class, 'buscarCodigo'])->name('productos.buscarcodigo');
-
-Route::get('/caracteristicas', [CaracteristicasController::class, 'index'])->name('caracteristicas.index');
-Route::get('/caracteristicas/buscarid/{id_producto}', [CaracteristicasController::class, 'consultarCaracteristicasProducto'])->name('caracteristicas.consultar');
-Route::get('/caracteristicas/agregar/{id_producto}', [CaracteristicasController::class, 'agregarcaracteristicas'])->name('caracteristicas.agregar');
-Route::get('/caracteristicas/eliminar/{id_caracteristica}', [CaracteristicasController::class, 'eliminarcaracteristicas'])->name('caracteristicas.eliminar');
-Route::post('/caracteristicas/actualizar/{id}', [CaracteristicasController::class, 'actualizarCaracteristica'])->name('caracteristicas.actualizar');
+Route::get('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/contactanos', [ContactanosController::class, 'contactanos'])->name('paginas.contactanos');
 Route::post('/contactanos', [ContactanosController::class, 'store'])->name('contactanos.store');
-
-Route::get('/subcaracteristicas/buscarid/{id_caracteristica}', [SubcaracteristicasController::class, 'consultarsubcaracteristicas'])->name('subcaracteristicas.consultar');
-Route::get('/subcaracteristicas/agregar/{id_caracteristica}', [SubcaracteristicasController::class, 'agregarsubcaracteristica'])->name('subcaracteristicas.agregar');
-Route::get('/subcaracteristicas/eliminar/{id_caracteristica}', [SubcaracteristicasController::class, 'eliminarsubcaracteristica'])->name('subcaracteristicas.eliminar');
-Route::post('/subcaracteristicas/actualizar/{id}', [SubcaracteristicasController::class, 'actualizarsubcaracteristica'])->name('subcaracteristicas.actualizar');
-
 Route::get('/contactos', [ContactoController::class, 'index'])->name('contactos.index');
 Route::delete('/contactosdelete/{id}', [ContactoController::class, 'destroy'])->name('contactos.destroy');
 Route::get('/contactos/show/{id}', [ContactoController::class, 'show'])->name('contactos.show');
 Route::get('/contactosbuscar', [ContactoController::class, 'buscarRegistros'])->name('contactos.buscar');
 
-Route::middleware(['auth'])->group(function () {
-     Route::get('/chats/contadorconversation/aqui', [ChatsController::class, 'contadorConversaciones']);
+/* AUTH */
+Route::middleware(['auth'/*, 'verifica.modulo'*/])->group(function () {
+    Route::get('/reikomodulos', [ModulosController::class, 'index'])->name('cmodulos.index');
+    Route::get('/moduloscreate', [ModulosController::class, 'create'])->name('cmodulos.create');
+    Route::post('/moduloscreate', [ModulosController::class, 'store'])->name('cmodulos.store');
+    Route::delete('/modulosdelete/{id}', [ModulosController::class, 'destroy'])->name('cmodulos.destroy');
+    Route::get('/reikomodulos/modulosshow/{id}', [ModulosController::class, 'show'])->name('cmodulos.show');
+    Route::put('/reikomodulos/modulosupdate/{id}', [ModulosController::class, 'update'])->name('cmodulos.update');
 
-    Route::get('/chats', [ChatsController::class, 'index'])->name('chats.index');
-    Route::post('/chats/store', [ChatsController::class, 'store'])->name('chats.store');
-    Route::get('/chats/show/{id}', [ChatsController::class, 'show'])->name('chats.show');
-    Route::delete('/chats/delete-conversation/{userId}', [ChatsController::class, 'deleteConversation']);
-    Route::delete('/chats/ocultar-conversation/{userId}', [ChatsController::class, 'ocultarConversacion']);
-   
+    Route::get('/marcas', [MarcasController::class, 'index'])->name('marcas.index');
+    Route::get('/marcascreate', [MarcasController::class, 'create'])->name('marcas.create');
+    Route::post('/marcascreate', [MarcasController::class, 'store'])->name('marcas.store');
+    Route::delete('/marcasdelete/{id}', [MarcasController::class, 'destroy'])->name('marcas.destroy');
+    Route::get('/marcas/show/{id}', [MarcasController::class, 'show'])->name('marcas.show');
+    Route::put('/marcas/update/{id}', [MarcasController::class, 'update'])->name('marcas.update');
+    Route::get('/marcasbuscar', [MarcasController::class, 'buscarRegistros'])->name('marcas.buscar');
+
+    Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias.index');
+    Route::get('/categoriascreate', [CategoriasController::class, 'create'])->name('categorias.create');
+    Route::post('/categoriascreate', [CategoriasController::class, 'store'])->name('categorias.store');
+    Route::delete('/categoriasdelete/{id}', [CategoriasController::class, 'destroy'])->name('categorias.destroy');
+    Route::get('/categorias/show/{id}', [CategoriasController::class, 'show'])->name('categorias.show');
+    Route::put('/categorias/update/{id}', [CategoriasController::class, 'update'])->name('categorias.update');
+    Route::get('/categoriasbuscar', [CategoriasController::class, 'buscarRegistros'])->name('categorias.buscar');
+
+    Route::get('/perfiles', [PerfilesController::class, 'index'])->name('perfiles.index');
+    Route::put('/perfilesupdate/', [PerfilesController::class, 'update'])->name('perfiles.update');
+
+    Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
+    Route::get('/usuarioscreate', [UsuariosController::class, 'create'])->name('usuarios.create');
+    Route::post('/usuarioscreate', [UsuariosController::class, 'store'])->name('usuarios.store');
+    Route::delete('/usuariosdelete/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
+    Route::get('/usuarios/show/{id}', [UsuariosController::class, 'show'])->name('usuarios.show');
+    Route::put('/usuarios/update/{id}', [UsuariosController::class, 'update'])->name('usuarios.update');
+    Route::get('/usuariosbuscar', [UsuariosController::class, 'buscarRegistros'])->name('usuarios.buscar');
+    
+    Route::get('productoscreate', [ProductosController::class, 'create'])->name('productos.create');
+    Route::post('productoscreate', [ProductosController::class, 'store'])->name('productos.store');
+    Route::delete('productosdelete/{id}', [ProductosController::class, 'destroy'])->name('productos.destroy');
+    Route::get('productosbuscarcodigo', [ProductosController::class, 'buscarCodigo'])->name('productos.buscarcodigo');
+   Route::get('productosbuscar', [ProductosController::class, 'buscarRegistros'])->name('productos.buscar');
+
+    Route::prefix('productos')->group(function () {
+        Route::get('/', [ProductosController::class, 'index'])->name('productos.index');
+        Route::put('/update/{id}', [ProductosController::class, 'update'])->name('productos.update');
+        Route::get('/show/{id}', [ProductosController::class, 'show'])->name('productos.show');
+  });
+
+    Route::get('/caracteristicas', [CaracteristicasController::class, 'index'])->name('caracteristicas.index');
+    Route::get('/caracteristicas/buscarid/{id_producto}', [CaracteristicasController::class, 'consultarCaracteristicasProducto'])->name('caracteristicas.consultar');
+    Route::get('/caracteristicas/agregar/{id_producto}', [CaracteristicasController::class, 'agregarcaracteristicas'])->name('caracteristicas.agregar');
+    Route::get('/caracteristicas/eliminar/{id_caracteristica}', [CaracteristicasController::class, 'eliminarcaracteristicas'])->name('caracteristicas.eliminar');
+    Route::post('/caracteristicas/actualizar/{id}', [CaracteristicasController::class, 'actualizarCaracteristica'])->name('caracteristicas.actualizar');
+
+
+    Route::get('/subcaracteristicas/buscarid/{id_caracteristica}', [SubcaracteristicasController::class, 'consultarsubcaracteristicas'])->name('subcaracteristicas.consultar');
+    Route::get('/subcaracteristicas/agregar/{id_caracteristica}', [SubcaracteristicasController::class, 'agregarsubcaracteristica'])->name('subcaracteristicas.agregar');
+    Route::get('/subcaracteristicas/eliminar/{id_caracteristica}', [SubcaracteristicasController::class, 'eliminarsubcaracteristica'])->name('subcaracteristicas.eliminar');
+    Route::post('/subcaracteristicas/actualizar/{id}', [SubcaracteristicasController::class, 'actualizarsubcaracteristica'])->name('subcaracteristicas.actualizar');
+
+    Route::prefix('chats')->group(function () {
+        Route::get('/contadorconversation/aqui', [ChatsController::class, 'contadorConversaciones']);
+
+        Route::get('/', [ChatsController::class, 'index'])->name('chats.index');
+        Route::post('/store', [ChatsController::class, 'store'])->name('chats.store');
+        Route::get('/show/{id}', [ChatsController::class, 'show'])->name('chats.show');
+        
+        Route::delete('/delete-conversation/{userId}', [ChatsController::class, 'deleteConversation']);
+        Route::delete('/ocultar-conversation/{userId}', [ChatsController::class, 'ocultarConversacion']);
+        Route::delete('/delete-message/{id}', [ChatsController::class, 'destroyMessage']);
+        
+        // Ocultar mensaje enviado (solo para el usuario que envió)
+        Route::patch('/ocultar-enviado/{id}', [ChatsController::class, 'ocultarMensajeEnviado']);
+        // Ocultar mensaje recibido (solo para el receptor)
+        Route::patch('/ocultar-recibido/{id}', [ChatsController::class, 'ocultarMensajeRecibido']);
+        Route::patch('/marcar-leidos/{userId}', [ChatsController::class, 'marcarLeidos']);
+    });
+
+    Route::get('/rolusuario', [RolesUsuarioController::class, 'index'])->name('rolusuario.index');
+    Route::post('/rolusuario/store', [RolesUsuarioController::class, 'store'])->name('rolusuario.store');
+
+    Route::get('/tipousuarios', [TipousuariosController::class, 'index'])->name('tipousuarios.index');
+    Route::get('/tipousuarioscreate', [TipousuariosController::class, 'create'])->name('tipousuarios.create');
+    Route::post('/tipousuarioscreate', [TipousuariosController::class, 'store'])->name('tipousuarios.store');
+    Route::delete('/tipousuariosdelete/{id}', [TipousuariosController::class, 'destroy'])->name('tipousuarios.destroy');
+    Route::get('/tipousuarios/show/{id}', [TipousuariosController::class, 'show'])->name('tipousuarios.show');
+    Route::put('/tipousuarios/update/{id}', [TipousuariosController::class, 'update'])->name('tipousuarios.update');
 
 });
-
-
-Route::delete('/chats/delete-message/{id}', [ChatsController::class, 'destroyMessage']);
-// Ocultar mensaje enviado (solo para el usuario que envió)
-Route::patch('/chats/ocultar-enviado/{id}', [ChatsController::class, 'ocultarMensajeEnviado']);
-// Ocultar mensaje recibido (solo para el receptor)
-Route::patch('/chats/ocultar-recibido/{id}', [ChatsController::class, 'ocultarMensajeRecibido']);
-Route::patch('/chats/marcar-leidos/{userId}', [ChatsController::class, 'marcarLeidos']);
-
-Route::get('/tipousuarios', [TipousuariosController::class, 'index'])->name('tipousuarios.index');
-Route::get('/tipousuarioscreate', [TipousuariosController::class, 'create'])->name('tipousuarios.create');
-Route::post('/tipousuarioscreate', [TipousuariosController::class, 'store'])->name('tipousuarios.store');
-Route::delete('/tipousuariosdelete/{id}', [TipousuariosController::class, 'destroy'])->name('tipousuarios.destroy');
-Route::get('/tipousuarios/show/{id}', [TipousuariosController::class, 'show'])->name('tipousuarios.show');
-Route::put('/tipousuarios/update/{id}', [TipousuariosController::class, 'update'])->name('tipousuarios.update');
-
-

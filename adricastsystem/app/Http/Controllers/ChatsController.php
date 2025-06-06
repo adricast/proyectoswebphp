@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Chat;
 use App\Models\User;
 use App\Models\Modulo;
+use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +26,8 @@ public function index()
     $typeUser = auth()->user()->typeUser;
     $user = Auth::user();
     $descripcion = $typeUser ? $typeUser->descripcion : 'No asignado';
-    $modulos = Modulo::all();
+    $moduloIds = Rol::where('estado', 1)->pluck('id_modulos')->unique();
+    $modulos = Modulo::whereIn('id', $moduloIds)->get();
 
     // Obtener los usuarios con los que se ha tenido conversación (mensajes visibles para authId)
     $chatUsers = Chat::selectRaw("CASE WHEN sender_id = ? THEN receiver_id ELSE sender_id END as other_user_id", [$authUserId])
@@ -79,38 +81,43 @@ public function index()
 
 // ChatController.php
 
-    public function store(Request $request)
-    {
-        // Validar los datos del formulario
-        $request->validate([
-            'username' => 'required|string',
-            'mensaje' => 'required|string',
+   public function store(Request $request)
+{
+    // Validar los datos del formulario
+    $request->validate([
+        'username' => 'required|string',
+        'mensaje' => 'required|string',
+    ]);
+
+    // Obtener el ID del usuario receptor a partir del nombre de usuario
+    $receiver = User::where('username', $request->username)->first();
+
+    // Verificar si el usuario receptor existe
+    if ($receiver) {
+        // Crear un nuevo mensaje
+        $chat = new Chat();
+        $chat->sender_id = auth()->id(); // ID del remitente (usuario autenticado)
+        $chat->receiver_id = $receiver->id; // ID del receptor
+        $chat->message = $request->mensaje; // Mensaje enviado
+        $chat->status = 'no_leido'; // Establecer el estado como "no_leído"
+        $chat->sent_at = Carbon::now(); // Establecer la fecha y hora de envío actual
+
+        $chat->save();
+
+        // Retornar una respuesta JSON con éxito
+        return response()->json([
+            'success' => true,
+            'message' => 'El mensaje se ha enviado correctamente.'
         ]);
-    
-        // Obtener el ID del usuario receptor a partir del nombre de usuario
-        $receiver = User::where('username', $request->username)->first();
-    
-        // Verificar si el usuario receptor existe
-        if ($receiver) {
-            // Crear un nuevo mensaje
-            $chat = new Chat();
-            $chat->sender_id = auth()->id(); // ID del remitente (usuario autenticado)
-            $chat->receiver_id = $receiver->id; // ID del receptor
-            $chat->message = $request->mensaje; // Mensaje enviado
-            $chat->status = 'no_leido'; // Establecer el estado como "no_leído"
-            $chat->sent_at = Carbon::now(); // Establecer la fecha y hora de envío actual
-          
-            $chat->save();
-    
-            // Aquí podrías realizar otras acciones, como enviar notificaciones, etc.
-    
-            // Retornar una respuesta JSON con éxito
-            return response()->json(['success' => 'El mensaje se ha enviado correctamente.']);
-        } else {
-            // El usuario receptor no existe
-            return response()->json(['error' => 'El usuario receptor no existe.']);
-        }
+    } else {
+        // El usuario receptor no existe
+        return response()->json([
+            'success' => false,
+             'message' => "El usuario receptor '{$request->username}' no existe."
+        ]);
     }
+}
+
   public function show($userId)
 {
     $authUserId = Auth::id();

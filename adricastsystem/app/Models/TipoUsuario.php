@@ -20,4 +20,8 @@ class TipoUsuario extends Model
     {
         return $this->hasMany(User::class);
     }
+    public function roles()
+    {
+        return $this->hasMany(Rol::class, 'id_tipousuarios', 'id');
+    }
 }

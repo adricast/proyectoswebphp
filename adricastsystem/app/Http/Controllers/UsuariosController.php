@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Modulo;
+use App\Models\Rol;
 use App\Models\TipoUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,9 @@ public function index(Request $request)
     $descripcion = $typeUser ? $typeUser->descripcion : 'No asignado';
 
     // Obtener los módulos
-    $modulos = Modulo::all();
+    $moduloIds = Rol::where('estado', 1)->pluck('id_modulos')->unique();
+    $modulos = Modulo::whereIn('id', $moduloIds)->get();
+ 
 
     // Obtener el término de búsqueda si existe
     $termino = $request->get('termino');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Modulo;
 use Illuminate\Http\Request;
 use App\Models\Caracteristica;
+use App\Models\Rol;
 use Illuminate\Support\Facades\Auth;
 
 class CaracteristicasController extends Controller
@@ -28,7 +29,8 @@ class CaracteristicasController extends Controller
           } else {
               $descripcion = 'No asignado';
           }
-          $modulos = Modulo::all();
+          $moduloIds = Rol::where('estado', 1)->pluck('id_modulos')->unique();
+          $modulos = Modulo::whereIn('id', $moduloIds)->get();
        
           return view('reikosoft.caracteristicas.index', compact('descripcion','user','modulos'));
   

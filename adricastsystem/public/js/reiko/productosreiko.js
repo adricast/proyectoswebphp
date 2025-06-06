@@ -1,6 +1,11 @@
-function cerrarModal(){
+function cerrarModaledit(){
     editmodal= document.getElementById('editmodal');
     editmodal.style.display = 'none';
+} 
+
+function cerrarModalcreate(){
+    createmodal= document.getElementById('createmodal');
+    createmodal.style.display = 'none';
 } 
 function principal(){
     window.location.href = '/productos';
@@ -87,7 +92,7 @@ function guardarDatos() {
     // Obtener los datos del formulario modal
     var formData = new FormData($('#miFormulario')[0]);
 
-    console.log(formData);
+    console.log(StoreUrl);
 
     // Enviar la solicitud AJAX
     $.ajax({
@@ -139,6 +144,11 @@ function modificarDatos(id){
     var miFormulario = document.getElementById('miFormulario');
     miFormulario.action = miFormulario.action.replace('__ID__', id);
     obtenerDatos(id)
+  }
+  function agregarDatos(){
+    createmodal= document.getElementById('createmodal');
+    createmodal.style.display = 'block';
+  
   }
   function obtenerDatos(id) {
     var miformulario = document.getElementById('miFormulario');
@@ -247,70 +257,79 @@ function modificarDatos(id){
   
 
   function consultaDatos() {
-    // Obtener el campo de entrada y el tbody de la tabla
     var inputBusqueda = document.getElementById('busqueda');
     var contenedorModulos = document.getElementById('contenedorelemento');
 
-    // Agregar el evento keyup al campo de entrada
-    inputBusqueda.addEventListener('keyup', function() {
+    inputBusqueda.addEventListener('keyup', function () {
         var termino = inputBusqueda.value.trim();
 
         $.ajax({
-            url: '/productosbuscar',
+            url: SearchUrl,
             method: 'GET',
             data: { termino: termino },
-            success: function(response) {
-                contenedorModulos.innerHTML = ''; // Limpiar el contenido existente en el contenedor antes de actualizar con los nuevos resultados
+            success: function (response) {
+                contenedorModulos.innerHTML = ''; // Limpiar el tbody antes de llenarlo
 
-                response.forEach(function(producto) {
-                    var aElement = document.createElement('a');
-                    aElement.href = '#';
+                response.forEach(function (producto) {
+                    var tr = document.createElement('tr');
 
-                    var divTarget = document.createElement('div');
-                    divTarget.className = 'target';
+                    var tdImg = document.createElement('td');
+                    var img = document.createElement('img');
+                    img.src = '/img/productos/' + producto.foto;
+                    img.alt = producto.nombre;
+                    img.width = 80;
+                    img.height = 80;
+                    img.style.objectFit = 'cover';
+                    tdImg.appendChild(img);
 
-                    var imgElement = document.createElement('img');
-                    imgElement.src = '/img/productos/' + producto.foto;
-                    imgElement.alt = producto.nombre;
+                    var tdNombre = document.createElement('td');
+                    tdNombre.textContent = producto.nombre;
 
-                    var pElement = document.createElement('p');
-                    pElement.textContent = producto.nombre;
+                    var tdCheck = document.createElement('td');
+                    var checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.name = 'productos_seleccionados[]';
+                    checkbox.value = producto.id;
+                    checkbox.onchange = function () {
+                        actualizarVisibilidadBotonEliminar();
+                    };
+                    tdCheck.appendChild(checkbox);
 
-                    var divBotones = document.createElement('div');
-                    divBotones.className = 'botones';
+                    var tdAcciones = document.createElement('td');
 
-                    var buttonEliminar = document.createElement('button');
-                    buttonEliminar.addEventListener('click', function() {
-                        eliminarDatos(producto.id);
-                    });
-                    var iEliminar = document.createElement('i');
-                    iEliminar.className = 'fas fa-trash';
-                    buttonEliminar.appendChild(iEliminar);
+                    var btnEliminar = document.createElement('button');
+                    btnEliminar.className = 'btn-accion eliminar';
+                    btnEliminar.onclick = function () {
+                        eliminarDato(producto.id);
+                    };
+                    var iconEliminar = document.createElement('i');
+                    iconEliminar.className = 'fas fa-trash';
+                    btnEliminar.appendChild(iconEliminar);
 
-                    var buttonModificar = document.createElement('button');
-                    buttonModificar.className = 'btneditar';
-                    buttonModificar.addEventListener('click', function() {
+                    var btnEditar = document.createElement('button');
+                    btnEditar.className = 'btn-accion editar';
+                    btnEditar.onclick = function () {
                         modificarDatos(producto.id);
-                    });
-                    var spanModificar = document.createElement('span');
-                    spanModificar.className = 'fa fa-edit';
-                    buttonModificar.appendChild(spanModificar);
+                    };
+                    var iconEditar = document.createElement('i');
+                    iconEditar.className = 'fa fa-edit';
+                    btnEditar.appendChild(iconEditar);
 
-                    divBotones.appendChild(buttonEliminar);
-                    divBotones.appendChild(buttonModificar);
+                    tdAcciones.appendChild(btnEliminar);
+                    tdAcciones.appendChild(btnEditar);
 
-                    divTarget.appendChild(imgElement);
-                    divTarget.appendChild(pElement);
-                    divTarget.appendChild(divBotones);
+                    tr.appendChild(tdImg);
+                    tr.appendChild(tdNombre);
+                    tr.appendChild(tdCheck);
+                    tr.appendChild(tdAcciones);
 
-                    aElement.appendChild(divTarget);
-
-                    contenedorModulos.appendChild(aElement);
+                    contenedorModulos.appendChild(tr);
                 });
             }
         });
     });
 }
+
 function obtenerProductosSeleccionados() {
     var productosSeleccionados = [];
     $("input[name='productos_seleccionados[]']:checked").each(function () {

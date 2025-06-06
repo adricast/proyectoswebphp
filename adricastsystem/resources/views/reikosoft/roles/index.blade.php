@@ -1,47 +1,68 @@
 @extends('reikosoft.contenedor.contenedor')
 
-@section('titulo', 'ReikoSoft')
+@section('titulo', 'Asignar Módulos a Roles')
 @section('reikosoft-active', 'active')
 
 @section('contenidoreiko')
+<section class="containerreiko">
+<div class="contenedorformularios">
+    <form action="{{ route('rolusuario.store') }}" method="POST" id="formAsignarModulos">
+        @csrf
 
-    <script src="{{ route('recursos.show', ['js/reiko', 'rolesusuariosreiko.js']) }}"></script>
-  
-    <div class="contenedorbusqueda">
-        Busqueda
-        <input type="text" name="busqueda" id="busqueda" placeholder="Ingrese el Codigo del Usuario"  style="width: 200px;">
-        <input type="button" value="buscar"  onclick="consultaUsuario()">
-    </div>
-   
-    <section class="containerreiko2">
-        <div class="containerelemento">
-            <div class="elemento1">
-                <label for="codigo">Codigo</label>
-                <input type="text" name="codigo" id="codigo" readonly>
+        <!-- Selección de Tipo de Usuario -->
+        <div style="margin-bottom: 20px;">
+            <label for="tipo_usuario">Seleccione Tipo de Usuario:</label>
+            <select id="tipo_usuario" name="tipo_usuario_id" class="roles-select" onchange="cargarAsignados()">
+                <option disabled selected>Seleccione...</option>
+                @foreach($tiposUsuario as $tipo)
+                    <option value="{{ $tipo->id }}">{{ $tipo->descripcion }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <!-- Selector de módulos con doble caja -->
+        <div class="dual-select-container">
+            
+            <!-- Módulos disponibles -->
+            <div class="select-box">
+                <h4>Módulos Disponibles</h4>
+                <select id="modulos_disponibles" multiple size="10" class="roles-select">
+                    {{-- Se llenará dinámicamente --}}
+                </select>
             </div>
-            <div class="elemento2">
-                <label for="nombre">Nombres</label>
-                <input type="text" name="nombre" id="nombre" readonly>
+
+            <!-- Botones de transferencia -->
+            <div class="transfer-buttons">
+                <button type="button" onclick="mover('modulos_disponibles', 'modulos_asignados')">→</button>
+                <button type="button" onclick="mover('modulos_asignados', 'modulos_disponibles')">←</button>
             </div>
-            <div class="elemento3">
-                <label for="descripcion">UserName</label>
-                <input type="text" name="username" id="username" readonly>
-            </div>
-            <div class="elemento4">
-                <label for="marca">Tipo Usuario</label>
-                <input type="text" name="marca" id="marca" readonly>
+
+            <!-- Módulos asignados -->
+            <div class="select-box">
+                <h4>Módulos Asignados</h4>
+                <select id="modulos_asignados" name="modulos_asignados[]" multiple size="10" class="roles-select">
+                    {{-- Se llenará dinámicamente --}}
+                </select>
             </div>
         </div>
-        <div class="contenedorcaracteristicas" id="contenedorcaracteristicas">
-            <!-- Aquí se generará dinámicamente el contenido de las características -->
+
+        <!-- Botón guardar -->
+        <div class="submit-btn-container" style="margin-top: 20px;">
+            <button type="submit">Guardar Asignación</button>
         </div>
-              
+     
+    </form>
+ </div>
+</section>
+
+<!-- Variables JS pasadas desde backend -->
+<script>
+    const rolesPorTipoUsuario = @json($rolesPorTipoUsuario);
         
-       
-        
-       
-    </section>
-    
-   
+   const todosLosModulos = @json($todosLosModulos);
+</script>
+
+<!-- Carga script JS externo -->
+<script src="{{ route('recursos.show', ['js/reiko', 'rolesreiko.js']) }}"></script>
 
 @endsection

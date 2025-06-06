@@ -6,19 +6,23 @@
 @section('contenidoreiko')
 
     <script src="{{ route('recursos.show', ['js/reiko', 'productosreiko.js']) }}"></script>
-
+    <script>
+         var SearchUrl = "{{ route('productos.buscar') }}";  
+  
+    </script>
     <button type="button" id="btnEliminarSeleccionados" style="display: none;" class="btn-eliminar-seleccionados" onclick="eliminarDatos(obtenerProductosSeleccionados())">
         Eliminar seleccionados
     </button>
 
     <div class="busqueda-box">
         <i class="fas fa-search search-icon"></i>
-        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar productos..." onkeyup="consultaDatos()" class="busqueda-input">
+        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar productos..." class="busqueda-input">
     </div>
 
   
     <div class="nuevo">
-        <a href="{{ route('productos.create') }}" class="btn-nuevo">
+         <!-- onclick="agregarDatos()" --> 
+        <a  href="{{ route('productos.create') }}" class="btn-nuevo">
             <img src="{{ route('recursos.show',['img/productos', 'mas.png']) }}" alt="Nuevo" width="25">
             Nuevo Producto
         </a>
@@ -34,7 +38,7 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="contenedorelemento">
                 @foreach ($productos as $producto)
                     <tr>
                         <td>
@@ -63,4 +67,10 @@
 
     @include('reikosoft.productos.edit')
 
+
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        consultaDatos(); // Agrega el evento keyup
+    });
+</script>

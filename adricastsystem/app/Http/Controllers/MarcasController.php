@@ -7,6 +7,7 @@ use App\Models\Marca;
 use Monolog\Registry;
 use App\Models\Modulo;
 use App\Models\Categoria;
+use App\Models\Rol;
 use App\Models\TipoUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,9 @@ public function index()
     $descripcion = $typeUser ? $typeUser->descripcion : 'No asignado';
 
     // Obtener los módulos y marcas paginadas
-    $modulos = Modulo::all();
+    $moduloIds = Rol::where('estado', 1)->pluck('id_modulos')->unique();
+    $modulos = Modulo::whereIn('id', $moduloIds)->get();
+ 
     $perPage = request()->perPage ?: 5; // Valor predeterminado 5 si no se pasa 'perPage' en la solicitud
     $marcas = Marca::paginate($perPage);
 

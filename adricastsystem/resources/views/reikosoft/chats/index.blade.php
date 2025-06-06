@@ -27,7 +27,7 @@
         <div class="headerchat" id="headerchat">
          
             <button id="btnVolverChats" class="btn-volver" onclick="mostrarUsersChat()" style="display: none;">
-                <i class="fas fa-arrow-left"></i> Chats
+                <i class="fas fa-arrow-left"></i>
             </button>
             <span id="chat-username"></span>
         </div>

@@ -1,16 +1,25 @@
-@extends('reikosoft.contenedor.contenedor')
 
-@section('titulo', 'ReikoSoft')
-@section('reikosoft-active', 'active')
-
-@section('contenidoreiko')
-    <script src="{{ route('recursos.show', ['js/reiko', 'productosReiko.js']) }}"></script>
+<div class="reikomodal2" id="createmodal">
+    <div class="contenidomodal">
+        <div class="bannertitulo">
+            Productos
+        </div>
+        <div class="closemodal">
+           <button onclick="cerrarModalcreate()">
+                <span class="fa fa-times"></span>
+           </button>
+        </div>
+        <div class="cuerpomodal">
     <script>
         var StoreUrl = "{{ route('productos.store') }}";   
     </script>
-    <section class="containerreiko">
-        
-        <div class="contenedorformularios">
+  
+    <script src="{{ route('recursos.show', ['js/reiko', 'productosReiko.js']) }}"></script>
+    <script>
+        var StoreUrl = "{{ route('productos.store') }}";   
+         const rutaSonido = "{{ route('recursos.show', ['sound', 'sound1.mp3']) }}";
+    </script>
+
             <form action="{{route('productos.store')}}" id="miFormulario" method="post" enctype="multipart/form-data" novalidate>
                 @csrf
                     <img src="{{ route('recursos.show', ['img', 'logotype.png']) }}" alt="" id="imagen-preview" height="150px" width="150px">
@@ -63,8 +72,8 @@
                     </div>
                     <input type="text" name="linkcompra" id="linkcompra" placeholder="link compra individual">
                 <div style="display:flex;">
-                <button style="margin-right: 10px;" type="submit" onclick="event.preventDefault(); guardarDatos();">Guardar</button>
-                <button style="margin-right: 10px;" onclick="event.preventDefault(); principal();">Cancelar</button>
+                <button class ="btn" type="button" onclick="event.preventDefault(); guardarDatos();">Guardar</button>
+                <button class ="btn"  onclick="event.preventDefault(); principal();">Cancelar</button>
                 </div>
                 
             </form>
@@ -72,10 +81,7 @@
             <script>
                 
             </script>
-   
-        </div>
-    
-    </section>
+    </div>
 
-@endsection
-   
+    </div>
+</div>

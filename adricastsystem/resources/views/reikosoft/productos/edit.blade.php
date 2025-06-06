@@ -4,7 +4,7 @@
             Productos
         </div>
         <div class="closemodal">
-           <button onclick="cerrarModal()">
+           <button onclick="cerrarModaledit()">
                 <span class="fa fa-times"></span>
            </button>
         </div>

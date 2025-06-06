@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Modulo;
+use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,9 @@ class CategoriasController extends Controller
            } else {
                $descripcion = 'No asignado';
            }
-           $modulos = Modulo::all();
+        $moduloIds = Rol::where('estado', 1)->pluck('id_modulos')->unique();
+        $modulos = Modulo::whereIn('id', $moduloIds)->get();
+ 
            $categorias = Categoria::all();
            return view('reikosoft.categorias.index', compact('descripcion','user','modulos','categorias'));
    

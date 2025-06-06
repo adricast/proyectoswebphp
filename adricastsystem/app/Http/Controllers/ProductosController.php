@@ -7,6 +7,7 @@ use App\Models\Marca;
 use App\Models\Modulo;
 use App\Models\Producto;
 use App\Models\Categoria;
+use App\Models\Rol;
 use App\Models\TipoProducto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,9 @@ class ProductosController extends Controller
             $descripcion = 'No asignado';
         }
 
-        $modulos = Modulo::all();
+        $moduloIds = Rol::where('estado', 1)->pluck('id_modulos')->unique();
+        $modulos = Modulo::whereIn('id', $moduloIds)->get();
+ 
         $productos = Producto::all();
         $tipoProductos = TipoProducto::all();
         $categorias = Categoria::all();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Modulo;
+use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +29,8 @@ class ModulosController extends Controller
         } else {
             $descripcion = 'No asignado';
         }
-        $modulos = Modulo::all();
+        $moduloIds = Rol::where('estado', 1)->pluck('id_modulos')->unique();
+        $modulos = Modulo::whereIn('id', $moduloIds)->get();
         return view('reikosoft.modulos.index', compact('descripcion','user','modulos'));
 
     }
