@@ -788,12 +788,24 @@
     align-items: center;
     justify-content: center;
 }
+<<<<<<< HEAD
 
 #reikocontenedor {
   height: 100vh; /* Usa todo el alto del viewport */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 50px 50px 1fr 40px;
+=======
+#reikocontenedor{
+    width: 100%;
+    height: 100%;
+   
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 50px  50px 100%  40px;
+    border: 1px solid black;
+    box-shadow: 5px 3px 2px gray ;
+>>>>>>> 7327fdf (07-06-2025 Roles Middleware y Rutas)
 }
 
 #reikocontenedor #infosystem{
@@ -840,7 +852,11 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 7327fdf (07-06-2025 Roles Middleware y Rutas)
 }
 #reikocontenedor #contenedormodulos #modulos{
     border: 1px black;
@@ -1340,7 +1356,11 @@
     overflow: auto;
 }
 
+<<<<<<< HEAD
 .reikomodal .contenidomodal .cuerpomodal::-webkit-scrollbar-thumb,.reikomodal2 .contenidomodal .cuerpomodal::-webkit-scrollbar-thumb{
+=======
+.reikomodal .contenidomodal .cuerpomodal::-webkit-scrollbar-thumb{
+>>>>>>> 7327fdf (07-06-2025 Roles Middleware y Rutas)
     background-color: #0C134F;
     border-radius: 4px;
 }   

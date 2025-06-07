@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Caracteristica;
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
@@ -27,24 +27,37 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\RolesUsuarioController;
 use App\Http\Controllers\SubcaracteristicasController;
 use App\Http\Controllers\TipousuariosController;
+=======
+use App\Http\Controllers\{
+    HomeController, NosotrosController, NoticiasController, TecnologiasController, ServiciosController,
+    EmpleoController, ContactanosController, ContactoController, RegistroController, LoginController,
+    LogoutController, PostController, RecursosController, ModulosController, MarcasController, CategoriasController,
+    PerfilesController, UsuariosController, ProductosController, CaracteristicasController, SubcaracteristicasController,
+    ChatsController, RolesUsuarioController, RolesusuariosController, TipousuariosController
+};
+>>>>>>> 7327fdf (07-06-2025 Roles Middleware y Rutas)
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// Definición de la función crudRoutes ANTES de usarla
+function crudRoutes($prefix, $controller) {
+    Route::prefix($prefix)->controller($controller)->group(function () use ($prefix) {
+        Route::get('/', 'index')->name("$prefix.index");
+        Route::get('create', 'create')->name("$prefix.create");
+        Route::post('create', 'store')->name("$prefix.store");
+        Route::delete('delete/{id}', 'destroy')->name("$prefix.destroy");
+        Route::get('show/{id}', 'show')->name("$prefix.show");
+        Route::put('update/{id}', 'update')->name("$prefix.update");
+        Route::get('buscar', 'buscarRegistros')->name("$prefix.buscar");
+    });
+}
 
+// Rutas públicas (sin auth)
 Route::get('/', [HomeController::class, 'inicio'])->name('paginas.inicio');
 Route::get('/nosotros', [NosotrosController::class, 'nosotros'])->name('paginas.nosotros');
 Route::get('/noticias', [NoticiasController::class, 'noticias'])->name('paginas.noticias');
 Route::get('/tecnologias', [TecnologiasController::class, 'tecnologias'])->name('paginas.tecnologias');
 Route::get('/servicios', [ServiciosController::class, 'servicios'])->name('paginas.servicios');
 Route::get('/empleos', [EmpleoController::class, 'empleo'])->name('paginas.empleo');
+<<<<<<< HEAD
 
 Route::get('{directory}/{filename}', [RecursosController::class, 'show'])->name('recursos.show');
 Route::post('/enviar-formulario', [ContactanosController::class, 'submit'])->name('enviarFormulario');
@@ -119,8 +132,45 @@ Route::middleware(['auth'/*, 'verifica.modulo'*/])->group(function () {
     Route::get('/caracteristicas/agregar/{id_producto}', [CaracteristicasController::class, 'agregarcaracteristicas'])->name('caracteristicas.agregar');
     Route::get('/caracteristicas/eliminar/{id_caracteristica}', [CaracteristicasController::class, 'eliminarcaracteristicas'])->name('caracteristicas.eliminar');
     Route::post('/caracteristicas/actualizar/{id}', [CaracteristicasController::class, 'actualizarCaracteristica'])->name('caracteristicas.actualizar');
+=======
+Route::get('/contactanos', [ContactanosController::class, 'contactanos'])->name('paginas.contactanos');
+Route::post('/contactanos', [ContactanosController::class, 'store'])->name('contactanos.store');
 
+Route::get('{directory}/{filename}', [RecursosController::class, 'show'])->name('recursos.show');
 
+// Registro y login (sin auth)
+Route::get('/crearcuenta', [RegistroController::class, 'index'])->name('register');
+Route::post('/crearcuenta', [RegistroController::class, 'store']);
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::post('/login', [LoginController::class, 'store']);
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+Route::get('/logout', fn() => redirect('/login'));
+
+// Rutas que requieren autenticación agrupadas con middleware 'auth'
+Route::middleware(['auth',''])->group(function () {
+    
+    // Home después del login
+    Route::get('/home', [PostController::class, 'index'])->name('posts.index');
+
+    // Rutas de módulos
+    Route::prefix('reikomodulos')->controller(ModulosController::class)->group(function () {
+        Route::get('/', 'index')->name('cmodulos.index');
+        Route::get('/modulosshow/{id}', 'show')->name('cmodulos.show');
+        Route::put('/modulosupdate/{id}', 'update')->name('cmodulos.update');
+    });
+    Route::get('/moduloscreate', [ModulosController::class, 'create'])->name('cmodulos.create');
+    Route::post('/moduloscreate', [ModulosController::class, 'store'])->name('cmodulos.store');
+    Route::delete('/modulosdelete/{id}', [ModulosController::class, 'destroy'])->name('cmodulos.destroy');
+>>>>>>> 7327fdf (07-06-2025 Roles Middleware y Rutas)
+
+    // CRUDs protegidos usando la función crudRoutes
+    crudRoutes('marcas', MarcasController::class);
+    crudRoutes('categorias', CategoriasController::class);
+    crudRoutes('usuarios', UsuariosController::class);
+    crudRoutes('productos', ProductosController::class);
+    crudRoutes('contactos', ContactoController::class);
+
+<<<<<<< HEAD
     Route::get('/subcaracteristicas/buscarid/{id_caracteristica}', [SubcaracteristicasController::class, 'consultarsubcaracteristicas'])->name('subcaracteristicas.consultar');
     Route::get('/subcaracteristicas/agregar/{id_caracteristica}', [SubcaracteristicasController::class, 'agregarsubcaracteristica'])->name('subcaracteristicas.agregar');
     Route::get('/subcaracteristicas/eliminar/{id_caracteristica}', [SubcaracteristicasController::class, 'eliminarsubcaracteristica'])->name('subcaracteristicas.eliminar');
@@ -153,5 +203,53 @@ Route::middleware(['auth'/*, 'verifica.modulo'*/])->group(function () {
     Route::delete('/tipousuariosdelete/{id}', [TipousuariosController::class, 'destroy'])->name('tipousuarios.destroy');
     Route::get('/tipousuarios/show/{id}', [TipousuariosController::class, 'show'])->name('tipousuarios.show');
     Route::put('/tipousuarios/update/{id}', [TipousuariosController::class, 'update'])->name('tipousuarios.update');
+=======
+    Route::get('/productosbuscarcodigo', [ProductosController::class, 'buscarCodigo'])->name('productos.buscarcodigo');
+
+    // Características
+    Route::prefix('caracteristicas')->controller(CaracteristicasController::class)->group(function () {
+        Route::get('/', 'index')->name('caracteristicas.index');
+        Route::get('buscarid/{id_producto}', 'consultarCaracteristicasProducto')->name('caracteristicas.consultar');
+        Route::get('agregar/{id_producto}', 'agregarcaracteristicas')->name('caracteristicas.agregar');
+        Route::get('eliminar/{id_caracteristica}', 'eliminarcaracteristicas')->name('caracteristicas.eliminar');
+        Route::post('actualizar/{id}', 'actualizarCaracteristica')->name('caracteristicas.actualizar');
+    });
+
+    // Subcaracterísticas
+    Route::prefix('subcaracteristicas')->controller(SubcaracteristicasController::class)->group(function () {
+        Route::get('buscarid/{id_caracteristica}', 'consultarsubcaracteristicas')->name('subcaracteristicas.consultar');
+        Route::get('agregar/{id_caracteristica}', 'agregarsubcaracteristica')->name('subcaracteristicas.agregar');
+        Route::get('eliminar/{id_caracteristica}', 'eliminarsubcaracteristica')->name('subcaracteristicas.eliminar');
+        Route::post('actualizar/{id}', 'actualizarsubcaracteristica')->name('subcaracteristicas.actualizar');
+    });
+
+    // Perfiles
+    Route::get('/perfiles', [PerfilesController::class, 'index'])->name('perfiles.index');
+    Route::put('/perfilesupdate', [PerfilesController::class, 'update'])->name('perfiles.update');
+
+    // Tipos de usuario
+    Route::get('/tipousuarios', [TipousuariosController::class, 'index'])->name('tipousuarios.index');
+
+    // Chats
+    Route::prefix('chats')->controller(ChatsController::class)->group(function () {
+        Route::get('/', 'index')->name('chats.index');
+        Route::post('/store', 'store')->name('chats.store');
+        Route::get('/show/{id}', 'show')->name('chats.show');
+        Route::get('/contadorconversation/aqui', 'contadorConversaciones');
+        Route::delete('/delete-conversation/{userId}', 'deleteConversation');
+        Route::delete('/ocultar-conversation/{userId}', 'ocultarConversacion');
+        Route::delete('/delete-message/{id}', 'destroyMessage');
+        Route::patch('/ocultar-enviado/{id}', 'ocultarMensajeEnviado');
+        Route::patch('/ocultar-recibido/{id}', 'ocultarMensajeRecibido');
+        Route::patch('/marcar-leidos/{userId}', 'marcarLeidos');
+    });
+
+    // Roles usuario
+    Route::get('/rolusuario', [RolesusuariosController::class, 'index'])->name('rolusuario.index');
+    Route::post('/rolusuario/store', [RolesusuariosController::class, 'store'])->name('rolusuario.store');
+
+    // Enviar formulario (solo usuarios autenticados)
+    Route::post('/enviar-formulario', [ContactanosController::class, 'submit'])->name('enviarFormulario');
+>>>>>>> 7327fdf (07-06-2025 Roles Middleware y Rutas)
 
 });

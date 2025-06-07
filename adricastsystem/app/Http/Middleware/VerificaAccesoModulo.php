@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7327fdf (07-06-2025 Roles Middleware y Rutas)
 namespace App\Http\Middleware;
 
 use Closure;
@@ -54,4 +57,8 @@ class VerificaAccesoModulo
 
         abort(403, 'No tienes autorización para acceder a esta página.');
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7327fdf (07-06-2025 Roles Middleware y Rutas)

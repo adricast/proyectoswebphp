@@ -45,7 +45,11 @@
          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
+<<<<<<< HEAD
         <a href="{{ route('logout') }}" class="salir" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-right-from-bracket"></i></a>
+=======
+        <a href="{{ route('logout') }}" class="salir" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Salir</a>
+>>>>>>> 7327fdf (07-06-2025 Roles Middleware y Rutas)
                 
     </div>
     <div id="contenedormodulos">
